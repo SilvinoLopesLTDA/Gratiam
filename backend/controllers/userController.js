@@ -2,6 +2,9 @@ const asyncHandler = require("express-async-handler")
 const User = require("../models/userModel")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
+const Token = require("../models/tokenModel")
+const crypto = require("crypto")
+const sendEmail = require("../utils/sendEmail")
 
 const generateToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1d"})
@@ -117,7 +120,179 @@ const loginUser = asyncHandler( async (req, res) => {
     }
 })
 
+// Logout User
+const logout = asyncHandler( async (req, res) => {
+    res.cookie("token", "", {
+        path: "/",
+        httpOnly: true,
+        expires: new Date (0), // 1 day
+        sameSite: "none",
+        secure: true
+    })
+    return res.status(200).json({
+        message: "Deslogado com sucesso"
+    })
+})
+
+// Get User Data
+const getUser = asyncHandler( async (req, res) => {
+    const user = await User.findById(req.user._id)
+
+    if(user) {
+        const {_id, name, email, photo, phone, bio } = user
+        res.status(200).json({
+            _id,
+            name,
+            email,
+            photo,
+            phone,
+            bio,
+        })
+    } else {
+        res.status(400)
+        throw new Error("Usuario não encontrado")
+    }
+    
+})
+
+// Get Login Status
+const loginStatus = asyncHandler( async (req, res) => {
+    const token = req.cookies.token
+    if(!token) {
+        return res.json(false)
+    }
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET)
+
+    if(verified) {
+        return res.json(true)
+    }
+    return res.json(false)
+
+})
+
+// Update User
+const updateUser = asyncHandler( async (req, res) => {
+    const user = await User.findById(req.user._id)
+
+    if(user) {
+        const {_id, name, email, photo, phone, bio } = user
+        user.email = email
+        user.name = req.body.name || name
+        user.phone = req.body.phone || phone
+        user.bio = req.body.bio || bio
+        user.photo = req.body.photo || photo
+
+        const updatedUser = await user.save()
+        res.status(200).json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            photo: updatedUser.photo,
+            phone: updatedUser.phone,
+            bio: updatedUser.bio,
+        })
+    } else {
+        res.status(404)
+        throw new Error("Usuario não encontrado")
+    }
+})
+
+// Update Password
+const changePassword = asyncHandler( async (req, res) => {
+    const user = await User.findById(req.user._id)
+    const { oldPassword, password} = req.body
+
+    // Validate
+    if(!user) {
+        res.status(400)
+        throw new Error("Usuario não encontrado, por favor cadastra-se")
+    }
+
+    if(!oldPassword || !password) {
+        res.status(400)
+        throw new Error("Por favor adcione a antiga e nova senha")
+    }
+
+    // Chech if old password matched password in DB
+    const passwordIsCorrect = await bcrypt.compare(oldPassword, user.password)
+
+    // Save new password
+    if(user && passwordIsCorrect) {
+        user.password = password
+        await user.save()
+        res.status(200).send("A senha foi atualizada com sucesso")
+    } else {
+        res.status(400)
+        throw new Error("A senha antiga esta incorreta")
+    }
+})
+
+//Forgot Password
+const forgotPassword = asyncHandler( async (req, res) => {
+    const {email} = req.body
+    const user = await User.findOne({email})
+
+    if(!user) {
+        res.status(400)
+        throw new Error("Usuario não existe")
+    }
+
+    // Delete Token if it exists in DB
+    let token = await Token.findOne({userId: user._id})
+    if(token) {
+        await token.deleteOne()
+    }
+
+    // Create Reset Token
+    let resetToken = crypto.randomBytes(32).toString("hex") + user._id
+    
+    // Hash Token before saving to DB
+    const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex")
+
+    // Save Token to DB
+    await new Token({
+        userId: user._id,
+        token: hashedToken,
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 30 *(60 * 1000) // 30 minutes
+    }).save()
+
+    // Construct Reset Url
+    const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`
+
+    // Reset Email
+    const message = `
+    <h2> Ola ${user.name} </h2>
+
+    <p>Por favor use o link abaixo para mudar a sua senha<p>
+    <p>Este link apenas será valido por 30 minutos<p>
+
+    <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>
+
+    <p>Atenciosamente;</p>
+    <p>Time de Desenvolvimento;</p>
+    `
+    const subject = "Redefinição de Senha"
+    const send_to = user.email
+    const send_from = process.env.EMAIL_USER
+
+    try {
+        await sendEmail(subject, message, send_to, send_from)
+        res.status(200).json({success: true, message: "Email de Redefinição Enviado"})
+    } catch (error) {
+        res.status(500)
+        throw new Error("Email não enviado, por favor tente novamente")
+    }
+})
+
 module.exports = {
     registerUser,
     loginUser,
+    logout,
+    getUser,
+    loginStatus,
+    updateUser,
+    changePassword,
+    forgotPassword
 }
