@@ -3,7 +3,14 @@
     min-height: 100vh;
   
     & nav {
-      padding-top: 2rem;
+      background: rgba(255, 255, 255, 0.33);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(6.3px);
+      -webkit-backdrop-filter: blur(6.3px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(5px);     
+      padding-top: 1.5rem;
       padding-bottom: 1.5rem;
       color: #fff;
       & > .logo {
@@ -19,6 +26,7 @@
     .register-link {
         color: #D90429;
         transition: all 0.3s;
+        font-size: 1.7em;
     }
     .register-link:hover {
       transform: translateY(-2px);
@@ -49,8 +57,14 @@
       color: #2B2D42;
       margin-bottom: 2rem;
     }
-    & > h2 span {
+    & > h1 span {
       display: block;
+    }
+    & > h1 {
+      font-size: 4em;
+    }
+    & p {
+      font-size: 1.8em;
     }
     & .hero-buttons {
       color: #2B2D42;
@@ -62,12 +76,16 @@
   }
 
   .hero-text, .hero-image {
-    margin-top: 5em;
+    margin-top: 13em;
   }
   
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
     .hero {
       flex-direction: column;
+    }
+
+    .hero-text, .hero-image {
+      margin-top: 0;
     }
   
     .hero-text {
@@ -78,11 +96,19 @@
       width: 100%;
       margin: auto;
       text-align: center;
+      margin-top: 3.5em;
     }
     .hero-image {
       width: 100%;
       &img {
         width: 100%;
       }
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    nav {
+      position: relative;
+      top: 3em;
     }
   }

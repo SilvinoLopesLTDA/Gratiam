@@ -17,7 +17,8 @@
   --color-purple: #9d0191;
   --color-orange: #ff7722;
 
-  --color-primary: #007bff;
+  --color-primary: #EF233C;
+  --color-secondary: #BC041A;
   --color-success: #28a745;
   --color-danger: orangered;
 }
@@ -152,6 +153,10 @@ h4 {
   font-size: 2rem;
 }
 
+hr {
+  margin-top: 1em;
+}
+
 p {
   font-size: 1.5rem;
   font-weight: 300;
@@ -194,7 +199,7 @@ p {
 }
 
 .--color-primary {
-  color: #007bff;
+  color: #EF233C;
 }
 .--color-danger {
   color: orangered;
@@ -298,7 +303,7 @@ p {
 .--btn {
   font-size: 1.8rem;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 9px 25px;
   margin: 0 5px 0 0;
   border: 1px solid transparent;
   border-radius: 3px;
