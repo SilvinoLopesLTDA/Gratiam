@@ -5,6 +5,7 @@ import heroImg from '../../../public/assets/inv-img.png'
 
 import "./Home.scss"
 import NumberText from "./NumberText"
+import { ShowOnLogin, ShowOnLogout } from "../../components/protect/hiddenLink"
 
 const Home = () => {
   return (
@@ -14,19 +15,25 @@ const Home = () => {
             <GrGatsbyjs size={35} />
           </div>
           <ul className="home-links">
-            <li>
-              <Link to="/register" className="register-link"> Cadastrar </Link>
-            </li>
-            <li>
-              <button className="--btn --btn-primary">
-                <Link to="/login"> Entrar </Link>
-              </button>
-            </li>
-            <li>
-              <button className="--btn --btn-primary">
-                <Link to="/dashboard"> Dashboard </Link>
-              </button>
-            </li>
+            <ShowOnLogout>
+              <li>
+                <Link to="/register" className="register-link"> Cadastrar </Link>
+              </li>
+            </ShowOnLogout>
+            <ShowOnLogout>
+              <li>
+                  <button className="--btn --btn-primary">
+                    <Link to="/login"> Entrar </Link>
+                  </button>
+                </li>
+            </ShowOnLogout>
+            <ShowOnLogin>
+              <li>
+                <button className="--btn --btn-primary">
+                  <Link to="/dashboard"> Dashboard </Link>
+                </button>
+              </li>
+            </ShowOnLogin>
           </ul>
         </nav>
 
