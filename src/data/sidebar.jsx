@@ -22,7 +22,7 @@ const menu = [
       },
       {
         title: "Editar",
-        path: "/profile-update",
+        path: "/edit-profile",
       },
     ],
   },

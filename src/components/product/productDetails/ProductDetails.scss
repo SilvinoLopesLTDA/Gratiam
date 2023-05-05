@@ -12,14 +12,18 @@
         margin-bottom: 1rem;
       }
       .badge {
-        background-color: var(--color-danger);
+        background-color: var(--color-primary);
         color: #fff;
         padding-left: 2px;
         padding-right: 2px;
         border-radius: 3px;
       }
+      b{
+        font-weight: bold;
+      }
       p b {
         color: var(--dark-blue);
+        
       }
     }
   }

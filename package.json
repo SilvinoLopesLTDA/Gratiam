@@ -14,10 +14,12 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
+    "dompurify": "^3.0.2",
     "dotenv": "^16.0.3",
     "react": "^18.2.0",
     "react-confirm-alert": "^3.0.6",
     "react-dom": "^18.2.0",
+    "react-global-configuration": "^1.4.1",
     "react-icons": "^4.8.0",
     "react-paginate": "^8.2.0",
     "react-quill": "^2.0.0",

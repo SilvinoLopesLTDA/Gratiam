@@ -51,7 +51,7 @@ const ProductList = ({ product, isLoading}) => {
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);
-    const itemsPerPage = 5;
+    const itemsPerPage = 10;
   
     useEffect(() => {
       const endOffset = itemOffset + itemsPerPage;
@@ -134,7 +134,7 @@ const ProductList = ({ product, isLoading}) => {
                 breakLabel="..."
                 nextLabel="Proximo >"
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={10}
                 pageCount={pageCount}
                 previousLabel="< Voltar"
                 renderOnZeroPageCount={null}

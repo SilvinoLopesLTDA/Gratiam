@@ -301,9 +301,9 @@ p {
 }
 
 .--btn {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   font-weight: 600;
-  padding: 9px 25px;
+  padding: 7px 23px;
   margin: 0 5px 0 0;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -387,6 +387,7 @@ p {
   border: 1px solid #777;
   border-radius: 3px;
   outline: none;
+  resize: none;
 }
 .--form-control select {
   font-size: 1.4rem;
@@ -403,6 +404,7 @@ p {
   min-width: 7rem;
   color: var(--color-dark);
   margin-right: 1rem;
+  display: flex;
 }
 
 @media screen and (max-width: 600px) {

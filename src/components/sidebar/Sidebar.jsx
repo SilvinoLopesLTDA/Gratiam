@@ -16,7 +16,6 @@ const Sidebar = ({ children }) => {
         navigate("/")
     }
 
-
   return (
     <div className='layout'>
         <div className="sidebar" style={{width: isOpen ? "230px" : "60px"}}>

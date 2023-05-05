@@ -68,6 +68,9 @@ const EditProduct = () => {
   return (
     <div>
     {isLoading && <Loader />}
+    <a href="/dashboard">
+        <button className='--btn --btn-primary' style={{marginTop: "1em"}}> Voltar </button>
+      </a>
     <h3 className="--mt">Edição de Produto</h3>
     <ProductForm 
         product={product}
