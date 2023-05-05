@@ -5,7 +5,7 @@ import heroImg from '../../../public/assets/inv-img.png'
 
 import "./Home.scss"
 import NumberText from "./NumberText"
-import { ShowOnLogin, ShowOnLogout } from "../../components/protect/hiddenLink"
+import { ShowOnLogin, ShowOnLogout } from "../../components/protect/HiddenLink"
 
 const Home = () => {
   return (
