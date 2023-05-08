@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useRedirectLoggedOutUser } from "../../../customHook/useRedirectLoggedOutUser";
 import { selectIsLoggedIn } from "../../../redux/features/auth/authSlice";
 import { getProduct } from "../../../redux/features/product/productSlice";
@@ -12,7 +12,8 @@ import DOMPurify from "dompurify";
 const ProductDetails = () => {
   useRedirectLoggedOutUser("/login");
   const dispatch = useDispatch();
-  const FRONTEND_URL = import.meta.env.VITE_APP_FRONTEND_URL
+  const navigate = useNavigate()
+  // const FRONTEND_URL = import.meta.env.VITE_APP_FRONTEND_URL
 
   const { id } = useParams();
 
@@ -41,11 +42,14 @@ const ProductDetails = () => {
     }
   }, [isLoggedIn, isError, message, dispatch, id]);
 
+  const handleClick = () => {
+    navigate("/dashboard")
+    window.location.reload();
+  };
+
   return (
     <div className="product-detail">
-      <a href={`${FRONTEND_URL}/dashboard`}>
-        <button className='--btn --btn-primary' style={{marginTop: "1em"}}> Voltar </button>
-      </a>
+      <button className='--btn --btn-primary' style={{marginTop: "1em"}} onClick={handleClick}> Voltar </button>
       <h3 className="--mt">Detalhes do Produto</h3>
       <Card cardClass="card">
         {isLoading && <SpinnerImg />}

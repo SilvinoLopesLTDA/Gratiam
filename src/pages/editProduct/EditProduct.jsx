@@ -8,7 +8,7 @@ import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutU
 
 const EditProduct = () => {
     useRedirectLoggedOutUser("/login")
-    const FRONTEND_URL = import.meta.env.VITE_APP_FRONTEND_URL
+    // const FRONTEND_URL = import.meta.env.VITE_APP_FRONTEND_URL
     
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -66,12 +66,22 @@ const EditProduct = () => {
         navigate("/dashboard")
     }
 
+    // const handleClick = () => {
+    //     const newWindow = window.redirect(`${FRONTEND_URL}/dashboard`);
+    //     newWindow.addEventListener("load", () => {
+    //       newWindow.location.reload();
+    //     });
+    //   };
+
+    const handleClick = () => {
+        navigate("/dashboard")
+        window.location.reload();
+      };
+
   return (
     <div>
     {isLoading && <Loader />}
-    <a href={`${FRONTEND_URL}/dashboard`}>
-        <button className='--btn --btn-primary' style={{marginTop: "1em"}}> Voltar </button>
-      </a>
+    <button className='--btn --btn-primary' style={{marginTop: "1em"}} onClick={handleClick}> Voltar </button>
     <h3 className="--mt">Edição de Produto</h3>
     <ProductForm 
         product={product}
