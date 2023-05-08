@@ -8,6 +8,7 @@ import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutU
 
 const EditProduct = () => {
     useRedirectLoggedOutUser("/login")
+    const FRONTEND_URL = import.meta.env.VITE_APP_FRONTEND_URL
     
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -68,7 +69,7 @@ const EditProduct = () => {
   return (
     <div>
     {isLoading && <Loader />}
-    <a href="/dashboard">
+    <a href={`${FRONTEND_URL}/dashboard`}>
         <button className='--btn --btn-primary' style={{marginTop: "1em"}}> Voltar </button>
       </a>
     <h3 className="--mt">Edição de Produto</h3>

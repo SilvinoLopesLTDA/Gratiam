@@ -12,6 +12,7 @@ import DOMPurify from "dompurify";
 const ProductDetails = () => {
   useRedirectLoggedOutUser("/login");
   const dispatch = useDispatch();
+  const FRONTEND_URL = import.meta.env.VITE_APP_FRONTEND_URL
 
   const { id } = useParams();
 
@@ -42,7 +43,7 @@ const ProductDetails = () => {
 
   return (
     <div className="product-detail">
-      <a href="/dashboard">
+      <a href={`${FRONTEND_URL}/dashboard`}>
         <button className='--btn --btn-primary' style={{marginTop: "1em"}}> Voltar </button>
       </a>
       <h3 className="--mt">Detalhes do Produto</h3>
