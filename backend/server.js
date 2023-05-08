@@ -18,10 +18,12 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use(cors({
-    origin: ["http://localhost:5173", "https://gratiam.vercel.app"],
-    credentials: true
-}))
+app.use(
+    cors({
+        origin: ["http://localhost:5173", "https://gratiam.vercel.app"," https://gratiam.vercel.app/dashboard"],
+        credentials: true,
+    })
+)
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 

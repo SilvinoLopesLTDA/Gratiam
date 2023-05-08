@@ -61,7 +61,7 @@ const AddProduct = () => {
   return (
     <div>
         {isLoading && <Loader />}
-        <h3 className="--mt">Adcionar Produto</h3>
+        <h3 className="--mt">Adicionar Produto</h3>
         <ProductForm 
             product={product}
             productImage={productImage}

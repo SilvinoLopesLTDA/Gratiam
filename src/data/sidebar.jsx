@@ -15,16 +15,17 @@ const menu = [
   {
     title: "Conta",
     icon: <FaRegChartBar />,
-    childrens: [
-      {
-        title: "Perfil",
-        path: "/profile",
-      },
-      {
-        title: "Editar",
-        path: "/edit-profile",
-      },
-    ],
+    path: "/profile",
+    // childrens: [
+    //   {
+    //     title: "Perfil",
+    //     path: "/profile",
+    //   },
+    //   {
+    //     title: "Editar",
+    //     path: "/edit-profile",
+    //   },
+    // ],
   },
   {
     title: "Feedback",

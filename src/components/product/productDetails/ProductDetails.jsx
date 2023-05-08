@@ -20,6 +20,9 @@ const ProductDetails = () => {
     (state) => state.product
   );
 
+  const created = new Date(product.createdAt)
+  const updated = new Date(product.updatedAt)
+
   const stockStatus = (quantity) => {
     if (quantity > 0) {
       return <span className="--color-success"> Em Estoque </span>;
@@ -39,7 +42,7 @@ const ProductDetails = () => {
 
   return (
     <div className="product-detail">
-          <a href="/dashboard">
+      <a href="/dashboard">
         <button className='--btn --btn-primary' style={{marginTop: "1em"}}> Voltar </button>
       </a>
       <h3 className="--mt">Detalhes do Produto</h3>
@@ -90,13 +93,11 @@ const ProductDetails = () => {
             ></div>
             <hr />
             <code className="--color-dark">
-              {/* Criado em: {product.createdAt.toLocaleString("en-US")} */}
-              Criado em: 04-05-2023
+              Criado em: {(created.toLocaleString('pt-BR'))}
             </code>
             <br />
             <code className="--color-dark">
-              {/* Ultima Atualização: {product.updatedAt.toLocaleString("en-US")} */}
-              Ultima Atualização: 05-05-2023
+              Ultima Atualização: {(updated.toLocaleString('pt-BR'))}
             </code>
           </div>
         )}
