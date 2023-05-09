@@ -34,9 +34,9 @@ const ProductForm = ({
                 <label> Categoria: </label>
                 <input type="text" placeholder='Categoria do Produto' name='category' value={product?.category} onChange={handleInputChange}/>
                 <label> Preço: </label>
-                <input type="text" placeholder='Preço do Produto' name='price' value={product?.price} onChange={handleInputChange}/>
+                <input type="number" placeholder='Preço do Produto' name='price' value={product?.price} onChange={handleInputChange}/>
                 <label> Quantidade: </label>
-                <input type="text" placeholder='Quantidade de Produtos' name='quantity' value={product?.quantity} onChange={handleInputChange}/>
+                <input type="number" placeholder='Quantidade de Produtos' name='quantity' value={product?.quantity} onChange={handleInputChange}/>
 
                 <label> Descrição: </label>
                 <ReactQuill theme="snow" value={description} onChange={setDescription} modules={ProductForm.modules} formats={ProductForm.formats} />

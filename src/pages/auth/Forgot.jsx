@@ -30,19 +30,23 @@ const Forgot = () => {
   }
 
   return (
-    <div className={`container ${styles.auth}`}>
+    <div className={`${styles.auth_square}`}>
       <Card> 
-        <div className={styles.form}>
+        <div className={styles.form_square}>
           <div className="--flex-center">
             <AiOutlineMail size={35} color="#999"/>
           </div>
           <h2> Esqueceu a Senha ? </h2>
+          <p style={{ textAlign: "center", fontSize:" 1.6em", marginTop: "1rem"}}>Siga os passos para redefinir a sua senha </p>
           <form onSubmit={forgot}>
-            <input type="email" placeholder="Email" required name="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <button type="submit" className="--btn --btn-primary --btn-block"> Obter Email de Redefinição </button>
+          <div className={styles.fields}>
+              <label htmlFor="email"> Email </label>
+              <input type="email" placeholder="exemplo@gmail.com" required id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          </div>
+            <button type="submit" className={`--btn --btn-primary --btn-block ${styles.btn_square}`}> Recuperar Senha </button>
           <div className={styles.links}>
-            <p><Link to="/"> -Home </Link></p> 
-            <p><Link to="/login"> -Entrar </Link></p>
+            <p><Link to="/"> {"< "}Voltar </Link></p> 
+            <p><Link to="/login"> Entrar{" >"} </Link></p>
           </div>
           </form>
         </div>

@@ -47,20 +47,26 @@ const Reset = () => {
   }
 
   return (
-    <div className={`container ${styles.auth}`}>
+    <div className={`${styles.auth_square}`}>
       <Card> 
-        <div className={styles.form}>
+        <div className={styles.form_square}>
           <div className="--flex-center">
             <MdPassword size={35} color="#999"/>
           </div>
           <h2> Mude a senha </h2>
           <form onSubmit={reset}>
-          <input type="password" placeholder="Nova Senha" required name="password"  value={password} onChange={handleInputChange}/>
-          <input type="password" placeholder="Confirmar Nova Senha" required name="password2"  value={password2} onChange={handleInputChange}/>
-            <button type="submit" className="--btn --btn-primary --btn-block"> Alterar Senha</button>
+            <div className={styles.fields}>
+              <label htmlFor="password"> Nova Senha </label>
+              <input type="password" placeholder="******" required id="password" name="password"  value={password} onChange={handleInputChange}/>
+            </div>
+            <div className={styles.fields}>
+              <label htmlFor="password2"> Confirmar Nova Senha </label>
+              <input type="password" placeholder="******" required  id="password2" name="password2"  value={password2} onChange={handleInputChange}/>
+            </div>
+            <button type="submit" className={`--btn --btn-primary --btn-block ${styles.btn_square}`}> Alterar Senha</button>
           <div className={styles.links}>
-            <p><Link to="/"> -Home </Link></p> 
-            <p><Link to="/login"> -Entrar </Link></p>
+            <p><Link to="/"> {"< "}Voltar</Link></p> 
+            <p><Link to="/login"> Entrar{" >"} </Link></p>
           </div>
           </form>
         </div>

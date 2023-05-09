@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import Card from "../../components/card/Card"
 import styles from "./auth.module.scss"
-import { TiUserAddOutline } from "react-icons/ti"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import { registerUser, validateEmail } from "../../services/authService"
@@ -68,27 +67,36 @@ const Register = () => {
 
 
   return (
-    <div className={`container ${styles.auth}`}>
+    <div className={`${styles.auth}`}>
       {isLoading && <Loader />}
       <Card> 
         <div className={styles.form}>
-          <div className="--flex-center">
-            <TiUserAddOutline size={35} color="#999"/>
-          </div>
-          <h2> Cadastra-se </h2>
+          <span className={styles.register} style={{color: "#0a1930"}}>
+            <Link to="/"> {"< "}Voltar </Link>
+          </span>
+          <h2> Conecte-se e Gerencie</h2>
           <span className={styles.register}>
-            <p>Já tem uma conta ?<Link to="/login"> Entre aqui </Link></p>
+            <p>Já tem uma conta ?<Link to="/login" style={{color: "#EF233C", fontWeight: "600"}}> Entre aqui </Link></p>
           </span>
           <form onSubmit={register}>
-            <input type="text" placeholder="Nome" required name="name" value={name} onChange={handleInputChange}/>
-            <input type="email" placeholder="Email" required name="email" value={email} onChange={handleInputChange}/>
-            <input type="password" placeholder="Senha" required name="password" value={password} onChange={handleInputChange}/>
-            <input type="password" placeholder="Confirmar Senha" required name="password2" value={password2} onChange={handleInputChange}/>
+            <div className={styles.fields} style={{marginTop: "7em"}}>
+              <label htmlFor="name"> Nome </label>
+              <input type="text" placeholder="Matheus..." required id="name" name="name" value={name} onChange={handleInputChange}/>
+            </div>
+            <div className={styles.fields}>
+              <label htmlFor="email"> Email </label>
+              <input type="email" placeholder="exemplo@gmail.com" required id="email" name="email" value={email} onChange={handleInputChange}/>
+            </div>
+            <div className={styles.fields}>
+              <label htmlFor="password"> Senha </label>
+              <input type="password" placeholder="******" required id="password" name="password" value={password} onChange={handleInputChange}/>
+            </div>
+            <div className={styles.fields}>
+              <label htmlFor="password2"> Confirmar Senha </label>
+              <input type="password" placeholder="******" required id="password2" name="password2" value={password2} onChange={handleInputChange}/>
+            </div>  
             <button type="submit" className="--btn --btn-primary --btn-block"> Criar Conta </button>
           </form>
-          <span className={styles.register}>
-            <Link to="/"> Home </Link>
-          </span>
         </div>
       </Card>
     </div>

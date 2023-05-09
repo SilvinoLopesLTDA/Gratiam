@@ -1,31 +1,127 @@
-.auth {
-    min-height: 80vh;
+.auth_square {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../../public/assets/cool-background.svg);
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 4500px;
+
+.form_square {
+  width: 55rem;
+  padding: 4rem;
+  animation: slide-up 0.5s ease;
+  background-color: #fff;
+
+  h2 {
+    color: var(--color-primary);
+    font-size: 4em;
+    padding-bottom: .4em;
+    text-align: center;
+    border-bottom: 3px solid var(--color-secondary);
+  }
+
+  form {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      display: flex;
+      font-size: 1.6rem;
+      font-weight: 300;
+      padding: 1rem;
+      margin: .8rem auto;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-bottom: 3px solid #ccc;
+      border-radius: 3px;
+      outline: none;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+        border-bottom: 3px solid #55c57a;
+      }
+
+      &:focus:invalid {
+        border-bottom: 3px solid #ff7730;
+      }
+    }
+
+    label {
+      color: var(--color-primary);
+      font-size: 1.4em;
+      font-weight: 700;
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2em;
+    }
+
+    .fields {
+      margin-top: 2em;
+    }
+
+    .btn_square {
+      margin-top: 1.8em;
+    }
+  }
+  .register {
     display: flex;
-    justify-content: center;
-    align-items: center;
-  
+    justify-content: start;
+    align-items: start;
+    margin: 2rem 0;  
+    font-weight: 500;
+  }
+}
+}
+
+
+
+
+
+.auth {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url(../../../public/assets/cool-background.svg);
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 2600px;
+
     .img {
       animation: slide-down 0.5s ease;
     }
+
   
     .form {
-      width: 35rem;
-      padding: 1.5rem;
+      width: 55rem;
+      height: 99.8vh;
+      padding: 4rem;
       animation: slide-up 0.5s ease;
       background-color: #fff;
+
       h2 {
         color: var(--color-primary);
-        text-align: center;
+        font-size: 5em;
+        padding-left: .4em;
+        text-align: start;
+        border-left: 5.5px solid var(--color-secondary);
       }
+
       form {
         input[type="text"],
         input[type="email"],
         input[type="password"] {
-          display: block;
+          display: flex;
           font-size: 1.6rem;
           font-weight: 300;
           padding: 1rem;
-          margin: 1rem auto;
+          margin: .8rem auto;
           width: 100%;
           border: 1px solid #ccc;
           border-bottom: 3px solid #ccc;
@@ -42,22 +138,38 @@
             border-bottom: 3px solid #ff7730;
           }
         }
+
+        label {
+          color: var(--color-primary);
+          font-size: 1.4em;
+          font-weight: 700;
+        }
+
         .links {
           display: flex;
           justify-content: space-between;
           margin: 5px 0;
         }
+
+        .fields {
+          margin-top: 2em;
+        }
   
         p {
-          text-align: center;
-          margin: 1rem;
+          text-align: start;
+          margin-top: 1rem;
+        }
+
+        button {
+          margin-top: 4.5em;
         }
       }
       .register {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 1rem;
+        justify-content: start;
+        align-items: start;
+        margin: 2rem 0;  
+        font-weight: 500;
       }
     }
   
@@ -82,5 +194,55 @@
   @media screen and (max-width: 700px) {
     .img {
       display: none;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .auth, .auth_square {
+      .form_square {
+        padding: 1.8em;
+        width: 35em;
+
+        .btn_square{
+          width: 18.5em;
+        }
+
+        .links {
+          display: flex;
+          justify-content: space-between;
+          margin: 5px 0;
+          width: 32em;
+        }
+
+        form {
+          width: 100%;
+        }
+
+        h2 {
+          width: 7.9em;
+        }
+      }
+
+      .form {
+        padding: 1.5em;
+        border-radius: none;
+
+        form {
+          border-radius: none;
+          width: 62%;
+        }
+
+        p {
+          width: 17em;
+        }
+
+        h2 {
+          width: 7em;
+        }
+
+        button {
+          width: 19em;
+        }
+      }
     }
   }

@@ -30,6 +30,16 @@
       }
     }
   }
+
+  input[type=number]::-webkit-inner-spin-button { 
+      -webkit-appearance: none;
+      
+  }
+  input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+  }
   
   .group {
     border: 1px solid var(--dark-blue);
