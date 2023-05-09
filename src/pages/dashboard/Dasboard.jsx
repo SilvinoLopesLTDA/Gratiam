@@ -7,8 +7,15 @@ import ProductList from "../../components/product/productList/ProductList"
 import ProductSummary from "../../components/product/productSummary/ProductSummary";
 
 const Dasboard = () => {
-  useRedirectLoggedOutUser("/login")
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (sessionStorage.getItem('shouldReloadDashboard')) {
+      window.location.reload();
+      sessionStorage.removeItem('shouldReloadDashboard');
+    }
+  }, []);
+  useRedirectLoggedOutUser("/login")
 
   const isLoggedin = useSelector(selectIsLoggedIn)
   const { product, isLoading, isError, message} = useSelector((state) => state.product)
