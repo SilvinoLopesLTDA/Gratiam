@@ -71,6 +71,7 @@ const AddProduct = () => {
             handleInputChange={handleInputChange}
             handleImageChange={handleImageChange}
             saveProduct={saveProduct}
+            required={"*"}
         />
     </div>
   )

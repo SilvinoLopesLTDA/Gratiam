@@ -79,7 +79,7 @@ const Register = () => {
             <p>Já tem uma conta ?<Link to="/login" style={{color: "#EF233C", fontWeight: "600"}}> Entre aqui </Link></p>
           </span>
           <form onSubmit={register}>
-            <div className={styles.fields} style={{marginTop: "7em"}}>
+            <div className={styles.fields} style={{marginTop: "5.5em"}}>
               <label htmlFor="name"> Nome </label>
               <input type="text" placeholder="Matheus..." required id="name" name="name" value={name} onChange={handleInputChange}/>
             </div>

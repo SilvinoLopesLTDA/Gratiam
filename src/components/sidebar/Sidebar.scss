@@ -148,3 +148,22 @@
   .sublink .sidebar-item .sidebar-title {
     padding-left: 40px;
   }
+
+  .s-devices {
+    display: none;
+  }
+
+  @media screen and (max-width: 600px) {
+    .isClosed {
+      display: none;
+    }
+
+    .s-devices {
+      display: block;
+      svg {
+        margin: 0;
+        position: relative;
+        left: -.1em;
+      }
+    }
+  }

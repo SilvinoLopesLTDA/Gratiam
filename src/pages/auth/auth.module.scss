@@ -199,19 +199,20 @@
 
   @media screen and (max-width: 600px) {
     .auth, .auth_square {
+      // Forgot and Reset Form
       .form_square {
         padding: 1.8em;
-        width: 35em;
+        width: 40em;
 
         .btn_square{
-          width: 18.5em;
+          width: 21.3em;
         }
 
         .links {
           display: flex;
           justify-content: space-between;
           margin: 5px 0;
-          width: 32em;
+          width: 36.4em;
         }
 
         form {
@@ -219,17 +220,26 @@
         }
 
         h2 {
-          width: 7.9em;
+          width: 9.2em;
         }
       }
 
+      // Login and Register Form
       .form {
-        padding: 1.5em;
-        border-radius: none;
+        padding: 2.85em;
 
         form {
-          border-radius: none;
-          width: 62%;
+          max-width: 350px;
+          width: 100%;
+          display: table;
+
+          .fields{
+            max-width: 90em;
+          }
+
+          button {
+            max-width: 70em;
+          }
         }
 
         p {
@@ -238,10 +248,6 @@
 
         h2 {
           width: 7em;
-        }
-
-        button {
-          width: 19em;
         }
       }
     }

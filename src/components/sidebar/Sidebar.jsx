@@ -5,10 +5,18 @@ import menu from '../../data/sidebar'
 import SidebarItem from './SidebarItem'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Sidebar = ({ children }) => {
     const [isOpen, setIsOpen] = useState(true)
     const toggle = () => setIsOpen(!isOpen)
+
+    useEffect(() => {
+        if (window.innerWidth < 600) {
+          setIsOpen(false);
+        }
+      }, []);
+      
 
     const navigate = useNavigate()
 
@@ -23,8 +31,11 @@ const Sidebar = ({ children }) => {
                 <div className="logo" style={{display: isOpen ? "block" : "none"}}>
                     <GrGatsbyjs size={35} style={{cursor: 'pointer'}} onClick={goHome}/>
                 </div>
-                <div className="bars" style={{marginLeft: isOpen ? "100px" : "0px"}}>
+                <div className="bars isClosed" style={{marginLeft: isOpen ? "100px" : "0px"}}>
                     <HiMenuAlt3 onClick={toggle}/>
+                </div>
+                <div className="logo s-devices">
+                    <GrGatsbyjs size={35} style={{cursor: 'pointer'}} onClick={goHome}/>
                 </div>
             </div>
             {menu.map((item, index) => {

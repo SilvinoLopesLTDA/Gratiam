@@ -11,12 +11,15 @@ const ProductForm = ({
     setDescription,
     handleInputChange,
     handleImageChange,
-    saveProduct
+    saveProduct,
+    required
 }) => {
   return (
     <div className='add-product'>
-        <Card cardClass={"card"}>
+        
             <form onSubmit={saveProduct}>
+
+            <Card cardClass={"card"}>
                 <Card cardClass={"group"}>
                     <label> Imagem do Produto </label>
                     <code className='--color-dark'> Formatos Suportados: jpg, jpeg, png </code>
@@ -28,24 +31,28 @@ const ProductForm = ({
                     ) : (
                         <p> Nenhuma imagem inserida para este produto </p>
                     )}
+                  </Card>
                 </Card>
-                <label> Nome: </label>
-                <input type="text" placeholder='Nome do Produto' name='name' value={product?.name} onChange={handleInputChange}/>
-                <label> Categoria: </label>
-                <input type="text" placeholder='Categoria do Produto' name='category' value={product?.category} onChange={handleInputChange}/>
-                <label> Preço: </label>
-                <input type="number" placeholder='Preço do Produto' name='price' value={product?.price} onChange={handleInputChange}/>
-                <label> Quantidade: </label>
-                <input type="number" placeholder='Quantidade de Produtos' name='quantity' value={product?.quantity} onChange={handleInputChange}/>
 
-                <label> Descrição: </label>
-                <ReactQuill theme="snow" value={description} onChange={setDescription} modules={ProductForm.modules} formats={ProductForm.formats} />
 
-                <div className="--my">
-                    <button type="submit" className='--btn --btn-primary'> Salvar </button>
+                <div className='blockL'>
+                  <label> Nome {required} </label>
+                    <input type="text" placeholder='Notebook...' name='name' value={product?.name} onChange={handleInputChange}/>
+                  <label> Categoria {required} </label>
+                    <input type="text" placeholder='Eletronicos...' name='category' value={product?.category} onChange={handleInputChange}/>
+                  <label> Preço {required} </label>
+                    <input type="text" placeholder='2499.99' name='price' value={product?.price} onChange={handleInputChange}/>
+                  <label> Quantidade {required} </label>
+                    <input type="text" placeholder='3' name='quantity' value={product?.quantity} onChange={handleInputChange}/>
+
+                  <label> Descrição {required} </label>
+                    <ReactQuill theme="snow" value={description} onChange={setDescription} modules={ProductForm.modules} formats={ProductForm.formats} />
+                  <div className="--my">
+                      <button type="submit" className='--btn --btn-primary'> Salvar </button>
+                  </div>
                 </div>
             </form>
-        </Card>
+
     </div>
   )
 }

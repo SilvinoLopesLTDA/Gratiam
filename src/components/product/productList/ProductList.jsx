@@ -103,6 +103,7 @@ const ProductList = ({ product, isLoading}) => {
                             {
                                 currentItems.map((product, index) => {
                                     const {_id, name, category, price, quantity} = product
+                                    const totalValue = price * quantity
                                     return (
                                         <tr key={_id}>
                                             <td>{index + 1}</td>
@@ -110,7 +111,7 @@ const ProductList = ({ product, isLoading}) => {
                                             <td>{category}</td>
                                             <td>{"R$"}{price}</td>
                                             <td>{quantity}</td>
-                                            <td>{"R$"}{price * quantity}</td>
+                                            <td>{"R$"}{totalValue.toFixed(2)}</td>
                                             <td className='icons'>
                                                 <span>
                                                     <Link to={`/product-details/${_id}`}>
