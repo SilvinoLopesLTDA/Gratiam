@@ -7,10 +7,10 @@ import Search from '../../search/Search'
 import { useDispatch, useSelector } from 'react-redux'
 import { FILTER_PRODUCTS, selectFilteredProducts } from '../../../redux/features/product/filterSlice'
 import ReactPaginate from 'react-paginate'
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteProduct, getProducts } from '../../../redux/features/product/productSlice'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const ProductList = ({ product, isLoading}) => {
     const [search, setSearch] = useState("")
@@ -31,20 +31,32 @@ const ProductList = ({ product, isLoading}) => {
     }
 
     const confirmDelete = (id) => {
-        confirmAlert({
-            title: 'Excluir  Item do Estoque ',
-            message: 'Tem certeza que deseja excluir permanentemente esse item do estoque ?',
-            buttons: [
-              {
-                label: 'Excluir',
-                onClick: () => delProduct(id)
-              },
-              {
-                label: 'Cancelar',
-                // onClick: () => alert('Click No')
+        Swal.fire({
+            title: 'Tem certeza ?',
+            text: "Deseja excluir permanentemente esse item do estoque ?",
+            icon: 'warning',
+            width: "50em",
+            showCancelButton: true,
+            confirmButtonColor: '#EF233C',
+            cancelButtonColor: '#2B2D42',
+            confirmButtonText: 'Sim, Excluir',
+            cancelButtonText: 'Não, Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              delProduct(id)
+              Swal.fire({
+                icon: 'success',
+                title: 'Item Excluido',
+                text: 'o Item de seu estoque foi deletado com sucesso !',
+              })
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Ação Cancelada',
+                    text: 'Não se preocupe seu item esta securo :)',
+                })
               }
-            ]
-          });
+            })
     }
 
     // Begin Pagination

@@ -51,62 +51,62 @@ const ProductDetails = () => {
     <div className="product-detail">
       <button className='--btn --btn-primary' style={{marginTop: "1em"}} onClick={handleClick}> Voltar </button>
       <h3 className="--mt">Detalhes do Produto</h3>
-      <Card cardClass="card">
         {isLoading && <SpinnerImg />}
         {product && (
           <div className="detail">
-            <Card cardClass="group">
-              {product?.image ? (
-                <img
-                  src={product.image.filePath}
-                  alt={product.image.fileName}
-                />
-              ) : (
-                <p>Nenhuma imagem inserida para este produto</p>
-              )}
+              <Card cardClass="group_image">
+                {product?.image ? (
+                  <img
+                    src={product.image.filePath}
+                    alt={product.image.fileName}
+                  />
+                ) : (
+                  <p>Nenhuma imagem inserida para este produto</p>
+                )}
             </Card>
-            <h4>Disponibilidade: {stockStatus(product.quantity)}</h4>
-            <hr />
-            <h4>
-              <span className="badge">Nome: </span> &nbsp; {product.name}
-            </h4>
-            <p>
-              <b>&rarr; SKU: </b> {product.sku}
-            </p>
-            <p>
-              <b>&rarr; Categoria: </b> {product.category}
-            </p>
-            <p>
-              <b>&rarr; Preço: </b> {"R$"}
-              {product.price}
-            </p>
-            <p>
-              <b>&rarr; Quantidade em Estoque: </b> {product.quantity}
-            </p>
-            <p>
-              <b>&rarr; Valor em Estoque: </b> {"R$"}
-              {product.price * product.quantity}
-            </p>
-            <hr />
-            <p>
-              <b>&rarr; Descrição: </b>
-            </p>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(product.description),
-              }}
-            ></div>
-            <hr />
-            <code className="--color-dark">
-              Criado em: {(created.toLocaleString('pt-BR'))}
-            </code>
-            <br />
-            <code className="--color-dark">
-              Ultima Atualização: {(updated.toLocaleString('pt-BR'))}
-            </code>
-          </div>
+            <div className="info"> 
+              <h4>Disponibilidade: {stockStatus(product.quantity)}</h4>
+                <hr />
+                <h4>
+                  <span className="badge">Nome: </span> &nbsp; {product.name}
+                </h4>
+                <p>
+                  <b>&rarr; SKU: </b> {product.sku}
+                </p>
+                <p>
+                  <b>&rarr; Categoria: </b> {product.category}
+                </p>
+                <p>
+                  <b>&rarr; Preço: </b> {"R$"}
+                  {product.price}
+                </p>
+                <p>
+                  <b>&rarr; Quantidade em Estoque: </b> {product.quantity}
+                </p>
+                <p>
+                  <b>&rarr; Valor em Estoque: </b> {"R$"}
+                  {product.price * product.quantity}
+                </p>
+                <hr />
+                <p>
+                  <b>&rarr; Descrição: </b>
+                </p>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(product.description),
+                  }}
+                ></div>
+                <hr />
+                <code className="--color-dark">
+                  Criado em: {(created.toLocaleString('pt-BR'))}
+                </code>
+                <br />
+                <code className="--color-dark">
+                  Ultima Atualização: {(updated.toLocaleString('pt-BR'))}
+                </code>
+              </div>
+            </div>
         )}
-      </Card>
     </div>
   );
 };

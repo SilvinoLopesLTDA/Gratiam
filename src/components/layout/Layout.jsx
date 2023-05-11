@@ -1,12 +1,14 @@
 import Footer from "../footer/Footer"
 import Header from "../header/Header"
 
+import styles from './Layout.module.scss'
+
 
 const Layout = ({ children }) => {
   return (
     <>
         <Header />
-            <div style={{minHeight: "80vh"}} className="--pad">
+            <div className={`${styles.layout} --pad`}>
                 {children}
             </div>
         <Footer />

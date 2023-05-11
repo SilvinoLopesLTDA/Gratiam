@@ -62,6 +62,7 @@ const AddProduct = () => {
     <div>
         {isLoading && <Loader />}
         <h3 className="--mt">Adicionar Produto</h3>
+        <p style={{color: "var(--color-primary)"}}> * Campo obrigatório</p>
         <ProductForm 
             product={product}
             productImage={productImage}
