@@ -1,24 +1,24 @@
-import './Loader.scss'
-import loaderImg from '../../../public/assets/loader.gif'
-import  ReactDOM  from 'react-dom'
+import "./Loader.scss";
+import loaderImg from "../../../public/assets/loader.gif";
+import ReactDOM from "react-dom";
 
 const Loader = () => {
   return ReactDOM.createPortal(
-    <div className='wrapper'>
-        <div className='loader'>
-          <img src={loaderImg} alt="Loading..." />
-        </div>
+    <div className="wrapper">
+      <div className="loader">
+        <img src={loaderImg} alt="Loading..." />
+      </div>
     </div>,
     document.getElementById("loader")
-  )
-}
+  );
+};
 
 export const SpinnerImg = () => {
   return (
     <div className="--center-all">
-        <img src={loaderImg} alt="Loading..." />
+      <img src={loaderImg} alt="Loading..." />
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

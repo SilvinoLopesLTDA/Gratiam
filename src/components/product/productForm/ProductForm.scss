@@ -1,82 +1,80 @@
 .add-product {
-    margin: 3rem 0;
-    .card {
-      float: right;
-      width: 100%;
-      max-width: 620px;
-      padding: 1rem;
-    }
-
-    .blockL {
-      float: left;
-      margin-right: .5em;
-
-      label {
-        display: block;
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: var(--color-primary);
-      }
-    }
-
-    form {
-      label {
-        display: block;
-        font-size: 1.4rem;
-        font-weight: 500;
-        color: var(--color-dark);
-      }
-      input[type="text"],
-      input[type="number"],
-      input[type="file"],
-      input[type="email"],
-      select,
-      input[type="password"] {
-        display: block;
-        font-size: 1.6rem;
-        font-weight: 300;
-        padding: 1rem;
-        margin: 1rem auto;
-        width: 100%;
-        border: 1px solid #777;
-        border-radius: 3px;
-        outline: none;
-      }
-    }
-  }
-
-  input[type=number]::-webkit-inner-spin-button { 
-      -webkit-appearance: none;
-      
-  }
-  input[type=number] { 
-    -moz-appearance: textfield;
-    appearance: textfield;
-
-  }
-  
-  .group {
-    border: 1px solid var(--dark-blue);
+  margin: 3rem 0;
+  .card {
+    float: right;
     width: 100%;
-    padding: 5px;
-  }
-  
-  .image-preview {
-    width: 100%;
-    height: 100%;
-    max-height: 500px;
-    background: var(--dark-blue);
+    max-width: 620px;
     padding: 1rem;
-    border-radius: 3px;
-    overflow: hidden;
-    // display: none;
-    transition: all 0.3s;
   }
-  
-  .image-preview img {
-    width: 100%;
+
+  .blockL {
+    float: left;
+    margin-right: 0.5em;
+
+    label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
   }
-  
-  .image-show {
-    display: block;
+
+  form {
+    label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--color-dark);
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    input[type="email"],
+    select,
+    input[type="password"] {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 300;
+      padding: 1rem;
+      margin: 1rem auto;
+      width: 100%;
+      border: 1px solid #777;
+      border-radius: 3px;
+      outline: none;
+    }
   }
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.group {
+  border: 1px solid var(--dark-blue);
+  width: 100%;
+  padding: 5px;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  background: var(--dark-blue);
+  padding: 1rem;
+  border-radius: 3px;
+  overflow: hidden;
+  // display: none;
+  transition: all 0.3s;
+}
+
+.image-preview img {
+  width: 100%;
+}
+
+.image-show {
+  display: block;
+}
