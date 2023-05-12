@@ -32,7 +32,7 @@ const Profile = () => {
   }, [dispatch]);
 
   return (
-    <div className="profile --my2">
+    <div className="profile">
       {isLoading && <SpinnerImg />}
       <>
         {!isLoading && profile === null ? (
@@ -43,21 +43,22 @@ const Profile = () => {
               <img src={profile?.photo} alt="Foto do Perfil" />
             </span>
             <span className="profile-data">
-              <p>
+              <p style={{ fontSize: "1.8em" }}>
                 <b>Nome:</b> {profile?.name}
               </p>
-              <p>
-                <b>Email:</b> {profile?.email}
+              <p style={{ fontSize: "1.8em" }}>
+                <b>Email:</b>{" "}
+                <span className="--color-primary">{profile?.email}</span>
               </p>
-              <p>
+              <p style={{ fontSize: "1.8em" }}>
                 <b>Tel:</b> {profile?.phone}
               </p>
-              <p>
-                <b>Descrição:</b> {profile?.bio}
+              <p style={{ fontSize: "1.8em" }}>
+                <b>Descrição:</b><br /><br />  {profile?.bio}
               </p>
-              <div>
+              <div className="btn-edit">
                 <Link to="/edit-profile">
-                  <button className="--btn --btn-primary">
+                  <button className="--btn --btn-primary" style={{marginTop: "1em"}}>
                     {" "}
                     Editar Perfil
                   </button>

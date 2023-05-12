@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Profile.scss";
+import "./EditProfile.scss";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/features/auth/authSlice";
 import Loader from "../../components/loader/Loader";
@@ -91,14 +91,14 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="profile --my2">
+    <div className="profileEdit --my2">
       {isLoading && <Loader />}
       <Card cardClass={"card --flex-dir-column"}>
-        <span className="profile-photo">
+        <span className="profileEdit-photo">
           <img src={user?.photo} alt="Foto do Perfil" />
         </span>
         <form className="--form-control --m" onSubmit={saveProfile}>
-          <span className="profile-data">
+          <span className="profileEdit-data">
             <p>
               <label> Nome: </label>
               <input
