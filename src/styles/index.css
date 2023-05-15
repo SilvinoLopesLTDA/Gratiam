@@ -499,7 +499,11 @@ ul {
   background-color: var(--color-primary);
 }
 .activePage {
-  color: #fff;
+  color: #fff !important;
   background-color: var(--color-primary);
   height: 100%;
+}
+
+.activePage:hover {
+  color: #ececec !important;
 }
