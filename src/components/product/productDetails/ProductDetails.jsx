@@ -43,7 +43,6 @@ const ProductDetails = () => {
   }, [isLoggedIn, isError, message, dispatch, id]);
 
   const handleClick = () => {
-    sessionStorage.setItem("shouldReloadDashboard", "true");
     navigate("/dashboard", { replace: true });
   };
 

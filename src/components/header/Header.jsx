@@ -18,8 +18,9 @@ const Header = () => {
     <div className="--pad header">
       <div className="--flex-between">
         <h3>
-          <span className="--fw-thin">Bem vindo de volta, </span>
-          <span className="--color-primary"> {name} </span>
+          <span className="--fw-thin">Bem vindo(a) de volta, </span>
+          <span className="--color-primary"> {name}</span>
+          <span className="--fw-thin">!</span>
         </h3>
         <button className="--btn --btn-primary" onClick={Logout}>
           Sair

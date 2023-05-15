@@ -38,8 +38,8 @@ const ProductList = ({ product, isLoading }) => {
 
   const confirmDelete = (id) => {
     Swal.fire({
-      title: "Tem certeza ?",
-      text: "Deseja excluir permanentemente esse item do estoque ?",
+      title: "Tem certeza?",
+      text: "Deseja excluir permanentemente esse item do estoque?",
       icon: "warning",
       width: "50em",
       showCancelButton: true,
@@ -53,13 +53,13 @@ const ProductList = ({ product, isLoading }) => {
         Swal.fire({
           icon: "success",
           title: "Item Excluido",
-          text: "o Item de seu estoque foi deletado com sucesso !",
+          text: "o Item de seu estoque foi deletado com sucesso!",
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
           icon: "info",
           title: "Ação Cancelada",
-          text: "Não se preocupe seu item esta securo :)",
+          text: "Não se preocupe, seu item está securo :)",
         });
       }
     });
@@ -162,7 +162,7 @@ const ProductList = ({ product, isLoading }) => {
         </div>
         <ReactPaginate
           breakLabel="..."
-          nextLabel="Proximo >"
+          nextLabel="Próximo >"
           onPageChange={handlePageClick}
           pageRangeDisplayed={10}
           pageCount={pageCount}
