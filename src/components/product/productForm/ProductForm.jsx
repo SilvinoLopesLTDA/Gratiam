@@ -14,6 +14,16 @@ const ProductForm = ({
   saveProduct,
   required,
 }) => {
+  const styleSpan = {
+    fontSize: "1.2rem",
+  };
+
+  const handlePriceChange = (e) => {
+    const { name, value } = e.target;
+    const cleanedValue = value.replace(",", ".");
+    handleInputChange({ target: { name, value: cleanedValue } });
+  };
+
   return (
     <div className="add-product">
       <form onSubmit={saveProduct}>
@@ -56,13 +66,20 @@ const ProductForm = ({
             value={product?.category}
             onChange={handleInputChange}
           />
-          <label> Preço {required} </label>
+          <label>
+            {" "}
+            Preço{" "}
+            <span style={styleSpan}>
+              (Coloque o ponto apenas na casa decimal)
+            </span>{" "}
+            {required}{" "}
+          </label>
           <input
             type="text"
             placeholder="2499.99"
             name="price"
             value={product?.price}
-            onChange={handleInputChange}
+            onChange={handlePriceChange}
           />
           <label> Quantidade {required} </label>
           <input
