@@ -3,14 +3,20 @@
   .info-summary {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  h3 {
+    text-align: center;
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
   }
 }
 
 .card {
   border: 1px solid #ccc;
-  // border-bottom: 3px solid var(--light-blue);
   padding: 5px;
   background-color: #f5f6fa;
+  width: 100%;
 }
 
 .card1 {
