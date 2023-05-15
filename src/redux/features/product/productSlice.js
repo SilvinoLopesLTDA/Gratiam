@@ -27,7 +27,6 @@ export const createProduct = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -114,25 +113,27 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     CALC_STORE_VALUE(state, action) {
-      const products = action.payload;
       const array = [];
-      products.map((item) => {
-        const { price, quantity } = item;
-        const productValue = price * quantity;
-        return array.push(productValue);
-      });
+      if (Array.isArray(action.payload)) {
+        action.payload.forEach((item) => {
+          const { price, quantity } = item;
+          const productValue = price * quantity;
+          array.push(productValue);
+        });
+      }
       const totalValue = array.reduce((a, b) => {
         return a + b;
       }, 0);
       state.totalStoreValue = totalValue;
     },
     CALC_OUTOFSTOCK(state, action) {
-      const products = action.payload;
       const array = [];
-      products.map((item) => {
-        const { quantity } = item;
-        return array.push(quantity);
-      });
+      if (Array.isArray(action.payload)) {
+        action.payload.map((item) => {
+          const { quantity } = item;
+          return array.push(quantity);
+        });
+      }
       let count = 0;
       array.forEach((number) => {
         if (number === 0 || number === "0") {
@@ -142,12 +143,13 @@ const productSlice = createSlice({
       state.outOfStock = count;
     },
     CALC_CATEGORY(state, action) {
-      const products = action.payload;
       const array = [];
-      products.map((item) => {
-        const { category } = item;
-        return array.push(category);
-      });
+      if (Array.isArray(action.payload)) {
+        action.payload.map((item) => {
+          const { category } = item;
+          return array.push(category);
+        });
+      }
       const uniqueCategory = [...new Set(array)];
       state.category = uniqueCategory;
     },
@@ -161,7 +163,6 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
         state.product.push(action.payload);
         toast.success("Produto Adcionado com Sucesso");
       })
@@ -179,7 +180,6 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
         state.product = action.payload;
       })
       .addCase(getProducts.rejected, (state, action) => {
