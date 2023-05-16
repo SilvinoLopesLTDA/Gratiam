@@ -134,7 +134,9 @@ const ProductList = ({ product, isLoading }) => {
                         {"R$"}
                         {price}
                       </td>
-                      <td>{quantity}</td>
+                      <td className={quantity <= 3 ? 'low-quantity' : ''}>
+                        {quantity}
+                      </td>
                       <td>
                         {"R$"}
                         {totalValue.toFixed(2)}

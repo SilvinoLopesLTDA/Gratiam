@@ -5,6 +5,11 @@
     width: 100%;
     overflow-x: auto;
 
+    .low-quantity {
+      color: var(--color-primary);
+      /* Outras propriedades de estilo que você deseja aplicar para quantidades baixas */
+    }
+    
     .search {
       width: 100%;
       max-width: 300px;

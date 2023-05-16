@@ -1,12 +1,21 @@
 import "./Loader.scss";
-import loaderImg from "/assets/loader.gif";
 import ReactDOM from "react-dom";
+import { Rings } from "react-loader-spinner";
 
 const Loader = () => {
   return ReactDOM.createPortal(
     <div className="wrapper">
       <div className="loader">
-        <img src={loaderImg} alt="Loading..." />
+        <Rings
+          height="80"
+          width="80"
+          color="#ef233c"
+          radius="6"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel="rings-loading"
+        />
       </div>
     </div>,
     document.getElementById("loader")
@@ -16,7 +25,16 @@ const Loader = () => {
 export const SpinnerImg = () => {
   return (
     <div className="--center-all">
-      <img src={loaderImg} alt="Loading..." />
+      <Rings
+        height="80"
+        width="80"
+        color="#ef233c"
+        radius="6"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+        ariaLabel="rings-loading"
+      />
     </div>
   );
 };
