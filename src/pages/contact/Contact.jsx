@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../services/authService";
 import axios from "axios";
 
-const contact = () => {
+const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const data = {
@@ -57,4 +57,4 @@ const contact = () => {
   );
 };
 
-export default contact;
+export default Contact;

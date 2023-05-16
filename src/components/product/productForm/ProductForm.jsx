@@ -1,10 +1,12 @@
 import ReactQuill from "react-quill";
+import PropTypes from "prop-types";
 import "react-quill/dist/quill.snow.css";
 import "./ProductForm.scss";
 import Card from "../../card/Card";
 
 const ProductForm = ({
   product,
+  // eslint-disable-next-line no-unused-vars
   productImage,
   imagePreview,
   description,
@@ -146,5 +148,17 @@ ProductForm.formats = [
   "code-block",
   "align",
 ];
+
+ProductForm.propTypes = {
+  product: PropTypes.object.isRequired,
+  productImage: PropTypes.string,
+  imagePreview: PropTypes.string,
+  description: PropTypes.string,
+  setDescription: PropTypes.func,
+  handleInputChange: PropTypes.func.isRequired,
+  handleImageChange: PropTypes.func.isRequired,
+  saveProduct: PropTypes.func.isRequired,
+  required: PropTypes.string.isRequired,
+};
 
 export default ProductForm;

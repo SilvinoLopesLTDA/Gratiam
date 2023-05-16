@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const NumberText = ({ num, text }) => {
   return (
     <div className="--mr-3">
@@ -6,4 +8,10 @@ const NumberText = ({ num, text }) => {
     </div>
   );
 };
+
+NumberText.propTypes = {
+  num: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+};
+
 export default NumberText;

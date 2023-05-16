@@ -1,4 +1,6 @@
+import PropTypes from "prop-types";
 import "./ProductSummary.scss";
+import { formatNumbers } from "./formatNumbers";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { BsCart4, BsCartX } from "react-icons/bs";
 import { BiCategory } from "react-icons/bi";
@@ -19,11 +21,6 @@ const earningIcon = <AiFillDollarCircle size={40} color="#fff" />;
 const productIcon = <BsCart4 size={40} color="#fff" />;
 const categoryIcon = <BiCategory size={40} color="#fff" />;
 const outOfStockIcon = <BsCartX size={40} color="#fff" />;
-
-// Format Amount
-export const formatNumbers = (x) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-};
 
 const ProductSummary = ({ product }) => {
   const dispatch = useDispatch();
@@ -68,6 +65,10 @@ const ProductSummary = ({ product }) => {
       </div>
     </div>
   );
+};
+
+ProductSummary.propTypes = {
+  product: PropTypes.object.isRequired,
 };
 
 export default ProductSummary;

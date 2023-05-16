@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./Search.module.scss";
 import { BiSearch } from "react-icons/bi";
 
@@ -13,6 +14,11 @@ const Search = ({ value, onChange }) => {
       />
     </div>
   );
+};
+
+Search.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Search;

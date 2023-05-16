@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./Sidebar.scss";
 import { GrGatsbyjs } from "react-icons/gr";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -62,6 +63,10 @@ const Sidebar = ({ children }) => {
       </main>
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Sidebar;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/features/auth/authSlice";
 
@@ -17,4 +18,12 @@ export const ShowOnLogout = ({ children }) => {
     return <> {children} </>;
   }
   return null;
+};
+
+ShowOnLogin.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+ShowOnLogout.propTypes = {
+  children: PropTypes.node.isRequired,
 };

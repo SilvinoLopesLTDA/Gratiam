@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -61,6 +62,11 @@ const SidebarItem = ({ item, isOpen }) => {
       </NavLink>
     );
   }
+};
+
+SidebarItem.propTypes = {
+  item: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 export default SidebarItem;

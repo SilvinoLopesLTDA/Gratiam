@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./ProductList.scss";
 import { SpinnerImg } from "../../loader/Loader";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
@@ -177,6 +178,11 @@ const ProductList = ({ product, isLoading }) => {
       </div>
     </div>
   );
+};
+
+ProductList.propTypes = {
+  product: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default ProductList;

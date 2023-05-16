@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./InfoBox.scss";
 
 const InfoBox = ({ bgColor, title, count, icon }) => {
@@ -10,6 +11,13 @@ const InfoBox = ({ bgColor, title, count, icon }) => {
       </span>
     </div>
   );
+};
+
+InfoBox.propTypes = {
+  bgColor: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default InfoBox;
