@@ -7,7 +7,6 @@ import { getProduct } from "../../../redux/features/product/productSlice";
 import Card from "../../card/Card";
 import { SpinnerImg } from "../../loader/Loader";
 import "./ProductDetails.scss";
-import DOMPurify from "dompurify";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const ProductDetails = () => {
@@ -48,6 +47,19 @@ const ProductDetails = () => {
   const handleClick = () => {
     navigate("/storage");
   };
+
+  const removeTagsFromHTML = (html) => {
+    const parser = new DOMParser();
+    const parsedDocument = parser.parseFromString(html, "text/html");
+    return parsedDocument.body.textContent || "Descrição não disponível!";
+  };
+
+  const formatDescription = (html) => {
+    const descriptionWithoutTags = removeTagsFromHTML(html);
+    return descriptionWithoutTags;
+  };
+
+  const formattedDescription = formatDescription(product.description);
 
   return (
     <div className="product-detail">
@@ -100,11 +112,13 @@ const ProductDetails = () => {
             <p>
               <b>&rarr; Descrição: </b>
             </p>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(product.description),
-              }}
-            ></div>
+            <div>
+              {product.description ? (
+                <p className="desc">{formattedDescription}</p>
+              ) : (
+                <p className="desc">Descrição não disponível!</p>
+              )}
+            </div>
             <hr />
             <code className="--color-dark">
               Criado em: {created.toLocaleString("pt-BR")}

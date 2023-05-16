@@ -24,9 +24,9 @@ const ProductForm = ({
 
   return (
     <div className="add-product">
-      <form onSubmit={saveProduct}>
-        <Card cardClass={"card"}>
-          <Card cardClass={"group"}>
+      <Card cardClass={"card"}>
+        <Card cardClass={"group"}>
+          <form onSubmit={saveProduct}>
             <label> Imagem do Produto </label>
             <code className="--color-dark">
               {" "}
@@ -38,20 +38,20 @@ const ProductForm = ({
               onChange={(e) => handleImageChange(e)}
             />
             {imagePreview != null ? (
-              <div className="image-preview">
+              <div className="image-container image-preview">
                 <img src={imagePreview} alt="Produto..." />
               </div>
             ) : (
-              <div className="image-message">
-                <h4>
-                  Nenhuma imagem inserida para este produto
-                </h4>
+              <div className="image-container image-msg">
+                <h4>Nenhuma imagem inserida para este produto</h4>
               </div>
             )}
-          </Card>
+          </form>
         </Card>
+      </Card>
 
-        <div className="blockL">
+      <div className="blockL">
+        <form onSubmit={saveProduct}>
           <label>
             {" "}
             Nome <span>{required} </span>
@@ -76,10 +76,7 @@ const ProductForm = ({
           />
           <label>
             {" "}
-            Preço{" "}
-            <span>
-              (Coloque o ponto apenas na casa decimal)
-            </span>{" "}
+            Preço <span>(Coloque o ponto apenas na casa decimal)</span>{" "}
             <span>{required}</span>{" "}
           </label>
           <input
@@ -117,8 +114,8 @@ const ProductForm = ({
               Salvar{" "}
             </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

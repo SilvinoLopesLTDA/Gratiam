@@ -43,21 +43,28 @@
 }
 
 .group_image {
+  display: grid;
+  place-items: center;
   border: 1px solid var(--dark-blue);
   padding: 1.5em 2.5em 1.5em 2em;
   width: 62.5em;
   min-height: 9.5em;
   float: left;
   img {
-    padding: 3.5em 1.5em 0 1.5em;
+    padding: 0em 1.5em;
     max-height: 40em;
   }
   .image-message {
-    margin-top: 18.5em;
     h4 {
-       text-align: center;
-       font-size: 1.8em;
+      text-align: center;
+      font-size: 1.8em;
     }
+  }
+}
+
+.desc {
+  &:first-letter {
+    text-transform: capitalize;
   }
 }
 
@@ -97,7 +104,6 @@
         width: 28em;
       }
       .image-message {
-        margin-top: 2.5em;
         h4 {
           text-align: center;
           font-size: 1.5em;
