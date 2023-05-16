@@ -174,6 +174,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
+    // eslint-disable-next-line no-unused-vars
     const { _id, name, email, photo, phone, bio } = user;
     user.email = email;
     user.name = req.body.name || name;

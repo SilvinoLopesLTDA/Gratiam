@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+mongoose.set("strictQuery", false);
+
 const tokenShema = mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
