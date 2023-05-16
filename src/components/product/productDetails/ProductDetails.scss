@@ -52,33 +52,56 @@
     padding: 3.5em 1.5em 0 1.5em;
     max-height: 40em;
   }
+  .image-message {
+    margin-top: 18.5em;
+    h4 {
+       text-align: center;
+       font-size: 1.8em;
+    }
+  }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .product-detail {
     min-height: 100vh;
 
     .detail {
       display: flex;
       flex-direction: column;
-      width: 10em;
+      max-width: 100%;
+    }
+
+    h4 {
+      margin-top: 1em;
+      font-size: 1.9em;
     }
 
     .info {
       margin: 0;
-      width: 31em;
+      width: 100%;
+    }
+
+    .description {
+      color: grey;
+      font-size: 1.8em;
     }
 
     .group_image {
-      padding: 1.5em;
+      padding: 1.5em 1em;
       min-height: 9.5em;
-      max-width: 35em;
-      width: 31.5em;
+      width: 100%;
       float: left;
       img {
         padding: 0;
         max-height: 40em;
         width: 28em;
+      }
+      .image-message {
+        margin-top: 2.5em;
+        h4 {
+          text-align: center;
+          font-size: 1.5em;
+        }
       }
     }
   }

@@ -7,6 +7,7 @@ import {
 } from "../../redux/features/product/productSlice";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
+import { toast } from "react-toastify";
 
 const initialState = {
   name: "",
@@ -58,7 +59,11 @@ const AddProduct = () => {
     console.log(...formData);
 
     await dispatch(createProduct(formData));
-    navigate("/dashboard");
+    if(!name || !category || !quantity || !price) {
+      return toast.error("Preencha os campos corretamente")
+    } else {
+      navigate("/storage");
+    }
   };
 
   return (

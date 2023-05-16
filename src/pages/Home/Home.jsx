@@ -1,7 +1,7 @@
 import { GrGatsbyjs } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
-import heroImg from "../../../public/assets/inv-img.png";
+import heroImg from "/assets/inv-img.png";
 
 import "./Home.scss";
 import NumberText from "./NumberText";
@@ -33,7 +33,7 @@ const Home = () => {
           <ShowOnLogin>
             <li>
               <button className="--btn --btn-primary">
-                <Link to="/dashboard"> Dashboard </Link>
+                <Link to="/storage"> Dashboard </Link>
               </button>
             </li>
           </ShowOnLogin>

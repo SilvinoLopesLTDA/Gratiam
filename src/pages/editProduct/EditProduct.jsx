@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import ProductForm from "../../components/product/productForm/ProductForm";
 import Loader from "../../components/loader/Loader";
+import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -67,11 +68,11 @@ const EditProduct = () => {
 
     await dispatch(updateProduct({ id, formData }));
     await dispatch(getProducts());
-    navigate("/dashboard");
+    navigate("/storage");
   };
 
   const handleClick = () => {
-    navigate("/dashboard", { replace: true });
+    navigate("/storage");
   };
 
   return (
@@ -79,10 +80,11 @@ const EditProduct = () => {
       {isLoading && <Loader />}
       <button
         className="--btn --btn-primary"
-        style={{ marginTop: "1em" }}
+        style={{ margin: "1.5em 0", paddingLeft: ".85em"}}
         onClick={handleClick}
       >
         {" "}
+        <MdOutlineKeyboardDoubleArrowLeft style={{marginRight: "0.5em"}}/>
         Voltar{" "}
       </button>
       <h3 className="--mt">Edição de Produto</h3>

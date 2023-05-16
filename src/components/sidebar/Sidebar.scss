@@ -22,6 +22,7 @@ main {
 .top_section {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 10px 15px;
   // border-bottom: 2px solid #ccc;
   transition: all 0.5s;
@@ -39,8 +40,8 @@ main {
 }
 .bars {
   display: flex;
+  float: right;
   font-size: 25px;
-  margin-left: 70px;
   cursor: pointer;
   color: var(--color-white);
   transition: all 0.3s;
@@ -52,7 +53,7 @@ main {
 }
 
 .sidebar-item {
-  padding: 0.75em 1em;
+  padding: 0.75em .75em;
   display: block;
   // border-radius: 5px;
   // border-bottom: 2px solid #ccc;

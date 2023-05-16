@@ -8,12 +8,12 @@ import Card from "../../card/Card";
 import { SpinnerImg } from "../../loader/Loader";
 import "./ProductDetails.scss";
 import DOMPurify from "dompurify";
+import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const ProductDetails = () => {
   useRedirectLoggedOutUser("/login");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const FRONTEND_URL = import.meta.env.VITE_APP_FRONTEND_URL
 
   const { id } = useParams();
 
@@ -24,6 +24,9 @@ const ProductDetails = () => {
 
   const created = new Date(product.createdAt);
   const updated = new Date(product.updatedAt);
+
+  const { price, quantity } = product;
+  const storeValue = price * quantity;
 
   const stockStatus = (quantity) => {
     if (quantity > 0) {
@@ -43,17 +46,18 @@ const ProductDetails = () => {
   }, [isLoggedIn, isError, message, dispatch, id]);
 
   const handleClick = () => {
-    navigate("/dashboard", { replace: true });
+    navigate("/storage");
   };
 
   return (
     <div className="product-detail">
       <button
         className="--btn --btn-primary"
-        style={{ marginTop: "1em" }}
+        style={{ margin: "1.5em 0", paddingLeft: ".85em" }}
         onClick={handleClick}
       >
         {" "}
+        <MdOutlineKeyboardDoubleArrowLeft style={{ marginRight: "0.3em" }} />
         Voltar{" "}
       </button>
       <h3 className="--mt">Detalhes do Produto</h3>
@@ -64,7 +68,9 @@ const ProductDetails = () => {
             {product?.image ? (
               <img src={product.image.filePath} alt={product.image.fileName} />
             ) : (
-              <p>Nenhuma imagem inserida para este produto</p>
+              <div className="image-message">
+                <h4>Nenhuma imagem inserida para este produto</h4>
+              </div>
             )}
           </Card>
           <div className="info">
@@ -88,7 +94,7 @@ const ProductDetails = () => {
             </p>
             <p>
               <b>&rarr; Valor em Estoque: </b> {"R$"}
-              {product.price * product.quantity}
+              {storeValue.toFixed(2)}
             </p>
             <hr />
             <p>

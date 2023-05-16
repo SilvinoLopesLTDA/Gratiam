@@ -6,7 +6,7 @@ import Forgot from "./pages/auth/Forgot";
 import Reset from "./pages/auth/Reset";
 import Sidebar from "./components/sidebar/Sidebar";
 import Layout from "./components/layout/Layout";
-import Dasboard from "./pages/dashboard/Dasboard";
+import Storage from "./pages/storage/Storage";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +20,9 @@ import EditProduct from "./pages/editProduct/EditProduct";
 import Profile from "./pages/profile/Profile";
 import EditProfile from "./pages/profile/EditProfile";
 import Contact from "./pages/contact/Contact";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Payments from "./pages/payments/Payments";
+import Sales from "./pages/sales/Sales";
 
 axios.defaults.withCredentials = true;
 
@@ -48,7 +51,27 @@ function App() {
           element={
             <Sidebar>
               <Layout>
-                <Dasboard />
+                <Dashboard />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/sales"
+          element={
+            <Sidebar>
+              <Layout>
+                <Sales />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/storage"
+          element={
+            <Sidebar>
+              <Layout>
+                <Storage />
               </Layout>
             </Sidebar>
           }
@@ -59,6 +82,16 @@ function App() {
             <Sidebar>
               <Layout>
                 <AddProduct />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/payments"
+          element={
+            <Sidebar>
+              <Layout>
+                <Payments />
               </Layout>
             </Sidebar>
           }

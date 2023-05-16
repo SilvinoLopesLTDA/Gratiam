@@ -16,10 +16,6 @@ const ProductForm = ({
   saveProduct,
   required,
 }) => {
-  const styleSpan = {
-    fontSize: "1.2rem",
-  };
-
   const handlePriceChange = (e) => {
     const { name, value } = e.target;
     const cleanedValue = value.replace(",", ".");
@@ -46,13 +42,20 @@ const ProductForm = ({
                 <img src={imagePreview} alt="Produto..." />
               </div>
             ) : (
-              <p> Nenhuma imagem inserida para este produto </p>
+              <div className="image-message">
+                <h4>
+                  Nenhuma imagem inserida para este produto
+                </h4>
+              </div>
             )}
           </Card>
         </Card>
 
         <div className="blockL">
-          <label> Nome {required} </label>
+          <label>
+            {" "}
+            Nome <span>{required} </span>
+          </label>
           <input
             type="text"
             placeholder="Notebook..."
@@ -60,7 +63,10 @@ const ProductForm = ({
             value={product?.name}
             onChange={handleInputChange}
           />
-          <label> Categoria {required} </label>
+          <label>
+            {" "}
+            Categoria <span> {required} </span>
+          </label>
           <input
             type="text"
             placeholder="Eletronicos..."
@@ -71,10 +77,10 @@ const ProductForm = ({
           <label>
             {" "}
             Preço{" "}
-            <span style={styleSpan}>
+            <span>
               (Coloque o ponto apenas na casa decimal)
             </span>{" "}
-            {required}{" "}
+            <span>{required}</span>{" "}
           </label>
           <input
             type="text"
@@ -83,7 +89,11 @@ const ProductForm = ({
             value={product?.price}
             onChange={handlePriceChange}
           />
-          <label> Quantidade {required} </label>
+          <label>
+            {" "}
+            Quantidade
+            <span>{required}</span>
+          </label>
           <input
             type="text"
             placeholder="3"
@@ -92,9 +102,10 @@ const ProductForm = ({
             onChange={handleInputChange}
           />
 
-          <label> Descrição {required} </label>
+          <label style={{ marginBottom: "1rem" }}> Descrição </label>
           <ReactQuill
             theme="snow"
+            placeholder="Nenhuma descrição informada"
             value={description}
             onChange={setDescription}
             modules={ProductForm.modules}
