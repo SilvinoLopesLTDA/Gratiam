@@ -24,7 +24,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://gratiam.vercel.app",
-      " https://gratiam.vercel.app/dashboard",
+      "https://gratiam-dev.vercel.app",
     ],
     credentials: true,
   })
