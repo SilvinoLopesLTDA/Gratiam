@@ -1,8 +1,7 @@
 .profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 90vh;
+  display: block;
+  max-height: 80vh;
+  margin-top: 4%;
   .card {
     max-width: 700px;
     width: 80em;
@@ -49,6 +48,7 @@
     min-height: 82vh;
     .card {
       padding: 2em;
+      max-width: 310px;
   
       img {
         max-width: 200px;

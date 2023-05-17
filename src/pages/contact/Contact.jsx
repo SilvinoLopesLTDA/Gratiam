@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Card from "../../components/card/Card";
 import "./Contact.scss";
 import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../services/authService";
@@ -28,14 +27,14 @@ const Contact = () => {
   return (
     <div className="contact">
       <h3 className="--mt">Envie seu Feedback</h3>
+      <p> Caso tenha passado por irregularidades no sistema ou deseja uma melhoria, envia-nos o seu feedback </p>
       <div className="section">
         <form onSubmit={sendEmail}>
-          <Card cardClass="card">
             <label> Assunto </label>
             <input
               type="text"
               name="subject"
-              placeholder="Assunto"
+              placeholder="Sujestão de melhorias..."
               required
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
@@ -45,12 +44,12 @@ const Contact = () => {
               cols="30"
               rows="10"
               name="message"
+              placeholder="Escreva sua mensagem aqui..."
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             ></textarea>
             <button className="--btn --btn-primary"> Enviar </button>
-          </Card>
         </form>
       </div>
     </div>

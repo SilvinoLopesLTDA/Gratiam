@@ -9,9 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { updateUser } from "../../services/authService";
 import ChangePassword from "../../components/changePassword/ChangePassword";
+import Modal from "../../components/modal/Modal";
 
 const EditProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 
@@ -94,57 +97,89 @@ const EditProfile = () => {
     <div className="profileEdit --my2">
       {isLoading && <Loader />}
       <Card cardClass={"card --flex-dir-column"}>
-        <span className="profileEdit-photo">
-          <img src={user?.photo} alt="Foto do Perfil" />
-        </span>
-        <form className="--form-control --m" onSubmit={saveProfile}>
-          <span className="profileEdit-data">
-            <p>
-              <label> Nome: </label>
-              <input
-                type="text"
-                name="name"
-                value={profile?.name}
-                onChange={handleInputChange}
-              />
-            </p>
-            <p>
-              <label> Email: </label>
-              <input type="text" name="email" value={profile?.email} disabled />
-              <br />
-              <code>O Email não pode ser Alterado </code>
-            </p>
-            <p>
-              <label> Tel: </label>
-              <input
-                type="text"
-                name="phone"
-                value={profile?.phone}
-                onChange={handleInputChange}
-              />
-            </p>
-            <p>
-              <label> Descrição: </label>
-              <textarea
-                name="bio"
-                value={profile?.bio}
-                onChange={handleInputChange}
-                cols="30"
-                rows={10}
-              ></textarea>
-            </p>
-            <p>
-              <label> Foto: </label>
-              <input type="file" name="image" onChange={handleImageChange} />
-            </p>
-            <div>
-              <button className="--btn --btn-primary"> Salvar </button>
-            </div>
+        <div className="form_top">
+          <span className="profileEdit-photo">
+            <img src={user?.photo} alt="Foto do Perfil" />
           </span>
-        </form>
+          <form className="--form-control --m" onSubmit={saveProfile}>
+            <span className="profileEdit-data">
+              <div className="input_info_top">
+                <p>
+                  <label> Foto: </label>
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleImageChange}
+                  />
+                </p>
+                <p>
+                  <label> Nome: </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={profile?.name}
+                    onChange={handleInputChange}
+                  />
+                </p>
+                <p>
+                  <label> Email: </label>
+                  <input
+                    type="text"
+                    name="email"
+                    value={profile?.email}
+                    disabled
+                  />
+                  <br />
+                  <code>O Email não pode ser Alterado </code>
+                </p>
+                <button
+                  className="--btn --btn-primary btn-modal"
+                  type="button"
+                  onClick={() => setIsModalVisible(true)}
+                >
+                  Alterar Senha
+                </button>
+                {isModalVisible ? (
+                  <Modal onClose={() => setIsModalVisible(false)}>
+                    <ChangePassword />
+                  </Modal>
+                ) : null}
+              </div>
+            </span>
+          </form>
+        </div>
+
+        <div className="form_bottom">
+          <form className="--form-control --m" onSubmit={saveProfile}>
+            <span className="profileEdit-data">
+              <div className="input_info_bottom">
+                <p>
+                  <label> Tel: </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    value={profile?.phone}
+                    onChange={handleInputChange}
+                  />
+                </p>
+                <p>
+                  <label> Descrição: </label>
+                  <textarea
+                    name="bio"
+                    value={profile?.bio}
+                    onChange={handleInputChange}
+                    cols="30"
+                    rows={10}
+                  ></textarea>
+                </p>
+                <div>
+                  <button className="--btn --btn-primary"> Salvar </button>
+                </div>
+              </div>
+            </span>
+          </form>
+        </div>
       </Card>
-      <br />
-      <ChangePassword />
     </div>
   );
 };
