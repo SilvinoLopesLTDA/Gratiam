@@ -11,8 +11,8 @@
     align-items: center;
     .container {
         background-color: var(--color-white);
-        width: 35%;
-        height: 50%;
+        width: 45%;
+        height: 65%;
         color: var(--color-dark);
         border: 2px solid var(--color-primary);
         border-radius: 20px;
@@ -49,8 +49,10 @@
 
 @media screen and (max-width: 600px) {
     .modal {
+        margin-top: -6em;
         .container{
             width: 80%;
+            height: 51%;
             .close {
                 right: calc(-100% + 35px);
             }

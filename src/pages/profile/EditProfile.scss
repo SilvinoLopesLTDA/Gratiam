@@ -1,5 +1,6 @@
 .profileEdit {
-  max-width: 1200px;
+  max-width: 100%;
+  width: 95%;
   .form_bottom {
     margin: 3em;
     max-height: 450px;
@@ -32,7 +33,7 @@
     .card {
       max-width: 100%;
       display: block;
-      margin: 0 7%;
+      margin: 3%;
       padding: 1rem 0;
   
       span.profileEdit-photo {
