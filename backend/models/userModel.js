@@ -37,7 +37,7 @@ const userShema = mongoose.Schema(
     },
     bio: {
       type: String,
-      default: "Bio",
+      default: "Nenhuma biografia foi informada.",
       maxLength: [250, "A bio não dever conter mais que 250 caracteres"],
     },
   },
