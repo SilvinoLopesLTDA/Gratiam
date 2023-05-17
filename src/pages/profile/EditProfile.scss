@@ -17,7 +17,9 @@
   .form_top {
     display: flex;
     max-height: 450px;
+    width: 100%;
     .input_info_top{
+      margin: 0 4em;
       input{
         width: 30em;
         margin: .5em 0;
@@ -46,10 +48,10 @@
   
       img {
         width: 100%;
-        max-width: 55em;
+        max-width: 50em;
         border-radius: 10px;
-        height: 38.2em;
-        margin: 3em 3em 0 3em;
+        height: 38em;
+        margin: 3em 0 0 3em;
         padding-right: 1rem;
         padding-left: 1rem;
       }
