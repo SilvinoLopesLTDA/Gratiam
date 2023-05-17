@@ -82,7 +82,8 @@
 
 .auth {
   width: 100%;
-  background-image: url(../../../public/assets/cool-background.svg);
+  height: 120vh;
+  background-image: url(/assets/cool-background.svg);
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -94,7 +95,7 @@
 
   .form {
     width: 55rem;
-    height: 100%;
+    height: 119.75vh;
     padding: 4rem;
     animation: slide-up 0.5s ease;
     background-color: #fff;
