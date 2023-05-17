@@ -17,11 +17,11 @@ const registerUser = asyncHandler(async (req, res) => {
   // Validation
   if (!name || !email || !password) {
     res.status(400);
-    throw new Error("Preencha os campos corretamente");
+    throw new Error("Preencha os campos corretamente.");
   }
   if (password.length < 6) {
     res.status(400);
-    throw new Error("A senha deve conter mais de 6 caracteres");
+    throw new Error("A senha deve conter mais de 6 caracteres.");
   }
 
   // Check if user email already exist
@@ -29,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400);
-    throw new Error("O email ja esta cadastrado");
+    throw new Error("O email já está cadastrado!");
   }
 
   // Create new user
@@ -64,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Dados de usuario invalidos");
+    throw new Error("Dados de usuário invalidos!");
   }
 });
 
@@ -75,7 +75,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // Validate Request
   if (!email || !password) {
     res.status(400);
-    throw new Error("Por favor adcione o email e a senha");
+    throw new Error("Por favor, adicione o email e a senha.");
   }
 
   // Check if user exists
@@ -83,7 +83,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (!user) {
     res.status(400);
-    throw new Error("Usuario não encontrado, por favor cadastra-se ");
+    throw new Error("Usuário não encontrado. Por favor, cadastre-se!");
   }
 
   // User exists, check if password is correct
@@ -116,7 +116,7 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Email ou Senha invalido");
+    throw new Error("Email ou Senha inválido!");
   }
 });
 
@@ -130,7 +130,7 @@ const logout = asyncHandler(async (req, res) => {
     secure: true,
   });
   return res.status(200).json({
-    message: "Deslogado com sucesso",
+    message: "Deslogado com sucesso!",
   });
 });
 
@@ -150,7 +150,7 @@ const getUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Usuario não encontrado");
+    throw new Error("Usuário não encontrado!");
   }
 });
 
@@ -193,7 +193,7 @@ const updateUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("Usuario não encontrado");
+    throw new Error("Usuário não encontrado!");
   }
 });
 
@@ -205,12 +205,12 @@ const changePassword = asyncHandler(async (req, res) => {
   // Validate
   if (!user) {
     res.status(400);
-    throw new Error("Usuario não encontrado, por favor cadastra-se");
+    throw new Error("Usuário não encontrado! Por favor, cadastre-se.");
   }
 
   if (!oldPassword || !password) {
     res.status(400);
-    throw new Error("Por favor adcione a antiga e nova senha");
+    throw new Error("Por favor, adicione a antiga e nova senha.");
   }
 
   // Chech if old password matched password in DB
@@ -220,10 +220,10 @@ const changePassword = asyncHandler(async (req, res) => {
   if (user && passwordIsCorrect) {
     user.password = password;
     await user.save();
-    res.status(200).send("A senha foi atualizada com sucesso");
+    res.status(200).send("A senha foi atualizada com sucesso!");
   } else {
     res.status(400);
-    throw new Error("A senha antiga esta incorreta");
+    throw new Error("A senha antiga está incorreta!");
   }
 });
 
@@ -234,7 +234,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   if (!user) {
     res.status(400);
-    throw new Error("Usuario não existe");
+    throw new Error("Usuário não existe!");
   }
 
   // Delete Token if it exists in DB
@@ -266,10 +266,10 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
   // Reset Email
   const message = `
-    <h2> Ola ${user.name} </h2>
+    <h2> Olá ${user.name} </h2>
 
-    <p>Por favor use o link abaixo para mudar a sua senha<p>
-    <p>Este link apenas será valido por 30 minutos<p>
+    <p>Por favor, use o link abaixo para mudar a sua senha.<p>
+    <p>Este link apenas será valido por 30 minutos!<p>
 
     <a href="${resetUrl}" clicktracking=off>${resetUrl}</a>
 
@@ -284,10 +284,10 @@ const forgotPassword = asyncHandler(async (req, res) => {
     await sendEmail(subject, message, send_to, send_from);
     res
       .status(200)
-      .json({ success: true, message: "Email de Redefinição Enviado" });
+      .json({ success: true, message: "Email de Redefinição Enviado!" });
   } catch (error) {
     res.status(500);
-    throw new Error("Email não enviado, por favor tente novamente");
+    throw new Error("Email não enviado. Por favor, tente novamente!");
   }
 });
 
@@ -310,7 +310,7 @@ const resetPassword = asyncHandler(async (req, res) => {
 
   if (!userToken) {
     res.status(404);
-    throw new Error("Token Invalido ou Expirado");
+    throw new Error("Token Inválido ou Expirado!");
   }
 
   // Find user
@@ -320,7 +320,7 @@ const resetPassword = asyncHandler(async (req, res) => {
   user.password = password;
   await user.save();
   res.status(200).json({
-    message: "Senhar Redefinida com Sucesso, Por Favor Entre em sua Conta",
+    message: "Senha Redefinida com Sucesso! Por Favor, Entre em sua Conta.",
   });
 });
 

@@ -9,7 +9,7 @@ const createProduct = asyncHandler(async (req, res) => {
   //Validation
   if (!name || !category || !quantity || !price) {
     res.status(400);
-    throw new Error("Por favor, preencha os campos corretamente");
+    throw new Error("Por favor, preencha os campos corretamente!");
   }
 
   // Handle Image upload
@@ -24,7 +24,7 @@ const createProduct = asyncHandler(async (req, res) => {
       });
     } catch (error) {
       res.status(500);
-      throw new Error("Upload da Imagem Falhou, tente novamente");
+      throw new Error("Upload da Imagem Falhou, tente novamente.");
     }
 
     fileData = {
@@ -61,12 +61,12 @@ const getProduct = asyncHandler(async (req, res) => {
   // If product doesn't exist
   if (!product) {
     res.status(404);
-    throw new Error("Produto não encontrado");
+    throw new Error("Produto não encontrado.");
   }
   // Match product with User
   if (product.user.toString() !== req.user.id) {
     res.status(401);
-    throw new Error("Usuario não Autorizado");
+    throw new Error("Usuário não Autorizado.");
   }
   res.status(200).json(product);
 });
@@ -77,12 +77,12 @@ const deleteProduct = asyncHandler(async (req, res) => {
   // If product doesn't exist
   if (!product) {
     res.status(404);
-    throw new Error("Produto não encontrado");
+    throw new Error("Produto não encontrado.");
   }
   // Match product with User
   if (product.user.toString() !== req.user.id) {
     res.status(401);
-    throw new Error({ message: "Produto Deletado com Sucesso" });
+    throw new Error({ message: "Produto Deletado com Sucesso." });
   }
   await product.remove();
   res.status(200).json(product);
@@ -97,13 +97,13 @@ const updateProduct = asyncHandler(async (req, res) => {
   // If product doesn't exist
   if (!product) {
     res.status(404);
-    throw new Error("Produto não encontrado");
+    throw new Error("Produto não encontrado.");
   }
 
   // Match product to the User
   if (product.user.toString() !== req.user.id) {
     res.status(401);
-    throw new Error({ message: "Produto Deletado com Sucesso" });
+    throw new Error({ message: "Produto Deletado com Sucesso." });
   }
 
   // Handle Image upload
@@ -118,7 +118,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       });
     } catch (error) {
       res.status(500);
-      throw new Error("Upload da Imagem Falhou, tente novamente");
+      throw new Error("Upload da Imagem Falhou, tente novamente.");
     }
 
     fileData = {
