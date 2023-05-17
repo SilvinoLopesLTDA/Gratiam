@@ -48,6 +48,9 @@
       border: 1px solid #777;
       border-radius: 3px;
       outline: none;
+      &.highlight {
+        border: 1px solid red;
+      }
     }
   }
 }
@@ -75,7 +78,6 @@ input[type="number"] {
   padding: 1rem;
   border-radius: 3px;
   overflow: hidden;
-  // display: none;
   transition: all 0.3s;
 }
 

@@ -7,7 +7,6 @@ import {
 } from "../../redux/features/product/productSlice";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
-import { toast } from "react-toastify";
 
 const initialState = {
   name: "",
@@ -51,7 +50,7 @@ const AddProduct = () => {
     formData.append("name", name);
     formData.append("sku", generateSku(category));
     formData.append("category", category);
-    formData.append("quantity", Number(quantity));
+    formData.append("quantity", quantity);
     formData.append("price", price);
     formData.append("description", description);
     formData.append("image", productImage);
@@ -59,9 +58,17 @@ const AddProduct = () => {
     console.log(...formData);
 
     await dispatch(createProduct(formData));
-    if(!name || !category || !quantity || !price) {
-      return toast.error("Preencha os campos corretamente")
-    } else {
+
+    if (
+      name &&
+      category &&
+      quantity &&
+      price &&
+      name.trim() !== "" &&
+      category.trim() !== "" &&
+      quantity.trim() !== "" &&
+      price.trim() !== ""
+    ) {
       navigate("/storage");
     }
   };

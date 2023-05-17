@@ -18,7 +18,7 @@ export const registerUser = async (userData) => {
       { withCredentials: true }
     );
     if (response.statusText === "OK") {
-      toast.success("Usuario Cadastrado com sucesso");
+      toast.success("Usuário Cadastrado com sucesso!");
     }
     return response.data;
   } catch (error) {
@@ -38,7 +38,7 @@ export const LoginUser = async (userData) => {
       userData
     );
     if (response.statusText === "OK") {
-      toast.success("Usuario Logado com sucesso");
+      toast.success("Usuário Logado com sucesso!");
     }
     return response.data;
   } catch (error) {
