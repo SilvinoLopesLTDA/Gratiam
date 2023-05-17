@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./ChangePassword.scss";
 import { toast } from "react-toastify";
 import { changePassword } from "../../services/authService";
-import Card from "../card/Card";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {
@@ -41,28 +40,31 @@ const ChangePassword = () => {
 
   return (
     <div className="change-password">
-      <Card cardClass="password-card">
+      <div className="password-card">
         <h3> Alterar Senha </h3>
         <form onSubmit={changePass} className="--form-control">
+          <label>Senha Atual</label>
           <input
             type="password"
-            placeholder="Senha Atual"
+            placeholder="******"
             required
             name="oldPassword"
             value={oldPassword}
             onChange={handleInputChange}
           />
+          <label> Nova Senha</label>
           <input
             type="password"
-            placeholder="Nova Senha"
+            placeholder="******"
             required
             name="password"
             value={password}
             onChange={handleInputChange}
           />
+          <label> Confirmar Nova Senha</label>
           <input
             type="password"
-            placeholder="Confirmar Nova Senha"
+            placeholder="******"
             required
             name="password2"
             value={password2}
@@ -73,7 +75,7 @@ const ChangePassword = () => {
             Alterar{" "}
           </button>
         </form>
-      </Card>
+      </div>
     </div>
   );
 };

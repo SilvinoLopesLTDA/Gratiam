@@ -1,8 +1,22 @@
 .profileEdit {
   max-width: 1200px;
+  .form_bottom {
+    margin: 3em;
+    max-height: 450px;
+    input {
+      width: 33.5em;
+    }
+    label {
+      margin: .8em 0 1em 0;
+    }
+    button {
+      margin: 1em 0;
+    }
+  }
   .form_top {
     display: flex;
-    .input_info_top {
+    max-height: 450px;
+    .input_info_top{
       input{
         width: 30em;
         margin: .5em 0;
@@ -18,8 +32,7 @@
     .card {
       max-width: 100%;
       display: block;
-      justify-content: flex-start;
-  
+      margin: 0 7%;
       padding: 1rem 0;
   
       span.profileEdit-photo {
@@ -35,7 +48,7 @@
         max-width: 55em;
         border-radius: 10px;
         height: 38.2em;
-        margin: 3em;
+        margin: 3em 3em 0 3em;
         padding-right: 1rem;
         padding-left: 1rem;
       }
@@ -48,7 +61,7 @@
       }
 
       textarea {
-        width: 50em;
+        width: 63em;
       }
     }
   }
@@ -56,5 +69,43 @@
   @media screen and (max-width: 600px) {
     span.profileEdit-photo {
       margin: auto;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .profileEdit {
+      max-width: 800px;
+      .form_top {
+        display: flex;
+        flex-direction: column;
+        max-height: 670px;
+        max-width: 100%;
+        .input_info_top {
+          input {
+            width: 100%;
+          }
+        }
+      }
+      .form_bottom {
+        margin: 0;
+        max-width: 100%;
+        max-height: 465px;
+        input {
+          width: 100%;
+        }
+      }
+      .card {
+        margin: 0;
+        max-width: 100%;
+        img {
+          max-width: 400px;
+          width: 25em;
+          max-height: 200px;
+          margin: 1em 0 0 0 ;
+        }
+        textarea {
+          width: 100%;
+        }
+      }
     }
   }
