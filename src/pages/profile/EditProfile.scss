@@ -1,14 +1,29 @@
 .profileEdit {
+  max-width: 1200px;
+  .form_top {
+    display: flex;
+    .input_info_top {
+      input{
+        width: 30em;
+        margin: .5em 0;
+      }
+      label {
+        margin: 1.5em 0 0 0;
+      }
+      button {
+        margin: 1em 0 0 0;
+      }
+    }
+  }
     .card {
-      max-width: 700px;
-      display: flex;
+      max-width: 100%;
+      display: block;
       justify-content: flex-start;
   
       padding: 1rem 0;
   
       span.profileEdit-photo {
         text-align: center;
-
       }
 
       b {
@@ -17,7 +32,10 @@
   
       img {
         width: 100%;
-        max-width: 40em;
+        max-width: 55em;
+        border-radius: 10px;
+        height: 38.2em;
+        margin: 3em;
         padding-right: 1rem;
         padding-left: 1rem;
       }
@@ -27,6 +45,10 @@
       span.profileEdit-data > * {
         border-top: 1px solid #ccc;
         padding: 5px 0;
+      }
+
+      textarea {
+        width: 50em;
       }
     }
   }
