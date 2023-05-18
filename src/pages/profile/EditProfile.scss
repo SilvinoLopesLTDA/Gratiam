@@ -4,6 +4,7 @@
   .form_bottom {
     margin: 3em;
     max-height: 450px;
+    width: 100%;
     input {
       width: 33.5em;
     }
@@ -16,10 +17,11 @@
   }
   .form_top {
     display: flex;
-    max-height: 450px;
+    max-height: 550px;
     width: 100%;
     .input_info_top{
       margin: 0 4em;
+      width: 100%;
       input{
         width: 30em;
         margin: .5em 0;
@@ -84,6 +86,7 @@
         max-height: 670px;
         max-width: 100%;
         .input_info_top {
+          margin: 0;
           input {
             width: 100%;
           }
