@@ -134,7 +134,7 @@ const ProductList = ({ product, isLoading }) => {
                         {"R$"}
                         {price}
                       </td>
-                      <td className={quantity <= 3 ? 'low-quantity' : ''}>
+                      <td className={quantity <= 3 ? "low-quantity" : ""}>
                         {quantity}
                       </td>
                       <td>
@@ -144,15 +144,20 @@ const ProductList = ({ product, isLoading }) => {
                       <td className="icons">
                         <span>
                           <Link to={`/product-details/${_id}`}>
-                            <AiOutlineEye size={25} color="purple" />
+                            <AiOutlineEye
+                              size={25}
+                              color="purple"
+                              title="Detalhes"
+                            />
                           </Link>
                           <Link to={`/edit-product/${_id}`}>
-                            <FaEdit size={20} color="green" />
+                            <FaEdit size={20} color="green" title="Editar" />
                           </Link>
                           <FaTrashAlt
                             size={20}
                             color="red"
                             onClick={() => confirmDelete(_id)}
+                            title="Deletar"
                           />
                         </span>
                       </td>
