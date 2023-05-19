@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0.5rem;
+  color: rgb(40, 40, 40);
+  a {
+    font-size: 11px;
+    margin: 0 5px;
+    text-decoration: underline;
+  }
+}
