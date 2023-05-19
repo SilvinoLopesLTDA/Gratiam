@@ -7,7 +7,7 @@ const Card = ({ children, cardClass }) => {
 
 Card.propTypes = {
   children: PropTypes.node.isRequired,
-  cardClass: PropTypes.string.isRequired,
+  cardClass: PropTypes.string,
 };
 
 export default Card;
