@@ -16,7 +16,7 @@ const InfoBox = ({ bgColor, title, count, icon }) => {
 InfoBox.propTypes = {
   bgColor: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   icon: PropTypes.object.isRequired,
 };
 
