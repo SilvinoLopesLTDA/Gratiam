@@ -4,10 +4,10 @@ const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2;
 
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, sku, category, quantity, price, description } = req.body;
+  const { name, sku, category, quantity, cost, price, colors, description } = req.body;
 
   //Validation
-  if (!name || !category || !quantity || !price) {
+  if (!name || !category || !quantity || !cost || !price) {
     res.status(400);
     throw new Error("Por favor, preencha os campos corretamente!");
   }
@@ -42,7 +42,9 @@ const createProduct = asyncHandler(async (req, res) => {
     sku,
     category,
     quantity,
+    cost,
     price,
+    colors,
     description,
     image: fileData,
   });
@@ -90,7 +92,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 // Update Product
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, category, quantity, price, description } = req.body;
+  const { name, category, quantity, cost, price, colors, description } = req.body;
   const { id } = req.params;
   const product = await Product.findById(id);
 
@@ -136,7 +138,9 @@ const updateProduct = asyncHandler(async (req, res) => {
       name,
       category,
       quantity,
+      cost,
       price,
+      colors,
       description,
       image: Object.keys(fileData).length === 0 ? product?.image : fileData,
     },

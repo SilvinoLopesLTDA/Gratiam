@@ -11,7 +11,7 @@ const productSchema = mongoose.Schema(
     },
     name: {
       type: String,
-      required: [true, "Por favor, Adcione um Nome"],
+      required: [true, "Por favor, Adicione um Nome!"],
       trim: true,
     },
     sku: {
@@ -22,18 +22,27 @@ const productSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      required: [true, "Por favor, Adcione uma Categoria"],
+      required: [true, "Por favor, Adicione uma Categoria!"],
       trim: true,
     },
     quantity: {
       type: Number,
-      required: [true, "Por favor, Adcione uma Quantidade"],
+      required: [true, "Por favor, Adicione uma Quantidade!"],
+      trim: true,
+    },
+    cost: {
+      type: Number,
+      required: [true, "Por favor, Adicione o Custo do produto!"],
       trim: true,
     },
     price: {
       type: Number,
-      required: [true, "Por favor, Adcione um Preço"],
+      required: [true, "Por favor, Adicione um Preço!"],
       trim: true,
+    },
+    colors: {
+      type: Array,
+      default: [],
     },
     description: {
       type: String,
