@@ -224,6 +224,17 @@ const ProductForm = ({
             name="quantity"
             value={product?.quantity}
             onChange={handleInputChange}
+            onWheel={(e) => e.currentTarget.blur()}
+            onKeyDown={(e) => {
+              if (
+                e.key === "-" ||
+                e.key === "e" ||
+                e.key === "+" ||
+                e.key === "."
+              ) {
+                e.preventDefault();
+              }
+            }}
             className={
               isSubmitted && product?.quantity === "" ? "highlight" : ""
             }
