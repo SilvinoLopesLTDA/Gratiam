@@ -18,6 +18,7 @@ import {
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Export from "../../export/Export";
 
 const ProductList = ({ product, isLoading }) => {
   const [search, setSearch] = useState("");
@@ -89,6 +90,9 @@ const ProductList = ({ product, isLoading }) => {
     dispatch(FILTER_PRODUCTS({ product, search }));
   }, [product, search, dispatch]);
 
+  console.log(currentItems);
+  console.log(product);
+
   return (
     <div className="product-list">
       <hr />
@@ -98,38 +102,49 @@ const ProductList = ({ product, isLoading }) => {
             <h3> Produtos em Estoque </h3>
           </span>
           <span>
-            <Search
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+            <Search value={search} onChange={setSearch} />
           </span>
         </div>
         {isLoading && <SpinnerImg />}
         <div className="table">
           {!isLoading && product.length === 0 ? (
-            <p>-- Nenhum Produto Cadastrado, Por favor adcione um produto</p>
+            <p>-- Nenhum Produto Cadastrado. Por favor, adicione um produto</p>
           ) : (
             <table>
               <thead>
                 <tr>
                   <th> s/n </th>
-                  <th> Nome</th>
-                  <th> Categoria</th>
+                  <th> Nome </th>
+                  <th> Categoria </th>
+                  <th> Cor </th>
+                  <th> Custo </th>
                   <th> Preço </th>
-                  <th> Quantidade </th>
+                  <th> Quant. </th>
                   <th> Valor </th>
                   <th> Ações </th>
                 </tr>
               </thead>
               <tbody>
                 {currentItems.map((product, index) => {
-                  const { _id, name, category, price, quantity } = product;
+                  const { _id, name, colors, category, cost, price, quantity } =
+                    product;
                   const totalValue = price * quantity;
                   return (
                     <tr key={_id}>
                       <td>{index + 1}</td>
                       <td>{shortenText(name)}</td>
                       <td>{category}</td>
+                      <td>
+                        {colors.length
+                          ? colors.join(", ")
+                          : Array.isArray(colors)
+                          ? "Nenhuma cor informada."
+                          : ""}
+                      </td>
+                      <td>
+                        {"R$"}
+                        {cost}
+                      </td>
                       <td>
                         {"R$"}
                         {price}
@@ -168,6 +183,7 @@ const ProductList = ({ product, isLoading }) => {
             </table>
           )}
         </div>
+        <Export products={filteredProduct} />
         <ReactPaginate
           breakLabel="..."
           nextLabel="Próximo >"
@@ -188,7 +204,7 @@ const ProductList = ({ product, isLoading }) => {
 };
 
 ProductList.propTypes = {
-  product: PropTypes.object.isRequired,
+  product: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
 

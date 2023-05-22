@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import ProductList from "../../components/product/productList/ProductList";
 import ProductSummary from "../../components/product/productSummary/ProductSummary";
 
-const Dasboard = () => {
+const Storage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,4 +40,4 @@ const Dasboard = () => {
   );
 };
 
-export default Dasboard;
+export default Storage;

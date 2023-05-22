@@ -98,6 +98,18 @@ const ProductDetails = () => {
               <b>&rarr; Categoria: </b> {product.category}
             </p>
             <p>
+              <b>&rarr; Cor: </b>{" "}
+              {product.colors
+                ? product.colors.join(", ")
+                : Array.isArray(product.colors)
+                ? "Nenhuma cor informada."
+                : ""}
+            </p>
+            <p>
+              <b>&rarr; Custo: </b> {"R$"}
+              {product.cost}
+            </p>
+            <p>
               <b>&rarr; Preço: </b> {"R$"}
               {product.price}
             </p>

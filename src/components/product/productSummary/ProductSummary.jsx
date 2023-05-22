@@ -68,7 +68,7 @@ const ProductSummary = ({ product }) => {
 };
 
 ProductSummary.propTypes = {
-  product: PropTypes.object.isRequired,
+  product: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
 };
 
 export default ProductSummary;

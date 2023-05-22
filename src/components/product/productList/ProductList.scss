@@ -9,7 +9,7 @@
       color: var(--color-primary);
       /* Outras propriedades de estilo que você deseja aplicar para quantidades baixas */
     }
-    
+
     .search {
       width: 100%;
       max-width: 300px;
@@ -34,12 +34,14 @@
         vertical-align: top;
         text-align: left;
         padding: 8px;
+        text-align: center;
 
         &.icons {
           display: flex;
-          justify-content: flex-start;
+          justify-content: center;
           align-items: center;
           svg {
+            text-align: center;
             margin-right: 7px;
             cursor: pointer;
             vertical-align: middle;

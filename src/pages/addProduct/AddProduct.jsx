@@ -12,7 +12,9 @@ const initialState = {
   name: "",
   category: "",
   quantity: "",
+  cost: "",
   price: "",
+  colors: [],
 };
 
 const AddProduct = () => {
@@ -25,7 +27,7 @@ const AddProduct = () => {
 
   const isLoading = useSelector(selectIsLoading);
 
-  const { name, category, quantity, price } = product;
+  const { name, category, quantity, cost, colors, price } = product;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -51,7 +53,11 @@ const AddProduct = () => {
     formData.append("sku", generateSku(category));
     formData.append("category", category);
     formData.append("quantity", quantity);
+    formData.append("cost", cost);
     formData.append("price", price);
+    colors.forEach((color) => {
+      formData.append("colors[]", color);
+    });
     formData.append("description", description);
     formData.append("image", productImage);
 
@@ -63,10 +69,12 @@ const AddProduct = () => {
       name &&
       category &&
       quantity &&
+      cost &&
       price &&
       name.trim() !== "" &&
       category.trim() !== "" &&
       quantity.trim() !== "" &&
+      cost.trim() !== "" &&
       price.trim() !== ""
     ) {
       navigate("/storage");

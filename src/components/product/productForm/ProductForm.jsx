@@ -4,6 +4,9 @@ import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import "./ProductForm.scss";
 import Card from "../../card/Card";
+import { useNavigate } from "react-router-dom";
+import { WithContext as ReactTags } from "react-tag-input";
+import { COLORS } from "./colors";
 
 const ProductForm = ({
   product,
@@ -17,23 +20,104 @@ const ProductForm = ({
   saveProduct,
   required,
 }) => {
+  const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
 
-    if (product.name && product.category && product.price && product.quantity) {
-      console.log("Formulário enviado!");
+    if (
+      product.name &&
+      product.category &&
+      product.cost &&
+      product.price &&
+      product.quantity
+    ) {
+      saveProduct(product);
+      navigate("/storage");
     } else {
-      console.log("Por favor, preencha todos os campos obrigatórios.");
+      navigate("/add-product");
     }
   };
 
   const handlePriceChange = (e) => {
     const { name, value } = e.target;
-    const cleanedValue = value.replace(",", ".");
+    const filteredValue = value.replace(/[^0-9.,]/g, "");
+    const dotFilter = filteredValue.replace(",", ".");
+    const decimalCount = dotFilter.split(".").length - 1;
+    let cleanedValue = dotFilter;
+    if (decimalCount > 1) {
+      const lastIndex = dotFilter.lastIndexOf(".");
+      cleanedValue =
+        dotFilter.substring(0, lastIndex) + dotFilter.substring(lastIndex + 1);
+    }
     handleInputChange({ target: { name, value: cleanedValue } });
+  };
+
+  const suggestions = COLORS.map((color) => {
+    return {
+      id: color,
+      text: color,
+    };
+  });
+
+  const KeyCodes = {
+    comma: 188,
+    enter: 13,
+  };
+
+  const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
+  const [tags, setTags] = useState([]);
+
+  const handleAddition = (tag) => {
+    const updatedTags = [...tags, tag];
+    setTags(updatedTags);
+
+    const updatedProduct = {
+      ...product,
+      colors: updatedTags.map((tag) => tag.text),
+    };
+    handleInputChange({
+      target: { name: "colors", value: updatedProduct.colors },
+    });
+  };
+
+  const handleDelete = (i) => {
+    const updatedTags = tags.filter((tag, index) => index !== i);
+    setTags(updatedTags);
+
+    const updatedProduct = {
+      ...product,
+      colors: updatedTags.map((tag) => tag.text),
+    };
+    handleInputChange({
+      target: { name: "colors", value: updatedProduct.colors },
+    });
+  };
+
+  const handleDrag = (tag, currPos, newPos) => {
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    setTags(newTags);
+  };
+
+  const handleTagClick = (index) => {
+    console.log("The tag at index " + index + " was clicked");
+  };
+
+  const saveProductData = () => {
+    const productData = {
+      ...product,
+      colors: tags.map((tag) => tag.text),
+    };
+
+    saveProduct(productData);
+    console.log(productData.colors);
   };
 
   return (
@@ -106,15 +190,28 @@ const ProductForm = ({
           />
           <label>
             {" "}
+            Custo <span>(Coloque o ponto apenas na casa decimal)</span>{" "}
+            <span>{required}</span>
+          </label>
+          <input
+            type="text"
+            placeholder="2499.99"
+            name="cost"
+            value={product?.cost}
+            onChange={(e) => handlePriceChange(e)}
+            className={isSubmitted && product?.cost === "" ? "highlight" : ""}
+          />
+          <label>
+            {" "}
             Preço <span>(Coloque o ponto apenas na casa decimal)</span>{" "}
             <span>{required}</span>
           </label>
           <input
-            type="number"
+            type="text"
             placeholder="2499.99"
             name="price"
             value={product?.price}
-            onChange={handlePriceChange}
+            onChange={(e) => handlePriceChange(e)}
             className={isSubmitted && product?.price === "" ? "highlight" : ""}
           />
           <label>
@@ -131,6 +228,24 @@ const ProductForm = ({
               isSubmitted && product?.quantity === "" ? "highlight" : ""
             }
           />
+          <label> Cores </label>
+          <div className="reactTags">
+            <ReactTags
+              tags={tags}
+              suggestions={suggestions}
+              delimiters={delimiters}
+              handleDelete={handleDelete}
+              handleAddition={handleAddition}
+              handleDrag={handleDrag}
+              handleTagClick={handleTagClick}
+              inputFieldPosition="top"
+              placeholder="Insira as cores do produto"
+              value={product?.colors}
+              onChange={handleInputChange}
+              autocomplete
+              editable
+            />
+          </div>
 
           <label style={{ marginBottom: "1rem" }}> Descrição </label>
           <ReactQuill
@@ -143,7 +258,11 @@ const ProductForm = ({
           />
 
           <div className="--my">
-            <button type="submit" className="--btn --btn-primary">
+            <button
+              type="submit"
+              onClick={saveProductData}
+              className="--btn --btn-primary"
+            >
               {" "}
               Salvar{" "}
             </button>
@@ -193,7 +312,7 @@ ProductForm.formats = [
 ];
 
 ProductForm.propTypes = {
-  product: PropTypes.object.isRequired,
+  product: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   productImage: PropTypes.string,
   imagePreview: PropTypes.string,
   description: PropTypes.string,

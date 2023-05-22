@@ -55,10 +55,11 @@ const EditProduct = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", product?.name);
-
     formData.append("category", product?.category);
     formData.append("quantity", product?.quantity);
+    formData.append("cost", product?.cost);
     formData.append("price", product?.price);
+    formData.append("colors", product?.colors);
     formData.append("description", description);
     if (productImage) {
       formData.append("image", productImage);
@@ -80,11 +81,11 @@ const EditProduct = () => {
       {isLoading && <Loader />}
       <button
         className="--btn --btn-primary"
-        style={{ margin: "1.5em 0", paddingLeft: ".85em"}}
+        style={{ margin: "1.5em 0", paddingLeft: ".85em" }}
         onClick={handleClick}
       >
         {" "}
-        <MdOutlineKeyboardDoubleArrowLeft style={{marginRight: "0.5em"}}/>
+        <MdOutlineKeyboardDoubleArrowLeft style={{ marginRight: "0.5em" }} />
         Voltar{" "}
       </button>
       <h3 className="--mt">Edição de Produto</h3>
