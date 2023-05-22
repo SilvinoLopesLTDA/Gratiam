@@ -1,7 +1,9 @@
 import { RiAddCircleLine } from "react-icons/ri";
 import { BsPersonCircle } from "react-icons/bs";
 import { TbDatabase } from "react-icons/tb";
-import { MdOutlineMail } from "react-icons/md";
+import { MdOutlineMail, MdOutlinePayments } from "react-icons/md";
+import { CiImport } from "react-icons/ci"
+
 
 const menu = [
   // {
@@ -34,11 +36,21 @@ const menu = [
       // },
     // ],
   },
-  // {
-  //   title: "Pagamentos",
+  {
+    title: "Pagamentos",
+    icon: <MdOutlinePayments />,
+    path: "/payments",
+  },
+  //   {
+  //   title: "Importar/Exportar",
   //   icon: <MdOutlinePayments />,
   //   path: "/payments",
   // },
+  {
+    title: "Importar",
+    icon: <CiImport />,
+    path: "/import"
+  },
   {
     title: "Conta",
     icon: <BsPersonCircle />,

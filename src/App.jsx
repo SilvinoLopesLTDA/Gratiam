@@ -23,6 +23,8 @@ import Contact from "./pages/contact/Contact";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Payments from "./pages/payments/Payments";
 import Sales from "./pages/sales/Sales";
+import Export from "./components/export/Export";
+import TableImport from "./components/import/TableImport";
 
 axios.defaults.withCredentials = true;
 
@@ -112,6 +114,26 @@ function App() {
             <Sidebar>
               <Layout>
                 <EditProduct />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/import"
+          element={
+            <Sidebar>
+              <Layout>
+                <TableImport />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/export"
+          element={
+            <Sidebar>
+              <Layout>
+                <Export />
               </Layout>
             </Sidebar>
           }
