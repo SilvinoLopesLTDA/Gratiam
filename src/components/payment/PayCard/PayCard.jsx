@@ -9,6 +9,7 @@ import {
   getPayments,
 } from "../../../redux/features/payment/paymentSlice";
 import { AiOutlineEye } from "react-icons/ai";
+import { MdOutlineDoNotDisturbAlt } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -23,15 +24,34 @@ const PayCard = ({ payment, isLoading }) => {
       completed: true,
     };
     try {
-      await axios.patch(`${BACKEND_URL}/api/payments/${payment._id}`, newFormData);
-      toast.success(`Pagamento: ${payment.name} concluido`);
+      await axios.patch(
+        `${BACKEND_URL}/api/payments/${payment._id}`,
+        newFormData
+      );
+      toast.success(`Pagamento: ${payment.name} concluido!`);
       dispatch(getPayments());
     } catch (error) {
       toast.error(error.message);
     }
   };
 
-  const delPayment= async (id) => {
+  const setToUncomplete = async (payment) => {
+    const newFormData = {
+      completed: false,
+    };
+    try {
+      await axios.patch(
+        `${BACKEND_URL}/api/payments/${payment._id}`,
+        newFormData
+      );
+      toast.warn(`Pagamento: ${payment.name} desfeito!`);
+      dispatch(getPayments());
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const delPayment = async (id) => {
     await dispatch(deletePayment(id));
     await dispatch(getPayments());
   };
@@ -77,29 +97,43 @@ const PayCard = ({ payment, isLoading }) => {
           const { _id, name, description } = payment;
           const shortDescription = description.substring(0, 145).trim() + "...";
           return (
-            <div key={_id} className={payment.completed ? `${styles.paycard} ${styles.completed}`  : `${styles.paycard}`}>
+            <div
+              key={_id}
+              className={
+                payment.completed
+                  ? `${styles.paycard} ${styles.completed}`
+                  : `${styles.paycard}`
+              }
+            >
               <h2>{name}</h2>
               <p>{shortDescription}</p>
               <div className={styles.icons}>
-                <span>
+                <div className={styles.icons_states}>
                   <FaCheckDouble
                     color="green"
                     size={15}
                     onClick={() => setToComplete(payment)}
                   />
-                  <Link to={`/payment-details/${_id}`}>
-                    <AiOutlineEye size={25} color="purple" title="Detalhes" />
-                  </Link>
-                  <Link to={`/edit-payment/${_id}`}>
-                    <FaEdit size={20} color="green" title="Editar" />
-                  </Link>
-                  <FaTrashAlt
-                    size={20}
+                  <MdOutlineDoNotDisturbAlt
                     color="red"
-                    onClick={() => confirmDelete(_id)}
-                    title="Deletar"
+                    size={21}
+                    onClick={() => setToUncomplete(payment)}
                   />
-                </span>
+                </div>
+                <div className={styles.icons_actions}>
+                    <Link to={`/payment-details/${_id}`}>
+                      <AiOutlineEye size={25} color="purple" title="Detalhes" />
+                    </Link>
+                    <Link to={`/edit-payment/${_id}`}>
+                      <FaEdit size={20} color="green" title="Editar" />
+                    </Link>
+                    <FaTrashAlt
+                      size={20}
+                      color="red"
+                      onClick={() => confirmDelete(_id)}
+                      title="Deletar"
+                    />
+                </div>
               </div>
             </div>
           );
