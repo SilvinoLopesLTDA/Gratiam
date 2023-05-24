@@ -23,8 +23,10 @@ import Contact from "./pages/contact/Contact";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Payments from "./pages/payments/Payments";
 import Sales from "./pages/sales/Sales";
-import Export from "./components/export/Export";
-import TableImport from "./components/import/TableImport";
+import PaymentDetails from "./components/payment/paymentDetails/PaymentDetails";
+import EditPayment from "./components/payment/paymentEdit/EditPayment";
+// import Export from "./components/export/Export";
+// import TableImport from "./components/import/TableImport";
 
 axios.defaults.withCredentials = true;
 
@@ -109,6 +111,16 @@ function App() {
           }
         />
         <Route
+          path="/payment-details/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <PaymentDetails />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
           path="/edit-product/:id"
           element={
             <Sidebar>
@@ -119,6 +131,16 @@ function App() {
           }
         />
         <Route
+          path="/edit-payment/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <EditPayment />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        {/* <Route
           path="/import"
           element={
             <Sidebar>
@@ -137,7 +159,7 @@ function App() {
               </Layout>
             </Sidebar>
           }
-        />
+        /> */}
         <Route
           path="/profile"
           element={

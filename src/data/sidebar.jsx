@@ -46,11 +46,11 @@ const menu = [
   //   icon: <MdOutlinePayments />,
   //   path: "/payments",
   // },
-  {
-    title: "Importar",
-    icon: <CiImport />,
-    path: "/import"
-  },
+  // {
+  //   title: "Importar",
+  //   icon: <CiImport />,
+  //   path: "/import"
+  // },
   {
     title: "Conta",
     icon: <BsPersonCircle />,

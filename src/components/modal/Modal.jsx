@@ -24,9 +24,9 @@ const Modal = ({
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  payClass: PropTypes.string.isRequired,
-  contentClass: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  payClass: PropTypes.string,
+  contentClass: PropTypes.string
 };
 
 export default Modal;

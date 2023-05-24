@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import "./Payments.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
@@ -41,7 +40,7 @@ const Payments = () => {
 };
 
 Payments.propTypes = {
-  payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
 
 export default Payments;

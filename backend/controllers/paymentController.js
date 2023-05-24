@@ -4,7 +4,7 @@ const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2;
 
 const createPayment = asyncHandler(async (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, completed } = req.body;
 
   //Validation
   if (!name || !description) {
@@ -40,6 +40,7 @@ const createPayment = asyncHandler(async (req, res) => {
     user: req.user.id,
     name,
     description,
+    completed,
     image: fileData,
   });
   res.status(201).json(payment);
@@ -86,7 +87,7 @@ const deletePayment = asyncHandler(async (req, res) => {
 
 // Update Payment
 const updatePayment = asyncHandler(async (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, completed } = req.body;
   const { id } = req.params;
   const payment = await Payment.findById(id);
 
@@ -131,6 +132,7 @@ const updatePayment = asyncHandler(async (req, res) => {
     {
       name,
       description,
+      completed,
       image: Object.keys(fileData).length === 0 ? payment?.image : fileData,
     },
     {

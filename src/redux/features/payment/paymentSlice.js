@@ -110,7 +110,7 @@ const paymentSlice = createSlice({
   initialState,
   reducers: {
     setPaymentInfo: (state, action) => {
-      const { name, description, image } = action.payload;
+      const { name, description, image, completed } = action.payload;
 
       const allowedExtensions = ["png", "jpg", "jpeg"];
       const fileExtension = image.name.split(".").pop();
@@ -125,6 +125,7 @@ const paymentSlice = createSlice({
         name,
         description,
         image,
+        completed
       };
     },
   },

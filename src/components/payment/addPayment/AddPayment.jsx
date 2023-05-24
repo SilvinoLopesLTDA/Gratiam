@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import Loader from "../../loader/Loader";
 import PayCard from "../PayCard/PayCard";
 import PayForm from "../PayForm/PayForm";
+import './AddPayment.scss'
 
 const initialState = {
   name: "",
@@ -17,7 +18,7 @@ const initialState = {
 
 const AddPayment = ({ payment }) => {
   const dispatch = useDispatch();
-  const [productImage] = useState("");
+  const [paymentImage, setPaymentImage] = useState(null);
   const [paymentData, setPaymentData] = useState(initialState);
   const [submittedPayments, setSubmittedPayments] = useState([]);
 
@@ -33,7 +34,7 @@ const AddPayment = ({ payment }) => {
     const formData = new FormData();
     formData.append("name", paymentData.name);
     formData.append("description", paymentData.description);
-    formData.append("image", productImage);
+    formData.append("image", paymentImage);
     await dispatch(createPayment(formData));
 
     if (paymentData.name && paymentData.description) {
@@ -54,6 +55,7 @@ const AddPayment = ({ payment }) => {
           payment={payment}
           savePayment={savePayment}
           handleInputChange={handleInputChange}
+          setPaymentImage={setPaymentImage} 
         />
       </div>
       <div className="pay-container">

@@ -15,8 +15,14 @@ const paymentSchema = mongoose.Schema(
     },
     description: {
       type: String,
+      required: true,
       default: "Nenhuma descrição informada",
       trim: true,
+    },
+    completed: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     image: {
       type: Object,
