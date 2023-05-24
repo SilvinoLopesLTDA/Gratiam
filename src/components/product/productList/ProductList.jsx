@@ -18,7 +18,7 @@ import {
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-// import Export from "../../export/Export";
+import Export from "../../export/Export";
 
 const ProductList = ({ product, isLoading }) => {
   const [search, setSearch] = useState("");
@@ -180,7 +180,7 @@ const ProductList = ({ product, isLoading }) => {
             </table>
           )}
         </div>
-        {/* <Export products={filteredProduct} /> */}
+        <Export products={filteredProduct} />
         <ReactPaginate
           breakLabel="..."
           nextLabel="Próximo >"
