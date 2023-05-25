@@ -26,6 +26,8 @@ app.use(
       "http://localhost:5173",
       "https://gratiam.vercel.app",
       "https://gratiam-dev.vercel.app",
+      "https://gratiam-dev-branch.onrender.com",
+      "https://gratiam.onrender.com",
     ],
     credentials: true,
   })
