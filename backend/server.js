@@ -30,6 +30,7 @@ app.use(
       "https://gratiam.onrender.com",
     ],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Cookie"],
   })
 );
 
