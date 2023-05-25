@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Loader from "../../loader/Loader";
+import { SpinnerImg } from "../../loader/Loader";
 import styles from "./PayCard.module.scss";
 import { FaCheckDouble, FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -87,7 +87,7 @@ const PayCard = ({ payment, isLoading }) => {
 
   return (
     <div className={styles.cardContainer}>
-      {isLoading && <Loader />}
+      {isLoading && <SpinnerImg />}
       {!isLoading && payment.length === 0 ? (
         <p className={styles.placeholder}>
           -- Nenhum pagamento cadastrado. Por favor, adicione um pagamento!

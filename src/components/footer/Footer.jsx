@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import versionData from "./version/version.json";
 import styles from "./Footer.module.scss";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [version, setVersion] = useState("");
@@ -21,11 +22,18 @@ const Footer = () => {
 
   return (
     <div className={styles.footer}>
-      Todos Direitos Reservados &copy; Gratiam |{" "}
-      <a href={repoUrl} target="_blank" rel="noreferrer">
-        {version}
-      </a>{" "}
-      | {currentYear}
+      <div className={styles.info}>
+        &copy; Gratiam |{" "}
+        <a href={repoUrl} target="_blank" rel="noreferrer">
+          {version}
+        </a>{" "}
+        | {currentYear}
+      </div>
+      <div className={styles.links}>
+        <Link to="/terms">Termos e Condições  -</Link>
+        <Link to="/privacy">Politica de Privacidade  -</Link>
+        <Link to="/faq">FAQ</Link>
+      </div>
     </div>
   );
 };
