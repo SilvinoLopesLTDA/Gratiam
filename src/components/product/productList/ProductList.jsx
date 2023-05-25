@@ -17,7 +17,8 @@ import {
   getProducts,
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 import Export from "../../export/Export";
 
 const ProductList = ({ product, isLoading }) => {
