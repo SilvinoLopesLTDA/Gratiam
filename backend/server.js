@@ -34,19 +34,10 @@ app.use(
   })
 );
 app.use((req, res, next) => {
-  const allowedOrigins = [
-    "http://localhost:5173",
-    "https://gratiam.vercel.app",
-    "https://gratiam.onrender.com",
-    "https://gratiam-dev.vercel.app",
-    "https://gratiam-dev-branch.onrender.com",
-  ];
-
-  const origin = req.headers.origin;
-
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://gratiam-dev-branch.onrender.com"
+  );
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.setHeader(
@@ -54,7 +45,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept, Cookie"
   );
   res.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
-  res.setHeader("Set-Cookie", "SameSite=None; Secure; Domain=onrender.com");
+  res.setHeader("Set-Cookie", "SameSite=None; Secure; Domain=.onrender.com");
 
   next();
 });
