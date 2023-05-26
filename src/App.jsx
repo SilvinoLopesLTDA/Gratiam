@@ -27,7 +27,7 @@ import PaymentDetails from "./components/payment/paymentDetails/PaymentDetails";
 import EditPayment from "./components/payment/paymentEdit/EditPayment";
 import Terms from "./pages/info/Terms";
 import Privacy from "./pages/info/Privacy";
-import Faq from "./pages/info/faq";
+import Faq from "./pages/info/Faq";
 
 axios.defaults.withCredentials = true;
 
