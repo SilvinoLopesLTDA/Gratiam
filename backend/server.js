@@ -25,30 +25,15 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://gratiam.vercel.app",
+      "https://gratiam.onrender.com",
       "https://gratiam-dev.vercel.app",
       "https://gratiam-dev-branch.onrender.com",
-      "https://gratiam.onrender.com",
     ],
     credentials: true,
     allowedHeaders: ["Content-Type", "Cookie"],
   })
 );
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gratiam.vercel.app",
-    "https://gratiam-dev.vercel.app"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Cookie"
-  );
-  res.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
-
-  next();
-});
+app.options("*", cors());
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
