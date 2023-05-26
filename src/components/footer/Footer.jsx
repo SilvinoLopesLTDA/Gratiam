@@ -30,8 +30,8 @@ const Footer = () => {
         | {currentYear}
       </div>
       <div className={styles.links}>
-        <Link to="/terms">Termos e Condições  -</Link>
-        <Link to="/privacy">Politica de Privacidade  -</Link>
+        <Link to="/terms">Termos e Condições </Link>&nbsp;-&nbsp;
+        <Link to="/privacy">Politica de Privacidade </Link> &nbsp;-&nbsp;
         <Link to="/faq">FAQ</Link>
       </div>
     </div>
