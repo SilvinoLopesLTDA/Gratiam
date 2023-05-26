@@ -33,6 +33,26 @@ app.use(
     allowedHeaders: ["Content-Type", "Cookie"],
   })
 );
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://gratiam-dev-branch.onrender.com, https://gratiam.onrender.com"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PTCH");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Cookie"
+  );
+  res.setHeader("Access-Control-Expose-Headers", "Set-Cookie");
+  res.setHeader("Set-Cookie", [
+    "SameSite=None; Secure; Domain=.gratiam-dev-branch.onrender.com",
+    "SameSite=None; Secure; Domain=.gratiam.onrender.com",
+  ]);
+
+  next();
+});
+
 app.options("*", cors());
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
