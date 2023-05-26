@@ -6,7 +6,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import Loader from "../../loader/Loader";
+import { SpinnerImg } from "../../loader/Loader";
 import PayCard from "../PayCard/PayCard";
 import PayForm from "../PayForm/PayForm";
 import './AddPayment.scss'
@@ -49,7 +49,7 @@ const AddPayment = ({ payment }) => {
   return (
     <>
       <div className="pay-header">
-        {isLoading && <Loader />}
+        {isLoading && <SpinnerImg />}
         <h3> Pagamentos </h3>
         <PayForm
           payment={payment}

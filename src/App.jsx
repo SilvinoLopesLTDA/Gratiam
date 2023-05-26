@@ -23,8 +23,11 @@ import Contact from "./pages/contact/Contact";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Payments from "./pages/payments/Payments";
 import Sales from "./pages/sales/Sales";
-import PaymentDetails from "./components/payment/paymentDetails/PaymentDetails"
-import EditPayment from "./components/payment/paymentEdit/EditPayment"
+import PaymentDetails from "./components/payment/paymentDetails/PaymentDetails";
+import EditPayment from "./components/payment/paymentEdit/EditPayment";
+import Terms from "./pages/info/Terms";
+import Privacy from "./pages/info/Privacy";
+import Faq from "./pages/info/faq";
 
 axios.defaults.withCredentials = true;
 
@@ -164,6 +167,36 @@ function App() {
             <Sidebar>
               <Layout>
                 <Contact />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/terms"
+          element={
+            <Sidebar>
+              <Layout>
+                <Terms />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/privacy"
+          element={
+            <Sidebar>
+              <Layout>
+                <Privacy />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/faq"
+          element={
+            <Sidebar>
+              <Layout>
+                <Faq />
               </Layout>
             </Sidebar>
           }
