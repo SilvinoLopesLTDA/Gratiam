@@ -34,10 +34,16 @@ app.use(
   })
 );
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://gratiam-dev-branch.onrender.com, https://gratiam.onrender.com"
-  );
+  const allowedOrigins = [
+    "https://gratiam-dev-branch.onrender.com",
+    "https://gratiam.onrender.com",
+  ];
+
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PTCH");
   res.setHeader(
