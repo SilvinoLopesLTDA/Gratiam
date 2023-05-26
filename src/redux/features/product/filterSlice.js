@@ -1,25 +1,51 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    filteredProducts: [],
-}
+  filteredProducts: [],
+};
 
 const filterSlice = createSlice({
-    name: "filter",
-    initialState,
-    reducers: {
-        FILTER_PRODUCTS(state, action) {
-            const {product, search} = action.payload
-            const tempProducts = product.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()) ||
-            product.category.toLowerCase().includes(search.toLowerCase()))
+  name: "filter",
+  initialState,
+  reducers: {
+    FILTER_PRODUCTS(state, action) {
+      const { product, search } = action.payload;
+      if (Array.isArray(product)) {
+        const searchWords = search.toLowerCase().split(" ");
 
-            state.filteredProducts = tempProducts
-        }
-    }
-})
+        const tempProducts = product.filter((product) => {
+          const lowercaseName = product.name.toLowerCase();
+          const lowercaseCategory = product.category.toLowerCase();
+          const lowercaseColors = product.colors.map((color) =>
+            color.toLowerCase()
+          );
 
-export const {FILTER_PRODUCTS} = filterSlice.actions
+          const isMatch = (str, words) => {
+            if (typeof str === "string") {
+              return words.every((word) => str.includes(word));
+            } else if (Array.isArray(str)) {
+              return words.every((word) =>
+                str.some((item) => item.includes(word))
+              );
+            }
+            return false;
+          };
 
-export const selectFilteredProducts = (state) => state.filter.filteredProducts
+          return (
+            isMatch(lowercaseName, searchWords) ||
+            isMatch(lowercaseCategory, searchWords) ||
+            isMatch(lowercaseColors, searchWords)
+          );
+        });
 
-export default filterSlice.reducer
+        state.filteredProducts = tempProducts;
+      }
+    },
+  },
+});
+
+export const { FILTER_PRODUCTS } = filterSlice.actions;
+
+export const selectFilteredProducts = (state) => state.filter.filteredProducts;
+
+export default filterSlice.reducer;

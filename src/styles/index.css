@@ -9,7 +9,7 @@
   --light-blue: #1f93ff;
 
   --color-white: #fff;
-  --color-dark: #2B2D42;
+  --color-dark: #2b2d42;
 
   --color-grey: #eee;
   --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -17,8 +17,8 @@
   --color-purple: #9d0191;
   --color-orange: #ff7722;
 
-  --color-primary: #EF233C;
-  --color-secondary: #BC041A;
+  --color-primary: #ef233c;
+  --color-secondary: #bc041a;
   --color-success: #28a745;
   --color-danger: orangered;
 }
@@ -199,7 +199,7 @@ p {
 }
 
 .--color-primary {
-  color: #EF233C;
+  color: #ef233c;
 }
 .--color-danger {
   color: orangered;
@@ -328,11 +328,11 @@ p {
 
 .--btn-primary {
   color: #fff;
-  background: #EF233C;
+  background: #ef233c;
 }
 .--btn-secondary {
-  color: #2B2D42;
-  border: 1px solid #2B2D42;
+  color: #2b2d42;
+  border: 1px solid #2b2d42;
   background: transparent;
 }
 .--btn-danger {
@@ -499,7 +499,11 @@ ul {
   background-color: var(--color-primary);
 }
 .activePage {
-  color: #fff;
+  color: #fff !important;
   background-color: var(--color-primary);
   height: 100%;
+}
+
+.activePage:hover {
+  color: #ececec !important;
 }
