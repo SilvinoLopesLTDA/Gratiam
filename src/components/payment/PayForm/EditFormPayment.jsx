@@ -2,7 +2,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
-// import "./ProductForm.scss";
 import Card from "../../card/Card";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +12,7 @@ const PayFormEdit = ({
   imagePreview,
   handleInputChange,
   handleImageChange,
-  savePayment
+  savePayment,
 }) => {
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -22,10 +21,7 @@ const PayFormEdit = ({
     e.preventDefault();
     setIsSubmitted(true);
 
-    if (
-      payment.name &&
-      payment.description 
-    ) {
+    if (payment.name && payment.description) {
       savePayment(payment);
       navigate("/payments");
     } else {
@@ -42,7 +38,7 @@ const PayFormEdit = ({
   };
 
   return (
-    <div className="add-product">
+    <div className="add-payment">
       <Card cardClass={"card"}>
         <Card cardClass={"group"}>
           <form
@@ -64,18 +60,18 @@ const PayFormEdit = ({
             />
             {imagePreview != null ? (
               <div className="image-container image-preview">
-                <img src={imagePreview} alt="Produto..." />
+                <img src={imagePreview} alt="Pagamento..." />
               </div>
             ) : (
               <div className="image-container image-msg">
-                <h4>Nenhuma imagem inserida para este produto</h4>
+                <h4>Nenhuma imagem inserida para este Pagamento</h4>
               </div>
             )}
           </form>
         </Card>
       </Card>
 
-      <div className="blockL" style={{width: "100%"}}>
+      <div className="blockL" style={{ width: "100%" }}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -83,10 +79,7 @@ const PayFormEdit = ({
             savePayment(e);
           }}
         >
-          <label>
-            {" "}
-            Nome
-          </label>
+          <label> Nome</label>
           <input
             type="text"
             placeholder="Boleto 001..."
@@ -95,26 +88,21 @@ const PayFormEdit = ({
             onChange={handleInputChange}
             className={isSubmitted && payment?.name === "" ? "highlight" : ""}
           />
-          <label>
-            {" "}
-            Descrição 
-          </label>
+          <label> Descrição</label>
           <textarea
             type="text"
             placeholder="Pagar..."
             name="description"
-            style={
-                {
-                    width: "100%",
-                    resize: "none",
-                    fontSize: "1.5em",
-                    fontWeight: "400",
-                    fontFamily: "Poppins",
-                    outline: "none",
-                    height: "10em",
-                    padding: ".5em"
-                }
-            }
+            style={{
+              width: "100%",
+              resize: "none",
+              fontSize: "1.5em",
+              fontWeight: "400",
+              fontFamily: "Poppins",
+              outline: "none",
+              height: "10em",
+              padding: ".5em",
+            }}
             value={payment?.description}
             onChange={handleInputChange}
             className={
@@ -128,8 +116,8 @@ const PayFormEdit = ({
             placeholder="Nenhuma descrição informada"
             value={description}
             onChange={setDescription}
-            modules={ProductForm.modules}
-            formats={ProductForm.formats}
+            modules={PaymentForm.modules}
+            formats={PaymentForm.formats}
           /> */}
 
           <div className="--my">
@@ -138,8 +126,7 @@ const PayFormEdit = ({
               onClick={savePaymentData}
               className="--btn --btn-primary"
             >
-              {" "}
-              Salvar{" "}
+              Salvar
             </button>
           </div>
         </form>
@@ -147,7 +134,6 @@ const PayFormEdit = ({
     </div>
   );
 };
-
 
 PayFormEdit.propTypes = {
   payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,

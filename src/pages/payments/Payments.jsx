@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
 import { selectIsLoggedIn } from "../../redux/features/auth/authSlice";
 import { getPayments } from "../../redux/features/payment/paymentSlice";
-import AddPayment from "../../components/payment/addPayment/AddPayment";
+import PaymentContainer from "../../components/payment/PaymentContainer/PaymentContainer";
 
 const Payments = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Payments = () => {
 
   return (
     <div>
-      <AddPayment payment={payment} isLoading={isLoading} />
+      <PaymentContainer payment={payment} isLoading={isLoading} />
     </div>
   );
 };

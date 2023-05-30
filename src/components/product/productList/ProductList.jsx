@@ -17,8 +17,8 @@ import {
   getProducts,
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 import Export from "../../export/Export";
 
 const ProductList = ({ product, isLoading }) => {
@@ -100,6 +100,13 @@ const ProductList = ({ product, isLoading }) => {
             <h3> Produtos em Estoque </h3>
           </span>
           <span>
+            <Link to="/add-product">
+              <button className="--btn --btn-primary">
+                Adicionar Produto
+              </button>
+            </Link>
+          </span>
+          <span>
             <Search value={search} onChange={setSearch} />
           </span>
         </div>
@@ -118,7 +125,6 @@ const ProductList = ({ product, isLoading }) => {
                   <th> Custo </th>
                   <th> Preço </th>
                   <th> Quant. </th>
-                  <th> Valor </th>
                   <th> Ações </th>
                 </tr>
               </thead>
@@ -126,7 +132,6 @@ const ProductList = ({ product, isLoading }) => {
                 {currentItems.map((product, index) => {
                   const { _id, name, colors, category, cost, price, quantity } =
                     product;
-                  const totalValue = price * quantity;
                   return (
                     <tr key={_id}>
                       <td>{index + 1}</td>
@@ -149,10 +154,6 @@ const ProductList = ({ product, isLoading }) => {
                       </td>
                       <td className={quantity <= 3 ? "low-quantity" : ""}>
                         {quantity}
-                      </td>
-                      <td>
-                        {"R$"}
-                        {totalValue.toFixed(2)}
                       </td>
                       <td className="icons">
                         <span>

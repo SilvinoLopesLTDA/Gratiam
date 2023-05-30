@@ -5,7 +5,7 @@ import { getPayment, getPayments, selectIsLoading, selectPayments, updatePayment
 import { useState } from "react";
 import { useEffect } from "react";
 import Loader from "../../loader/Loader";
-import PayFormEdit from "../PayForm/PayFormEdit";
+import EditFormPayment from "../PayForm/EditFormPayment";
 import axios from "axios";
 import { BACKEND_URL } from "../../../redux/features/payment/paymentService";
 
@@ -79,14 +79,15 @@ const EditPayment = () => {
       {isLoading && <Loader />}
       <button
         className="--btn --btn-primary"
-        style={{ margin: "1.5em 0", paddingLeft: ".85em" }}
+        style={{ margin: "1.5em 0", paddingLeft: ".85em"}}
         onClick={handleClick}
       >
         {" "}
         <MdOutlineKeyboardDoubleArrowLeft style={{ marginRight: "0.3em" }} />
         Voltar{" "}
       </button>
-      <PayFormEdit
+      <h2> Editar Pagamento </h2>
+      <EditFormPayment
         payment={payment}
         paymentImage={paymentImage}
         imagePreview={imagePreview}

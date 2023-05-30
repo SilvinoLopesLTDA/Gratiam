@@ -28,6 +28,7 @@ import EditPayment from "./components/payment/paymentEdit/EditPayment";
 import Terms from "./pages/info/Terms";
 import Privacy from "./pages/info/Privacy";
 import Faq from "./pages/info/Faq";
+import AddPayment from "./components/payment/PayForm/AddPayment";
 
 axios.defaults.withCredentials = true;
 
@@ -97,6 +98,16 @@ function App() {
             <Sidebar>
               <Layout>
                 <Payments />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/add-payment"
+          element={
+            <Sidebar>
+              <Layout>
+                <AddPayment />
               </Layout>
             </Sidebar>
           }

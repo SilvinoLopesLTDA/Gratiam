@@ -7,6 +7,7 @@ import {
 } from "../../redux/features/product/productSlice";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
+import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const initialState = {
   name: "",
@@ -81,9 +82,22 @@ const AddProduct = () => {
     }
   };
 
+  const handleClick = () => {
+    navigate("/storage");
+  };
+
   return (
     <div>
       {isLoading && <Loader />}
+      <button
+        className="--btn --btn-primary"
+        style={{ margin: "1.5em 0", paddingLeft: ".85em" }}
+        onClick={handleClick}
+      >
+        {" "}
+        <MdOutlineKeyboardDoubleArrowLeft style={{ marginRight: "0.3em" }} />
+        Voltar{" "}
+      </button>
       <h3 className="--mt">Adicionar Produto</h3>
       <p style={{ color: "var(--color-primary)" }}> * Campo obrigatório</p>
       <ProductForm
