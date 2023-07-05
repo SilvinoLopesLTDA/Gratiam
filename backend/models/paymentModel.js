@@ -13,11 +13,27 @@ const paymentSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    phone: {
+      type: String,
+      default: "+55",
+    },
     description: {
       type: String,
       required: true,
       default: "Nenhuma descrição informada",
       trim: true,
+    },
+    totalAmount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    expirateDate: {
+      type: Date,
+      required: true,
+      default: function () {
+        return new Date();
+      },
     },
     completed: {
       type: Boolean,

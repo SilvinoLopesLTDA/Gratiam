@@ -32,6 +32,7 @@ const ProductForm = ({
       product.category &&
       product.cost &&
       product.price &&
+      product.colors &&
       product.quantity
     ) {
       saveProduct(product);
@@ -117,7 +118,6 @@ const ProductForm = ({
     };
 
     saveProduct(productData);
-    console.log(productData.colors);
   };
 
   return (
@@ -239,7 +239,7 @@ const ProductForm = ({
               isSubmitted && product?.quantity === "" ? "highlight" : ""
             }
           />
-          <label> Cores </label>
+          <label htmlFor="colors"> Cores </label>
           <div className="reactTags">
             <ReactTags
               tags={tags}
@@ -251,8 +251,6 @@ const ProductForm = ({
               handleTagClick={handleTagClick}
               inputFieldPosition="top"
               placeholder="Insira as cores do produto"
-              value={product?.colors}
-              onChange={handleInputChange}
               autocomplete
               editable
             />

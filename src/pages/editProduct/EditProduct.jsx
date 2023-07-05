@@ -24,6 +24,7 @@ const EditProduct = () => {
   const [productImage, setProductImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const [description, setDescription] = useState("");
+  const [colors, setColors] = useState([]);
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -31,6 +32,7 @@ const EditProduct = () => {
 
   useEffect(() => {
     setProduct(productEdit);
+    console.log(productEdit);
 
     setImagePreview(
       productEdit && productEdit.image ? `${productEdit.image.filePath}` : null
@@ -39,6 +41,10 @@ const EditProduct = () => {
     setDescription(
       productEdit && productEdit.description ? productEdit.description : ""
     );
+
+    if (product && product.colors) {
+      setColors(product.colors);
+    }
   }, [productEdit]);
 
   const handleInputChange = (e) => {
@@ -94,6 +100,8 @@ const EditProduct = () => {
         productImage={productImage}
         imagePreview={imagePreview}
         description={description}
+        colors={colors}
+        setColors={setColors}
         setDescription={setDescription}
         handleInputChange={handleInputChange}
         handleImageChange={handleImageChange}

@@ -3,6 +3,7 @@ import "./ProductList.scss";
 import { SpinnerImg } from "../../loader/Loader";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { AiOutlineEye } from "react-icons/ai";
+import { BsFillCartPlusFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import Search from "../../search/Search";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,12 +15,15 @@ import ReactPaginate from "react-paginate";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import {
   deleteProduct,
+  duplicateProduct,
   getProducts,
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import Export from "../../export/Export";
+import { addToCart } from "../../../redux/features/product/cartSlice";
+import { BiDuplicate } from "react-icons/bi";
 
 const ProductList = ({ product, isLoading }) => {
   const [search, setSearch] = useState("");
@@ -36,6 +40,16 @@ const ProductList = ({ product, isLoading }) => {
 
   const delProduct = async (id) => {
     await dispatch(deleteProduct(id));
+    await dispatch(getProducts());
+  };
+
+  const handleAddToCart = async (id) => {
+    await dispatch(addToCart(id));
+    await dispatch(getProducts());
+  };
+
+  const handleDuplicate = async (id) => {
+    await dispatch(duplicateProduct(id));
     await dispatch(getProducts());
   };
 
@@ -101,9 +115,7 @@ const ProductList = ({ product, isLoading }) => {
           </span>
           <span>
             <Link to="/add-product">
-              <button className="--btn --btn-primary">
-                Adicionar Produto
-              </button>
+              <button className="--btn --btn-primary">Adicionar Produto</button>
             </Link>
           </span>
           <span>
@@ -115,74 +127,95 @@ const ProductList = ({ product, isLoading }) => {
           {!isLoading && product.length === 0 ? (
             <p>-- Nenhum Produto Cadastrado. Por favor, adicione um produto</p>
           ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th> s/n </th>
-                  <th> Nome </th>
-                  <th> Categoria </th>
-                  <th> Cor </th>
-                  <th> Custo </th>
-                  <th> Preço </th>
-                  <th> Quant. </th>
-                  <th> Ações </th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map((product, index) => {
-                  const { _id, name, colors, category, cost, price, quantity } =
-                    product;
-                  return (
-                    <tr key={_id}>
-                      <td>{index + 1}</td>
-                      <td>{shortenText(name)}</td>
-                      <td>{category}</td>
-                      <td>
-                        {colors.length
-                          ? colors.join(", ")
-                          : Array.isArray(colors)
-                          ? "Nenhuma cor informada."
-                          : ""}
-                      </td>
-                      <td>
-                        {"R$"}
-                        {cost}
-                      </td>
-                      <td>
-                        {"R$"}
-                        {price}
-                      </td>
-                      <td className={quantity <= 3 ? "low-quantity" : ""}>
-                        {quantity}
-                      </td>
-                      <td className="icons">
-                        <span>
-                          <Link to={`/product-details/${_id}`}>
-                            <AiOutlineEye
-                              size={25}
-                              color="purple"
-                              title="Detalhes"
+            <>
+              <table>
+                <thead>
+                  <tr>
+                    <th> s/n </th>
+                    <th> Nome </th>
+                    <th> Categoria </th>
+                    <th> Cor </th>
+                    <th> Custo </th>
+                    <th> Preço </th>
+                    <th> Quant. </th>
+                    <th> Ações </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.map((product, index) => {
+                    const {
+                      _id,
+                      name,
+                      colors,
+                      category,
+                      cost,
+                      price,
+                      quantity,
+                    } = product;
+                    return (
+                      <tr key={_id}>
+                        <td>{index + 1}</td>
+                        <td>{shortenText(name)}</td>
+                        <td>{category}</td>
+                        <td>
+                          {colors.length
+                            ? colors.join(", ")
+                            : Array.isArray(colors)
+                            ? "Nenhuma cor informada."
+                            : ""}
+                        </td>
+                        <td>
+                          {"R$"}
+                          {cost}
+                        </td>
+                        <td>
+                          {"R$"}
+                          {price}
+                        </td>
+                        <td className={quantity <= 3 ? "low-quantity" : ""}>
+                          {quantity}
+                        </td>
+                        <td className="icons">
+                          <span>
+                            <Link to={`/product-details/${_id}`}>
+                              <AiOutlineEye
+                                size={25}
+                                color="purple"
+                                title="Detalhes"
+                              />
+                            </Link>
+                            <Link to={`/edit-product/${_id}`}>
+                              <FaEdit size={20} color="green" title="Editar" />
+                            </Link>
+                            <FaTrashAlt
+                              size={20}
+                              color="red"
+                              onClick={() => confirmDelete(_id)}
+                              title="Deletar"
                             />
-                          </Link>
-                          <Link to={`/edit-product/${_id}`}>
-                            <FaEdit size={20} color="green" title="Editar" />
-                          </Link>
-                          <FaTrashAlt
-                            size={20}
-                            color="red"
-                            onClick={() => confirmDelete(_id)}
-                            title="Deletar"
-                          />
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                            <BsFillCartPlusFill
+                              size={20}
+                              color="green"
+                              onClick={() => handleAddToCart(_id)}
+                              title="Adicionar ao carrinho"
+                            />
+                            <BiDuplicate
+                              size={20}
+                              color="blue"
+                              onClick={() => handleDuplicate(_id)}
+                              title="Duplicar"
+                            />
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              <Export products={filteredProduct} />
+            </>
           )}
         </div>
-        <Export products={filteredProduct} />
         <ReactPaginate
           breakLabel="..."
           nextLabel="Próximo >"
@@ -203,8 +236,8 @@ const ProductList = ({ product, isLoading }) => {
 };
 
 ProductList.propTypes = {
-  product: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  product: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  isLoading: PropTypes.bool,
 };
 
 export default ProductList;

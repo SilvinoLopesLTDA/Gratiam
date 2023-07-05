@@ -4,6 +4,9 @@ import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import Card from "../../card/Card";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getPayments } from "../../../redux/features/payment/paymentSlice";
+import moment from "moment";
 
 const PayFormEdit = ({
   payment,
@@ -15,27 +18,30 @@ const PayFormEdit = ({
   savePayment,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
 
-    if (payment.name && payment.description) {
+    if (
+      payment.name &&
+      payment.totalAmount &&
+      payment.description &&
+      payment.expirateDate &&
+      payment.completed
+    ) {
       savePayment(payment);
       navigate("/payments");
+      dispatch(getPayments());
     } else {
       navigate("/edit-payment/:id");
     }
   };
 
-  const savePaymentData = () => {
-    const paymentData = {
-      ...payment,
-    };
-
-    savePayment(paymentData);
-  };
+  const expirateDate = payment.expirateDate;
+  const formattedDate = moment(expirateDate).format("yyyy-MM-DD");
 
   return (
     <div className="add-payment">
@@ -79,55 +85,95 @@ const PayFormEdit = ({
             savePayment(e);
           }}
         >
-          <label> Nome</label>
-          <input
-            type="text"
-            placeholder="Boleto 001..."
-            name="name"
-            value={payment?.name}
-            onChange={handleInputChange}
-            className={isSubmitted && payment?.name === "" ? "highlight" : ""}
-          />
-          <label> Descrição</label>
-          <textarea
-            type="text"
-            placeholder="Pagar..."
-            name="description"
-            style={{
-              width: "100%",
-              resize: "none",
-              fontSize: "1.5em",
-              fontWeight: "400",
-              fontFamily: "Poppins",
-              outline: "none",
-              height: "10em",
-              padding: ".5em",
-            }}
-            value={payment?.description}
-            onChange={handleInputChange}
-            className={
-              isSubmitted && payment?.description === "" ? "highlight" : ""
-            }
-          ></textarea>
-
-          {/* <label style={{ marginBottom: "1rem" }}> Descrição </label>
-          <ReactQuill
-            theme="snow"
-            placeholder="Nenhuma descrição informada"
-            value={description}
-            onChange={setDescription}
-            modules={PaymentForm.modules}
-            formats={PaymentForm.formats}
-          /> */}
-
-          <div className="--my">
-            <button
-              type="submit"
-              onClick={savePaymentData}
-              className="--btn --btn-primary"
-            >
-              Salvar
-            </button>
+          <div className="form-container">
+            <div className="form-group --form-control">
+              <label htmlFor="name">
+                Nome <span> *</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={payment?.name}
+                onChange={handleInputChange}
+                className={
+                  isSubmitted && payment?.name === "" ? "highlight" : ""
+                }
+              />
+            </div>
+            <div className="form-group --form-control">
+              <label htmlFor="phone">Número Telefone</label>
+              <input
+                type="text"
+                name="phone"
+                id="phone"
+                value={payment?.phone}
+                onChange={handleInputChange}
+                className={
+                  isSubmitted && payment?.phone === "" ? "highlight" : ""
+                }
+              />
+            </div>
+            <div className="form-group --form-control">
+              <label htmlFor="totalAmount">
+                Valor Total <span> *</span>
+              </label>
+              <input
+                type="text"
+                name="totalAmount"
+                id="totalAmount"
+                value={payment?.totalAmount}
+                onChange={handleInputChange}
+                className={
+                  isSubmitted && payment?.totalAmount === "" ? "highlight" : ""
+                }
+              />
+            </div>
+            <div className="form-group --form-control">
+              <label htmlFor="expirateDate">
+                Data de Validade <span> *</span>
+              </label>
+              <input
+                type="date"
+                name="expirateDate"
+                id="expirateDate"
+                value={formattedDate}
+                onChange={handleInputChange}
+                className={
+                  isSubmitted && payment?.expirateDate === "" ? "highlight" : ""
+                }
+              />
+            </div>
+            <div className="form-group --form-control">
+              <label htmlFor="description">
+                {" "}
+                Descrição<span> *</span>
+              </label>
+              <textarea
+                name="description"
+                id="description"
+                value={payment?.description}
+                onChange={handleInputChange}
+                className={
+                  isSubmitted && payment?.description === "" ? "highlight" : ""
+                }
+                cols="30"
+                rows="10"
+                style={{
+                  width: "100%",
+                  resize: "none",
+                  fontSize: "1em",
+                  fontWeight: "400",
+                  fontFamily: "Poppins",
+                  outline: "none",
+                  height: "10em",
+                  padding: ".5em",
+                }}
+              ></textarea>
+            </div>
+            <div className="--my">
+              <button className="--btn --btn-primary"> Salvar </button>
+            </div>
           </div>
         </form>
       </div>

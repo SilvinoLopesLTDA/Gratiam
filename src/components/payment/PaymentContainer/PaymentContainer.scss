@@ -8,6 +8,10 @@
   }
 }
 
+.dashed-hr {
+  border: 1px dashed rgb(195, 195, 195),
+}
+
 @media screen and (max-width: 600px) {
   .pay-header {
     display: flex;

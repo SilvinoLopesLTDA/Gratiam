@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRedirectLoggedOutUser } from "../../customHook/useRedirectLoggedOutUser";
 import { selectIsLoggedIn } from "../../redux/features/auth/authSlice";
-import { getPayments } from "../../redux/features/payment/paymentSlice";
+import {
+  checkExpiredPayments,
+  getPayments,
+} from "../../redux/features/payment/paymentSlice";
 import PaymentContainer from "../../components/payment/PaymentContainer/PaymentContainer";
 
 const Payments = () => {
@@ -21,6 +24,9 @@ const Payments = () => {
   const { payment, isLoading, isError, message } = useSelector(
     (state) => state.payment
   );
+  const completedPayments = Array.isArray(payment)
+    ? payment.filter((item) => item.completed)
+    : [];
 
   useEffect(() => {
     if (isLoggedin === true) {
@@ -32,9 +38,27 @@ const Payments = () => {
     }
   }, [dispatch, isLoggedin, isError, message]);
 
+  const [checkExpiredExecuted, setCheckExpiredExecuted] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedin && !checkExpiredExecuted) {
+      dispatch(checkExpiredPayments())
+        .then(() => {
+          setCheckExpiredExecuted(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [dispatch, isLoggedin, checkExpiredExecuted]);
+
   return (
     <div>
-      <PaymentContainer payment={payment} isLoading={isLoading} />
+      <PaymentContainer
+        payment={payment}
+        completedPayments={completedPayments}
+        isLoading={isLoading}
+      />
     </div>
   );
 };

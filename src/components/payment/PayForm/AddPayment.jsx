@@ -12,7 +12,11 @@ import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const initialState = {
   name: "",
+  phone: "",
   description: "",
+  totalAmount: "",
+  expirateDate: "",
+  completed: false
 };
 
 const PayForm = ({ payment }) => {
@@ -34,7 +38,10 @@ const PayForm = ({ payment }) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", paymentData.name);
+    formData.append("phone", paymentData.phone);
     formData.append("description", paymentData.description);
+    formData.append("totalAmount", paymentData.totalAmount);
+    formData.append("expirateDate", paymentData.expirateDate);
     formData.append("image", paymentImage);
     await dispatch(createPayment(formData));
 
@@ -157,6 +164,51 @@ const PayForm = ({ payment }) => {
                 />
               </div>
               <div className="form-group --form-control">
+                <label htmlFor="phone">
+                  Número Telefone
+                </label>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  value={payment?.phone}
+                  onChange={handleInputChange}
+                  className={
+                    isSubmitted && payment?.phone === "" ? "highlight" : ""
+                  }
+                />
+              </div>
+              <div className="form-group --form-control">
+                <label htmlFor="totalAmount">
+                  Valor Total <span> *</span>
+                </label>
+                <input
+                  type="text"
+                  name="totalAmount"
+                  id="totalAmount"
+                  value={payment?.totalAmount}
+                  onChange={handleInputChange}
+                  className={
+                    isSubmitted && payment?.totalAmount === "" ? "highlight" : ""
+                  }
+                />
+              </div>
+              <div className="form-group --form-control">
+                <label htmlFor="expirateDate">
+                  Data de Validade <span> *</span>
+                </label>
+                <input
+                  type="date"
+                  name="expirateDate"
+                  id="expirateDate"
+                  value={payment?.expirateDate}
+                  onChange={handleInputChange}
+                  className={
+                    isSubmitted && payment?.expirateDate === "" ? "highlight" : ""
+                  }
+                />
+              </div>
+              <div className="form-group --form-control">
                 <label htmlFor="description">
                   {" "}
                   Descrição<span> *</span>
@@ -197,7 +249,7 @@ const PayForm = ({ payment }) => {
 };
 
 PayForm.propTypes = {
-  payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   handleInputChange: PropTypes.func,
   savePayment: PropTypes.func,
   setPaymentImage: PropTypes.func,

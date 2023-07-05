@@ -1,6 +1,7 @@
-import { BsPersonCircle } from "react-icons/bs";
+import { BsPersonCircle, BsPersonFillAdd } from "react-icons/bs";
 import { TbDatabase } from "react-icons/tb";
 import { MdOutlineMail, MdOutlinePayments } from "react-icons/md";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 // import { CiImport } from "react-icons/ci"
 
 const menu = [
@@ -14,21 +15,35 @@ const menu = [
     icon: <TbDatabase />,
     path: "/storage",
   },
-  // {
-  //   title: "Caixa",
-  //   icon: <MdOutlineAttachMoney />,
-  //   path: "/sales",
-  // },
   {
     title: "Pagamentos",
     icon: <MdOutlinePayments />,
-    path: "/payments",
+    childrens: [
+      {
+        title: "Pagamentos",
+        path: "/payments"
+      },
+      {
+        title: "Transações",
+        path: "/transactions"
+      }
+    ]
   },
   // {
   //   title: "Importar",
   //   icon: <CiImport />,
   //   path: "/import"
   // },
+  {
+    title: "Carrinho",
+    icon: <AiOutlineShoppingCart />,
+    path: "/cart",
+  },
+  {
+    title: "Clientes",
+    icon: <BsPersonFillAdd />,
+    path: "/clients"
+  },
   {
     title: "Conta",
     icon: <BsPersonCircle />,
@@ -40,16 +55,5 @@ const menu = [
     path: "/contact-us",
   },
 ];
-
-//   childrens: [
-// {
-//   title: "Venda",
-//   path: "/profile",
-// },
-// {
-//   title: "Produto",
-//   path: "/edit-profile",
-// },
-// ],
 
 export default menu;

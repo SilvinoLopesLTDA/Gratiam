@@ -48,14 +48,14 @@ const EditPayment = () => {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
-  const savePayment = async (e) => {
-    e.preventDefault();
+  const savePayment = async () => {
     const formData = new FormData();
     formData.append("name", payment?.name);
+    formData.append("phone", payment?.phone);
     formData.append("description", payment?.description);
-    if (paymentImage) {
-      formData.append("image", paymentImage);
-    }
+    formData.append("totalAmount", payment?.totalAmount);
+    formData.append("expirateDate", payment?.expirateDate);
+    formData.append("image", paymentImage);
 
     const newFormData = {
       completed: false,
@@ -66,12 +66,13 @@ const EditPayment = () => {
     console.log(...formData);
 
     await dispatch(updatePayment({ id, formData }));
-    await dispatch(getPayments());
     navigate("/payments");
+    await dispatch(getPayments());
   };
 
   const handleClick = () => {
     navigate("/payments");
+    dispatch(getPayments())
   };
 
   return (

@@ -99,11 +99,9 @@ const ProductDetails = () => {
             </p>
             <p>
               <b>&rarr; Cor: </b>{" "}
-              {product.colors
+              {product.colors && product.colors.length > 0
                 ? product.colors.join(", ")
-                : Array.isArray(product.colors)
-                ? "Nenhuma cor informada."
-                : ""}
+                : "Nenhuma cor informada."}
             </p>
             <p>
               <b>&rarr; Custo: </b> {"R$"}

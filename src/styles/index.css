@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --nav-width: 68px;
@@ -262,7 +265,7 @@ p {
 }
 
 .--ml2 {
-  margin-left: 2rem;
+  margin-left: 2rem !important;
 }
 .--mr2 {
   margin-right: 2rem;
@@ -506,4 +509,8 @@ ul {
 
 .activePage:hover {
   color: #ececec !important;
+}
+
+.disabled {
+  cursor: not-allowed;
 }

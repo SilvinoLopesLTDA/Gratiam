@@ -108,6 +108,25 @@ export const updateProduct = createAsyncThunk(
   }
 );
 
+// Update Product
+export const duplicateProduct = createAsyncThunk(
+  "products/duplicateProduct",
+  async (id, thunkAPI) => {
+    try {
+      return await productService.duplicateProduct(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.log(message);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const productSlice = createSlice({
   name: "product",
   initialState,
@@ -231,6 +250,22 @@ const productSlice = createSlice({
         toast.success("Produto Atualizado com sucesso!");
       })
       .addCase(updateProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+
+      .addCase(duplicateProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(duplicateProduct.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        toast.success("Produto Duplicado com sucesso!");
+      })
+      .addCase(duplicateProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
