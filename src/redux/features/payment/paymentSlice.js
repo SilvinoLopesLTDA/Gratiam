@@ -114,6 +114,10 @@ export const checkExpiredPayments = createAsyncThunk(
       const payments = await paymentService.getPayments();
 
       const expiredPayments = payments.filter((payment) => {
+        if (payment.completed) {
+          return false;
+        }
+
         const expirationDates = [];
 
         if (Array.isArray(payment.expirateDate)) {
@@ -134,12 +138,22 @@ export const checkExpiredPayments = createAsyncThunk(
       expiredPayments.forEach((payment) => {
         const expirateDate = payment.expirateDate;
         const formattedDate = moment(expirateDate).format("DD/MM/YYYY");
-        toast.warning(
-          `O pagamento '${payment.name}' está prestes a expirar: '${formattedDate}'!`,
-          {
-            autoClose: 15000,
-          }
-        );
+
+        if (moment().isAfter(expirateDate) && !payment.completed) {
+          toast.error(
+            `O pagamento '${payment.name}' está pendente e não foi efetuado na data correta: '${formattedDate}'!`,
+            {
+              autoClose: 15000,
+            }
+          );
+        } else {
+          toast.warning(
+            `O pagamento '${payment.name}' está prestes a expirar: '${formattedDate}'!`,
+            {
+              autoClose: 15000,
+            }
+          );
+        }
       });
 
       return expiredPayments;

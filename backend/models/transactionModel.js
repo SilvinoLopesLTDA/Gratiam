@@ -8,16 +8,18 @@ const transactionSchema = new mongoose.Schema({
     required: true,
     ref: "User",
   },
-  items: [{
-    product: {
-      type: mongoose.Schema.Types.Mixed,
-      ref: "Product"
+  items: [
+    {
+      product: {
+        type: mongoose.Schema.Types.Mixed,
+        ref: "Product",
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
     },
-    quantity: {
-      type: Number,
-      required: true
-    }
-  }],
+  ],
   client: {
     type: mongoose.Schema.Types.Mixed,
     required: true,
@@ -27,6 +29,17 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     enum: ["Débito", "Crédito", "Dinheiro", "Pix"],
     required: true,
+  },
+  discount: {
+    type: {
+      type: String,
+      enum: ["R$", "%"],
+      default: "R$",
+    },
+    amount: {
+      type: Number,
+      default: 0,
+    },
   },
   totalAmount: {
     type: Number,

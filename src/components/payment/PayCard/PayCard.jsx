@@ -84,6 +84,13 @@ const PayCard = ({ payment, completedPayments, isLoading }) => {
     });
   };
 
+  const formatDescription = (html) => {
+    const descriptionWithoutTags = html
+      .replace(/<\/?p>/g, " ")
+      .replace(/<br\s?\/?>/g, " ");
+    return descriptionWithoutTags;
+  };
+
   return (
     <div className={styles.cardContainer}>
       {isLoading && <SpinnerImg />}
@@ -109,8 +116,7 @@ const PayCard = ({ payment, completedPayments, isLoading }) => {
                   .filter((paymentItem) => !paymentItem.completed)
                   .map((paymentItem) => {
                     const { _id, name, description } = paymentItem;
-                    const shortDescription =
-                      description.substring(0, 145).trim() + "...";
+                    const shortDescription = formatDescription(description).substring(0, 145).trim() + "...";
                     return (
                       <div
                         key={_id}
@@ -163,8 +169,7 @@ const PayCard = ({ payment, completedPayments, isLoading }) => {
               <div className={styles.gridContainer}>
                 {completedPayments.map((completedPayment) => {
                   const { _id, name, description } = completedPayment;
-                  const shortDescription =
-                    description.substring(0, 145).trim() + "...";
+                  const shortDescription = formatDescription(description);
                   return (
                     <div
                       key={_id}

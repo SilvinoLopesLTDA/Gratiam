@@ -319,7 +319,8 @@ const removeCartItem = asyncHandler(async (req, res) => {
 
 // Efetuar o pagamento do carrinho
 const checkout = asyncHandler(async (req, res) => {
-  const { clientId, paymentMethod, totalAmount } = req.body;
+  const { clientId, paymentMethod, discountType, discountAmount, totalAmount } =
+    req.body;
   const userId = req.user._id;
 
   if (!userId || !clientId || !paymentMethod || !totalAmount) {
@@ -350,6 +351,14 @@ const checkout = asyncHandler(async (req, res) => {
     // Atualize o estoque dos produtos no carrinho
     await updateStockAPI(cartItems);
 
+    // Calcular o valor do desconto
+    let discount = [];
+    if (discountType === "R$") {
+      discount = { type: discountType, amount: discountAmount };
+    } else if (discountType === "%") {
+      discount = { type: discountType, amount: discountAmount };
+    }
+
     // Registrar a transação de pagamento
     const transactionData = {
       user: userId,
@@ -367,6 +376,7 @@ const checkout = asyncHandler(async (req, res) => {
         quantity: item.quantity,
       })),
       paymentMethod: paymentMethod,
+      discount: discount,
       totalAmount: totalAmount,
     };
 

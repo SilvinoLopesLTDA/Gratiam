@@ -93,7 +93,17 @@ const PaymentDetails = () => {
             </h4>
             <p>
               {" "}
-              <span>Descrição:</span> <br /> {payment.description}
+              <span>Descrição:</span> <br />{" "}
+              {payment.description ? (
+                <p
+                  className="desc"
+                  dangerouslySetInnerHTML={{
+                    __html: payment.description.replace(/<br\s?\/?>/g, ""),
+                  }}
+                ></p>
+              ) : (
+                <p className="desc">Descrição não disponível!</p>
+              )}
             </p>
             <code className="--color-dark">
               Criado em: {created.toLocaleString("pt-BR")}

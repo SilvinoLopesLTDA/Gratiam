@@ -41,10 +41,13 @@ const filterSlice = createSlice({
         state.filteredProducts = tempProducts;
       }
     },
+    setFilteredProducts(state, action) {
+      state.filteredProducts = action.payload;
+    },
   },
 });
 
-export const { FILTER_PRODUCTS } = filterSlice.actions;
+export const { FILTER_PRODUCTS, setFilteredProducts } = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 

@@ -42,15 +42,10 @@ const Payments = () => {
 
   useEffect(() => {
     if (isLoggedin && !checkExpiredExecuted) {
-      dispatch(checkExpiredPayments())
-        .then(() => {
-          setCheckExpiredExecuted(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      dispatch(checkExpiredPayments());
+      setCheckExpiredExecuted(true);
     }
-  }, [dispatch, isLoggedin, checkExpiredExecuted]);
+  }, [checkExpiredExecuted, dispatch, isLoggedin]);
 
   return (
     <div>

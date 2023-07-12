@@ -40,15 +40,17 @@ const Cart = () => {
   if (cart === undefined) {
     return (
       <div>
-        Tivemos um problema técnico aqui. Tente novamente mais tarde ou tente
-        atualizar a página!
+        <p>
+          Tivemos um problema técnico aqui. Tente novamente mais tarde ou tente
+          atualizar a página!
+        </p>
       </div>
     );
   }
 
   return (
     <div>
-      <h2>Carrinho do Cliente</h2>
+      <h3 style={{ margin: "2rem 0" }}>Carrinho do Cliente</h3>
       <CartItems cartItems={cart} isLoading={isLoading} />
     </div>
   );

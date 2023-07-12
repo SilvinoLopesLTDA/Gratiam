@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import "./InfoBox.scss";
 
-const InfoBox = ({ bgColor, title, count, icon }) => {
+const InfoBox = ({ bgColor, title, count, icon, onClick }) => {
   return (
-    <div className={`info-box ${bgColor}`}>
+    <div className={`info-box ${bgColor}`} onClick={onClick}>
       <span className="info-icon --color-white">{icon}</span>
       <span className="info-text">
         <p>{title}</p>
@@ -18,6 +18,7 @@ InfoBox.propTypes = {
   title: PropTypes.string.isRequired,
   count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   icon: PropTypes.object.isRequired,
+  onClick: PropTypes.func, // Adicione a propriedade de evento de clique
 };
 
 export default InfoBox;

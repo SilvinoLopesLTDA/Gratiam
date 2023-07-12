@@ -18,7 +18,7 @@ const Transactions = () => {
 
   return (
     <div>
-      <h3 className="--my">Histórico de Transações</h3>
+      <h3 style={{ margin: "2rem 0" }}>Histórico de Transações</h3>
       <TransContainer transaction={transaction} isLoading={isLoading} />
     </div>
   );

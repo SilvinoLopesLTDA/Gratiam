@@ -5,13 +5,13 @@ import styles from "./Export.module.scss";
 
 const Export = ({ products }) => {
   const exportData = products.map((product) => ({
-    Nome: product.name,
-    Categoria: product.category,
-    Cor: product.colors.join(", "),
-    Custo: `R$${product.cost.toFixed(2)}`,
-    Preço: `R$${product.price.toFixed(2)}`,
-    Quantidade: product.quantity,
-    Valor: `R$${(product.price * product.quantity).toFixed(2)}`,
+    Nome: product?.name,
+    Categoria: product?.category,
+    Cor: product?.colors.join(", "),
+    Custo: `R$${product?.cost.toFixed(2)}`,
+    Preço: `R$${product?.price.toFixed(2)}`,
+    Quantidade: product?.quantity,
+    Valor: `R$${(product?.price * product?.quantity).toFixed(2)}`,
   }));
 
   const headers = [

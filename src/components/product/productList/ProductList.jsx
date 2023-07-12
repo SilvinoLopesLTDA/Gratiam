@@ -31,7 +31,7 @@ const ProductList = ({ product, isLoading }) => {
   const dispatch = useDispatch();
 
   const shortenText = (text, n) => {
-    if (text.length > n) {
+    if (text?.length > n) {
       const shortenedText = text.substring(0, n).concat("...");
       return shortenedText;
     }
@@ -124,7 +124,7 @@ const ProductList = ({ product, isLoading }) => {
         </div>
         {isLoading && <SpinnerImg />}
         <div className="table">
-          {!isLoading && product.length === 0 ? (
+          {!isLoading && product?.length === 0 ? (
             <p>-- Nenhum Produto Cadastrado. Por favor, adicione um produto</p>
           ) : (
             <>
@@ -158,8 +158,8 @@ const ProductList = ({ product, isLoading }) => {
                         <td>{shortenText(name)}</td>
                         <td>{category}</td>
                         <td>
-                          {colors.length
-                            ? colors.join(", ")
+                          {colors?.length
+                            ? colors?.join(", ")
                             : Array.isArray(colors)
                             ? "Nenhuma cor informada."
                             : ""}

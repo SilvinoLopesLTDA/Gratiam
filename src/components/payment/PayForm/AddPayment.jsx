@@ -9,14 +9,14 @@ import {
   getPayments,
 } from "../../../redux/features/payment/paymentSlice";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
+import ReactQuill from "react-quill";
 
 const initialState = {
   name: "",
   phone: "",
-  description: "",
   totalAmount: "",
   expirateDate: "",
-  completed: false
+  completed: false,
 };
 
 const PayForm = ({ payment }) => {
@@ -24,14 +24,21 @@ const PayForm = ({ payment }) => {
   const dispatch = useDispatch();
 
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
   const [paymentData, setPaymentData] = useState(initialState);
-  const [paymentImage, setPaymentImage] = useState(null);
+  const [paymentImage, setPaymentImage] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
   const [submittedPayments, setSubmittedPayments] = useState([]);
+  const [paymentValue, setPaymentValue] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPaymentData({ ...paymentData, [name]: value });
+  };
+
+  const handleImageChange = (e) => {
+    setPaymentImage(e.target.files[0]);
+    setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
   const savePayment = async (e) => {
@@ -39,16 +46,22 @@ const PayForm = ({ payment }) => {
     const formData = new FormData();
     formData.append("name", paymentData.name);
     formData.append("phone", paymentData.phone);
-    formData.append("description", paymentData.description);
-    formData.append("totalAmount", paymentData.totalAmount);
+    formData.append("totalAmount", paymentValue);
     formData.append("expirateDate", paymentData.expirateDate);
+    formData.append("description", description);
     formData.append("image", paymentImage);
+    console.log(...formData);
     await dispatch(createPayment(formData));
 
-    if (paymentData.name && paymentData.description) {
-      const newPayment = { ...paymentData };
+    if (
+      paymentData.name.trim() !== "" &&
+      paymentData.expirateDate.trim() !== ""
+    ) {
+      const newPayment = { ...paymentData, totalAmount: paymentValue };
       setSubmittedPayments([...submittedPayments, newPayment]);
       setPaymentData(initialState);
+      setPaymentValue("");
+      navigate("/payments");
       dispatch(getPayments());
     }
   };
@@ -65,29 +78,18 @@ const PayForm = ({ payment }) => {
     }
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setImagePreview(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-      setPaymentData((prevState) => ({
-        ...prevState,
-        image: file,
-      }));
-      setPaymentImage(file);
-    } else {
-      setImagePreview(null);
-      setPaymentData((prevState) => ({
-        ...prevState,
-        image: null,
-      }));
-      setPaymentImage(null);
+  const handlePaymentValueChange = (e) => {
+    const { value } = e.target;
+    const filteredValue = value.replace(/[^0-9.,]/g, "");
+    const dotFilter = filteredValue.replace(",", ".");
+    const decimalCount = dotFilter.split(".").length - 1;
+    let cleanedValue = dotFilter;
+    if (decimalCount > 1) {
+      const lastIndex = dotFilter.lastIndexOf(".");
+      cleanedValue =
+        dotFilter.substring(0, lastIndex) + dotFilter.substring(lastIndex + 1);
     }
+    setPaymentValue(cleanedValue);
   };
 
   const handleClick = () => {
@@ -164,9 +166,7 @@ const PayForm = ({ payment }) => {
                 />
               </div>
               <div className="form-group --form-control">
-                <label htmlFor="phone">
-                  Número Telefone
-                </label>
+                <label htmlFor="phone">Número Telefone</label>
                 <input
                   type="text"
                   name="phone"
@@ -186,10 +186,12 @@ const PayForm = ({ payment }) => {
                   type="text"
                   name="totalAmount"
                   id="totalAmount"
-                  value={payment?.totalAmount}
-                  onChange={handleInputChange}
+                  value={paymentValue}
+                  onChange={handlePaymentValueChange}
                   className={
-                    isSubmitted && payment?.totalAmount === "" ? "highlight" : ""
+                    isSubmitted && payment?.totalAmount === ""
+                      ? "highlight"
+                      : ""
                   }
                 />
               </div>
@@ -204,39 +206,24 @@ const PayForm = ({ payment }) => {
                   value={payment?.expirateDate}
                   onChange={handleInputChange}
                   className={
-                    isSubmitted && payment?.expirateDate === "" ? "highlight" : ""
-                  }
-                />
-              </div>
-              <div className="form-group --form-control">
-                <label htmlFor="description">
-                  {" "}
-                  Descrição<span> *</span>
-                </label>
-                <textarea
-                  name="description"
-                  id="description"
-                  value={payment?.description}
-                  onChange={handleInputChange}
-                  className={
-                    isSubmitted && payment?.description === ""
+                    isSubmitted && payment?.expirateDate === ""
                       ? "highlight"
                       : ""
                   }
-                  cols="30"
-                  rows="10"
-                  style={{
-                    width: "100%",
-                    resize: "none",
-                    fontSize: "1em",
-                    fontWeight: "400",
-                    fontFamily: "Poppins",
-                    outline: "none",
-                    height: "10em",
-                    padding: ".5em",
-                  }}
-                ></textarea>
+                />
               </div>
+              <label style={{ marginBottom: "1rem", marginTop: "1rem" }}>
+                {" "}
+                Descrição{" "}
+              </label>
+              <ReactQuill
+                theme="snow"
+                placeholder="Nenhuma descrição informada"
+                value={description}
+                onChange={setDescription}
+                modules={PayForm.modules}
+                formats={PayForm.formats}
+              />
               <div className="--my">
                 <button className="--btn --btn-primary"> Salvar </button>
               </div>
@@ -247,6 +234,44 @@ const PayForm = ({ payment }) => {
     </>
   );
 };
+
+PayForm.modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["clean"],
+  ],
+};
+
+PayForm.formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "color",
+  "background",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "video",
+  "image",
+  "code-block",
+  "align",
+];
 
 PayForm.propTypes = {
   payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),

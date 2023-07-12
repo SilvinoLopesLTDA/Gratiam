@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getPayments } from "../../../redux/features/payment/paymentSlice";
 import moment from "moment";
+import ReactQuill from "react-quill";
 
 const PayFormEdit = ({
   payment,
   // eslint-disable-next-line no-unused-vars
   paymentImage,
   imagePreview,
+  description,
+  setDescription,
   handleInputChange,
   handleImageChange,
   savePayment,
@@ -28,11 +31,11 @@ const PayFormEdit = ({
     if (
       payment.name &&
       payment.totalAmount &&
-      payment.description &&
       payment.expirateDate &&
       payment.completed
     ) {
-      savePayment(payment);
+      const updatedPayment = { ...payment, description: description };
+      savePayment(updatedPayment);
       navigate("/payments");
       dispatch(getPayments());
     } else {
@@ -145,31 +148,15 @@ const PayFormEdit = ({
               />
             </div>
             <div className="form-group --form-control">
-              <label htmlFor="description">
-                {" "}
-                Descrição<span> *</span>
-              </label>
-              <textarea
-                name="description"
-                id="description"
-                value={payment?.description}
-                onChange={handleInputChange}
-                className={
-                  isSubmitted && payment?.description === "" ? "highlight" : ""
-                }
-                cols="30"
-                rows="10"
-                style={{
-                  width: "100%",
-                  resize: "none",
-                  fontSize: "1em",
-                  fontWeight: "400",
-                  fontFamily: "Poppins",
-                  outline: "none",
-                  height: "10em",
-                  padding: ".5em",
-                }}
-              ></textarea>
+              <label style={{ marginBottom: "1rem" }}> Descrição </label>
+              <ReactQuill
+                theme="snow"
+                placeholder="Nenhuma descrição informada"
+                value={description}
+                onChange={setDescription}
+                modules={PayFormEdit.modules}
+                formats={PayFormEdit.formats}
+              />
             </div>
             <div className="--my">
               <button className="--btn --btn-primary"> Salvar </button>
@@ -180,6 +167,44 @@ const PayFormEdit = ({
     </div>
   );
 };
+
+PayFormEdit.modules = {
+  toolbar: [
+    [{ header: "1" }, { header: "2" }, { font: [] }],
+    [{ size: [] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [{ align: [] }],
+    [{ color: [] }, { background: [] }],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["clean"],
+  ],
+};
+
+PayFormEdit.formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "color",
+  "background",
+  "list",
+  "bullet",
+  "indent",
+  "link",
+  "video",
+  "image",
+  "code-block",
+  "align",
+];
 
 PayFormEdit.propTypes = {
   payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,

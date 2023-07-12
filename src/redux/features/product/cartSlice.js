@@ -123,7 +123,20 @@ export const checkout = createAsyncThunk(
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    addUnityItemSuccess: (state, action) => {
+      const { itemId } = action.payload;
+      const existingItem = state.cartItems.find(
+        (item) => item.product._id === itemId
+      );
+      if (existingItem) {
+        existingItem.quantity += 1;
+      }
+    },
+    addUnityItemFailure: (state, action) => {
+      state.error = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addToCart.pending, (state) => {
