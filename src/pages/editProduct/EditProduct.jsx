@@ -24,6 +24,7 @@ const EditProduct = () => {
   const [productImage, setProductImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const [description, setDescription] = useState("");
+  const [colors, setColors] = useState([]);
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -39,6 +40,10 @@ const EditProduct = () => {
     setDescription(
       productEdit && productEdit.description ? productEdit.description : ""
     );
+
+    if (product && product.colors) {
+      setColors(product.colors);
+    }
   }, [productEdit]);
 
   const handleInputChange = (e) => {
@@ -65,8 +70,6 @@ const EditProduct = () => {
       formData.append("image", productImage);
     }
 
-    console.log(...formData);
-
     await dispatch(updateProduct({ id, formData }));
     await dispatch(getProducts());
     navigate("/storage");
@@ -89,16 +92,20 @@ const EditProduct = () => {
         Voltar{" "}
       </button>
       <h3 className="--mt">Edição de Produto</h3>
-      <ProductForm
-        product={product}
-        productImage={productImage}
-        imagePreview={imagePreview}
-        description={description}
-        setDescription={setDescription}
-        handleInputChange={handleInputChange}
-        handleImageChange={handleImageChange}
-        saveProduct={saveProduct}
-      />
+      {product && (
+        <ProductForm
+          product={product}
+          productImage={productImage}
+          imagePreview={imagePreview}
+          description={description}
+          colors={colors}
+          setColors={setColors}
+          setDescription={setDescription}
+          handleInputChange={handleInputChange}
+          handleImageChange={handleImageChange}
+          saveProduct={saveProduct}
+        />
+      )}
     </div>
   );
 };

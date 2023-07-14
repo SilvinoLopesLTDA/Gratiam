@@ -15,9 +15,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { BACKEND_URL } from "../../../redux/features/payment/paymentService";
 
-const PayCard = ({ payment, isLoading }) => {
+const PayCard = ({ payment, completedPayments, isLoading }) => {
   const dispatch = useDispatch();
-  const currentItems = Array.isArray(payment) ? payment : [];
 
   const setToComplete = async (payment) => {
     const newFormData = {
@@ -72,17 +71,24 @@ const PayCard = ({ payment, isLoading }) => {
         delPayment(id);
         Swal.fire({
           icon: "success",
-          title: "Item Excluido",
-          text: "o Item de seu estoque foi deletado com sucesso!",
+          title: "Item Excluído",
+          text: "O item do seu estoque foi deletado com sucesso!",
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
           icon: "info",
           title: "Ação Cancelada",
-          text: "Não se preocupe, seu item está securo :)",
+          text: "Não se preocupe, seu item está seguro :)",
         });
       }
     });
+  };
+
+  const formatDescription = (html) => {
+    const descriptionWithoutTags = html
+      .replace(/<\/?p>/g, " ")
+      .replace(/<br\s?\/?>/g, " ");
+    return descriptionWithoutTags;
   };
 
   return (
@@ -93,58 +99,131 @@ const PayCard = ({ payment, isLoading }) => {
           -- Nenhum pagamento cadastrado. Por favor, adicione um pagamento!
         </p>
       ) : (
-        currentItems.map((payment) => {
-          const { _id, name, description } = payment;
-          const shortDescription = description.substring(0, 145).trim() + "...";
-          return (
-            <div
-              key={_id}
-              className={
-                payment.completed
-                  ? `${styles.paycard} ${styles.completed}`
-                  : `${styles.paycard}`
-              }
-            >
-              <h2>{name}</h2>
-              <p>{shortDescription}</p>
-              <div className={styles.icons}>
-                <div className={styles.icons_states}>
-                  <FaCheckDouble
-                    color="green"
-                    size={15}
-                    onClick={() => setToComplete(payment)}
-                  />
-                  <MdOutlineDoNotDisturbAlt
-                    color="red"
-                    size={21}
-                    onClick={() => setToUncomplete(payment)}
-                  />
-                </div>
-                <div className={styles.icons_actions}>
-                    <Link to={`/payment-details/${_id}`}>
-                      <AiOutlineEye size={25} color="purple" title="Detalhes" />
-                    </Link>
-                    <Link to={`/edit-payment/${_id}`}>
-                      <FaEdit size={20} color="green" title="Editar" />
-                    </Link>
-                    <FaTrashAlt
-                      size={20}
-                      color="red"
-                      onClick={() => confirmDelete(_id)}
-                      title="Deletar"
-                    />
-                </div>
+        <>
+          <div className="--flex-between --my">
+            <h3>
+              <a href="#pendentes">Ir para Pagamentos Pendentes</a>
+            </h3>
+            <h3>
+              <a href="#concluidos">Ir para Pagamentos Concluídos</a>
+            </h3>
+          </div>
+          {payment.length > 0 && (
+            <div>
+              <h2 id="pendentes">Pagamentos Pendentes</h2>
+              <div className={styles.gridContainer}>
+                {payment
+                  .filter((paymentItem) => !paymentItem.completed)
+                  .map((paymentItem) => {
+                    const { _id, name, description } = paymentItem;
+                    const shortDescription = formatDescription(description).substring(0, 145).trim() + "...";
+                    return (
+                      <div
+                        key={_id}
+                        className={`${styles.paycard} ${styles.pending}`}
+                      >
+                        <h2>{name}</h2>
+                        <p>{shortDescription}</p>
+                        <div className={styles.icons}>
+                          <div className={styles.icons_states}>
+                            <FaCheckDouble
+                              color="green"
+                              size={15}
+                              onClick={() => setToComplete(paymentItem)}
+                            />
+                            <MdOutlineDoNotDisturbAlt
+                              color="red"
+                              size={21}
+                              onClick={() => setToUncomplete(paymentItem)}
+                            />
+                          </div>
+                          <div className={styles.icons_actions}>
+                            <Link to={`/payment-details/${_id}`}>
+                              <AiOutlineEye
+                                size={25}
+                                color="purple"
+                                title="Detalhes"
+                              />
+                            </Link>
+                            <Link to={`/edit-payment/${_id}`}>
+                              <FaEdit size={20} color="green" title="Editar" />
+                            </Link>
+                            <FaTrashAlt
+                              size={20}
+                              color="red"
+                              onClick={() => confirmDelete(_id)}
+                              title="Deletar"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
-          );
-        })
+          )}
+
+          {completedPayments?.length > 0 && (
+            <div>
+              <h2 id="concluidos">Pagamentos Concluídos</h2>
+              <div className={styles.gridContainer}>
+                {completedPayments.map((completedPayment) => {
+                  const { _id, name, description } = completedPayment;
+                  const shortDescription = formatDescription(description);
+                  return (
+                    <div
+                      key={_id}
+                      className={`${styles.paycard} ${styles.completed}`}
+                    >
+                      <h2>{name}</h2>
+                      <p>{shortDescription}</p>
+                      <div className={styles.icons}>
+                        <div className={styles.icons_states}>
+                          <FaCheckDouble
+                            color="green"
+                            size={15}
+                            onClick={() => setToComplete(completedPayment)}
+                          />
+                          <MdOutlineDoNotDisturbAlt
+                            color="red"
+                            size={21}
+                            onClick={() => setToUncomplete(completedPayment)}
+                          />
+                        </div>
+                        <div className={styles.icons_actions}>
+                          <Link to={`/payment-details/${_id}`}>
+                            <AiOutlineEye
+                              size={25}
+                              color="purple"
+                              title="Detalhes"
+                            />
+                          </Link>
+                          <Link to={`/edit-payment/${_id}`}>
+                            <FaEdit size={20} color="green" title="Editar" />
+                          </Link>
+                          <FaTrashAlt
+                            size={20}
+                            color="red"
+                            onClick={() => confirmDelete(_id)}
+                            title="Deletar"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
 };
 
 PayCard.propTypes = {
-  payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  payment: PropTypes.array.isRequired,
+  completedPayments: PropTypes.array.isRequired,
   isLoading: PropTypes.bool,
 };
 

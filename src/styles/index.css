@@ -262,7 +262,7 @@ p {
 }
 
 .--ml2 {
-  margin-left: 2rem;
+  margin-left: 2rem !important;
 }
 .--mr2 {
   margin-right: 2rem;
@@ -506,4 +506,8 @@ ul {
 
 .activePage:hover {
   color: #ececec !important;
+}
+
+.disabled {
+  cursor: not-allowed;
 }

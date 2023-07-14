@@ -22,12 +22,18 @@ import EditProfile from "./pages/profile/EditProfile";
 import Contact from "./pages/contact/Contact";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Payments from "./pages/payments/Payments";
-import Sales from "./pages/sales/Sales";
 import PaymentDetails from "./components/payment/paymentDetails/PaymentDetails";
 import EditPayment from "./components/payment/paymentEdit/EditPayment";
 import Terms from "./pages/info/Terms";
 import Privacy from "./pages/info/Privacy";
 import Faq from "./pages/info/Faq";
+import AddPayment from "./components/payment/PayForm/AddPayment";
+import Cart from "./pages/cart/Cart";
+import Transactions from "./pages/transactions/Transactions"
+import Clients from "./pages/clients/Clients"
+import ClientDetails from "./pages/clients/ClientDetails"
+import AddClient from "./pages/clients/AddClient"
+import EditClient from "./pages/clients/EditClient"
 
 axios.defaults.withCredentials = true;
 
@@ -57,16 +63,6 @@ function App() {
             <Sidebar>
               <Layout>
                 <Dashboard />
-              </Layout>
-            </Sidebar>
-          }
-        />
-        <Route
-          path="/sales"
-          element={
-            <Sidebar>
-              <Layout>
-                <Sales />
               </Layout>
             </Sidebar>
           }
@@ -102,11 +98,11 @@ function App() {
           }
         />
         <Route
-          path="/product-details/:id"
+          path="/add-payment"
           element={
             <Sidebar>
               <Layout>
-                <ProductDetails />
+                <AddPayment />
               </Layout>
             </Sidebar>
           }
@@ -117,6 +113,36 @@ function App() {
             <Sidebar>
               <Layout>
                 <PaymentDetails />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/transactions"
+          element={
+            <Sidebar>
+              <Layout>
+                <Transactions />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <Sidebar>
+              <Layout>
+                <Cart />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/product-details/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <ProductDetails />
               </Layout>
             </Sidebar>
           }
@@ -147,6 +173,46 @@ function App() {
             <Sidebar>
               <Layout>
                 <Profile />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/clients"
+          element={
+            <Sidebar>
+              <Layout>
+                <Clients />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/client-details/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <ClientDetails />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/add-client"
+          element={
+            <Sidebar>
+              <Layout>
+                <AddClient />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/edit-client/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <EditClient />
               </Layout>
             </Sidebar>
           }

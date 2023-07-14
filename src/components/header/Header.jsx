@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "../../services/authService";
 import { SET_LOGIN, selectName } from "../../redux/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BsCartFill } from "react-icons/bs";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,14 @@ const Header = () => {
           <span className="--color-primary"> {name}</span>
           <span className="--fw-thin">!</span>
         </h3>
-        <button className="--btn --btn-primary" onClick={Logout}>
-          Sair
-        </button>
+        <div className="--flex-between">
+          <Link to="/cart">
+            <BsCartFill size={33} color="red" title="Carrinho" />
+          </Link>
+          <button className="--btn --btn-primary --ml2" onClick={Logout}>
+            Sair
+          </button>
+        </div>
       </div>
       <hr />
     </div>

@@ -1,167 +1,138 @@
-.payForm {
-    .payContainer {
-        height: 75%;
-        width: 65%;
-        .content {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100%;
-          width: 100%;
-          margin: 5em 0;
-          .form-group-image {
-            float: left;
-            width: 50%;
-            input {
-                width: 100%;
-            }
-          }
-          .form-container {
-            float: right;
-            width: 50%;
-          }
-        }
-        .image-preview {
-          width: 100%;
-          height: 100%;
-          max-height: 350px;
-          background: var(--dark-blue);
-          padding: 1rem;
-          border-radius: 3px;
-          overflow: hidden;
-          transition: all 0.3s;
-        }
-      
-        .image-preview img {
-          width: 100%;
-        }
-      
-        .image-container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      
-        .image-msg {
-          margin-top: 1.2em;
-          h4 {
-            text-align: center;
-            font-size: 1.1em;
-          }
-        }
-        .image-show {
-          display: block;
-        }
-        .btn-pay {
-          display: flex;
-          justify-content: space-between;
-          margin: 0.5em 2.8em 2em 3.2em;
-          button {
-            margin-right: 0em;
-            margin-left: 0em;
-          }
-        }
-      }
+.add-payment {
+  margin: 3rem 0;
+  max-width: 100%;
+  min-height: 90vh;
+  .card {
+    float: right;
+    width: 100%;
+    max-width: 47.5%;
+    padding: 1rem;
+    height: 60.5em;
+  }
 
-    h2 {
-      margin: -0.5em 0 0.6em 1em;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      margin: 0.6em 2em;
-      .highlight {
-        border: 2px solid red;
-      }
-      .group {
-        border: 1px solid var(--dark-blue);
-        width: 100%;
-        font-size: 1em;
-        padding: 0.5em;
-        input {
-          width: 100%;
-        }
-      }
-      label {
-        color: var(--color-dark);
-        font-size: 1em;
-      }
-      textarea {
-        height: 10em;
-      }
+  .blockL {
+    float: left;
+    margin-right: 0.5em;
+    max-width: 47.5%;
+
+    label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-dark);
       span {
         color: var(--color-primary);
+        font-size: 1.2rem;
       }
     }
   }
-  
-  @media screen and (max-width: 600px) {
-    .payForm {
-        h2 {
-            text-align: center;
-            margin: 1em 0;
-          }
-        .payContainer {
-            height: 90%;
-            width: 90%;
-            .content {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              flex-direction: column;
-              height: 100%;
- 
-              .form-group-image {
-                float: none;
-                margin: 0 10%;
-                width: 80%;
-              }
-              .form-container {
-                float: none;
-                width: 100%;
-              }
-            }
-            .image-preview {
-              width: 100%;
-              height: 20%;
-              max-height: 210px;
-              background: var(--dark-blue);
-              padding: 1rem;
-              border-radius: 3px;
-              overflow: hidden;
-              transition: all 0.3s;
-            }
-        
-            .image-preview img {
-              width: 100%;
-            }
-        
-            .image-container {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-        
-            .image-msg {
-              margin-top: 1.4em;
-              h4 {
-                text-align: center;
-                font-size: 1em;
-              }
-            }
-            .image-show {
-              display: block;
-            }
-            .btn-pay {
-              display: flex;
-              justify-content: space-between;
-              margin: 0.5em 2.8em 2em 3.2em;
-              button {
-                margin-right: 1em;
-                margin-left: 1em;
-              }
-            }
-        }
+
+  form {
+    label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--color-dark);
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    input[type="email"],
+    select,
+    input[type="password"] {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 300;
+      padding: 1rem;
+      margin: 1rem auto;
+      width: 100%;
+      border: 1px solid #777;
+      border-radius: 3px;
+      outline: none;
+      &.highlight {
+        border: 1px solid red;
+      }
     }
   }
-  
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.group {
+  border: 1px solid var(--dark-blue);
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  background: var(--dark-blue);
+  padding: 1rem;
+  border-radius: 3px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.image-preview img {
+  width: 100%;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-msg {
+  margin-top: 21em;
+  h4 {
+    text-align: center;
+    font-size: 1.8em;
+  }
+}
+
+.image-show {
+  display: block;
+}
+
+.btn-pay {
+  display: flex;
+}
+
+@media screen and (max-width: 600px) {
+  .add-product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .card {
+      max-width: 100%;
+      max-height: 22em;
+      margin-bottom: 2em;
+    }
+    .blockL {
+      max-width: 100%;
+      label {
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .image-msg {
+    margin-top: 2.5em;
+    h4 {
+      text-align: center;
+      font-size: 1.5em;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import paymentService from "./paymentService";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 const initialState = {
   payments: null,
@@ -16,6 +17,7 @@ export const createPayment = createAsyncThunk(
   "payments/create",
   async (formData, thunkAPI) => {
     try {
+      console.log(formData);
       return await paymentService.createPayment(formData);
     } catch (error) {
       const message =
@@ -105,6 +107,63 @@ export const updatePayment = createAsyncThunk(
   }
 );
 
+export const checkExpiredPayments = createAsyncThunk(
+  "payments/checkExpiredPayments",
+  async (_, thunkAPI) => {
+    try {
+      const payments = await paymentService.getPayments();
+
+      const expiredPayments = payments.filter((payment) => {
+        if (payment.completed) {
+          return false;
+        }
+
+        const expirationDates = [];
+
+        if (Array.isArray(payment.expirateDate)) {
+          expirationDates.push(
+            ...payment.expirateDate.map((date) => moment(date, "YYYY-MM-DD"))
+          );
+        } else if (payment.expirateDate) {
+          expirationDates.push(moment(payment.expirateDate, "YYYY-MM-DD"));
+        }
+
+        const twoDaysBeforeExpiration = moment().add(2, "days");
+
+        return expirationDates.some((expirationDate) =>
+          expirationDate.isSameOrBefore(twoDaysBeforeExpiration, "day")
+        );
+      });
+
+      expiredPayments.forEach((payment) => {
+        const expirateDate = payment.expirateDate;
+        const formattedDate = moment(expirateDate).format("DD/MM/YYYY");
+
+        if (moment().isAfter(expirateDate) && !payment.completed) {
+          toast.error(
+            `O pagamento '${payment.name}' está pendente e não foi efetuado na data correta: '${formattedDate}'!`,
+            {
+              autoClose: 15000,
+            }
+          );
+        } else {
+          toast.warning(
+            `O pagamento '${payment.name}' está prestes a expirar: '${formattedDate}'!`,
+            {
+              autoClose: 15000,
+            }
+          );
+        }
+      });
+
+      return expiredPayments;
+    } catch (error) {
+      const message = error.message || error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const paymentSlice = createSlice({
   name: "payment",
   initialState,
@@ -125,7 +184,7 @@ const paymentSlice = createSlice({
         name,
         description,
         image,
-        completed
+        completed,
       };
     },
   },
@@ -140,10 +199,6 @@ const paymentSlice = createSlice({
         state.isError = false;
         state.payment.push(action.payload);
         toast.success("Pagamento Adicionado com Sucesso!");
-        console.log(action.payload);
-        console.log(action.payload.name);
-        console.log(action.payload.description);
-        console.log(action.payload._id);
       })
       .addCase(createPayment.rejected, (state, action) => {
         state.isLoading = false;
@@ -210,6 +265,22 @@ const paymentSlice = createSlice({
         toast.success("Pagamento Atualizado com sucesso!");
       })
       .addCase(updatePayment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+
+      .addCase(checkExpiredPayments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkExpiredPayments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.expiredPayments = action.payload;
+      })
+      .addCase(checkExpiredPayments.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

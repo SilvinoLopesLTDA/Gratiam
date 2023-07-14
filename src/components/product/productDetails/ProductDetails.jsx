@@ -48,19 +48,6 @@ const ProductDetails = () => {
     navigate("/storage");
   };
 
-  const removeTagsFromHTML = (html) => {
-    const parser = new DOMParser();
-    const parsedDocument = parser.parseFromString(html, "text/html");
-    return parsedDocument.body.textContent || "Descrição não disponível!";
-  };
-
-  const formatDescription = (html) => {
-    const descriptionWithoutTags = removeTagsFromHTML(html);
-    return descriptionWithoutTags;
-  };
-
-  const formattedDescription = formatDescription(product.description);
-
   return (
     <div className="product-detail">
       <button
@@ -99,11 +86,9 @@ const ProductDetails = () => {
             </p>
             <p>
               <b>&rarr; Cor: </b>{" "}
-              {product.colors
+              {product.colors && product.colors.length > 0
                 ? product.colors.join(", ")
-                : Array.isArray(product.colors)
-                ? "Nenhuma cor informada."
-                : ""}
+                : "Nenhuma cor informada."}
             </p>
             <p>
               <b>&rarr; Custo: </b> {"R$"}
@@ -126,7 +111,10 @@ const ProductDetails = () => {
             </p>
             <div>
               {product.description ? (
-                <p className="desc">{formattedDescription}</p>
+                <p
+                  className="desc"
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                ></p>
               ) : (
                 <p className="desc">Descrição não disponível!</p>
               )}

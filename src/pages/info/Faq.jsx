@@ -47,7 +47,7 @@ const Faq = () => {
         </p>
       </div>
       <div className="info-item">
-      <h4>5. Como identidico quando o estoque de um produto estiver baixo?</h4>
+      <h4>5. Como identifico quando o estoque de um produto estiver em baixa quantidade?</h4>
         <p>
           O sistema permite limite mínimo de estoque para cada produto. Quando a
           quantidade disponível de um produto atingir esse limite, você podera
