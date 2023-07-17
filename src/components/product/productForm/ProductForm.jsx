@@ -131,7 +131,12 @@ const ProductForm = ({
               {" "}
               Formatos Suportados: jpg, jpeg, png{" "}
             </code>
-            <input type="file" name="image" onChange={handleImageChange} />
+            <input
+              type="file"
+              name="image"
+              accept=".jpg, .jpeg, .png"
+              onChange={handleImageChange}
+            />
             {imagePreview != null ? (
               <div className="image-container image-preview">
                 <img src={imagePreview} alt="Produto..." />

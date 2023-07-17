@@ -86,7 +86,9 @@ const ProductDetails = () => {
             </p>
             <p>
               <b>&rarr; Cor: </b>{" "}
-              {product.colors && product.colors.length > 0
+              {product.colors &&
+              product.colors.length > 0 &&
+              product.colors[0].trim() !== ""
                 ? product.colors.join(", ")
                 : "Nenhuma cor informada."}
             </p>

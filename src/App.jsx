@@ -29,11 +29,11 @@ import Privacy from "./pages/info/Privacy";
 import Faq from "./pages/info/Faq";
 import AddPayment from "./components/payment/PayForm/AddPayment";
 import Cart from "./pages/cart/Cart";
-import Transactions from "./pages/transactions/Transactions"
-import Clients from "./pages/clients/Clients"
-import ClientDetails from "./pages/clients/ClientDetails"
-import AddClient from "./pages/clients/AddClient"
-import EditClient from "./pages/clients/EditClient"
+import Transactions from "./pages/transactions/Transactions";
+import Clients from "./pages/clients/Clients";
+import ClientDetails from "./pages/clients/ClientDetails";
+import AddClient from "./pages/clients/AddClient";
+import EditClient from "./pages/clients/EditClient";
 
 axios.defaults.withCredentials = true;
 

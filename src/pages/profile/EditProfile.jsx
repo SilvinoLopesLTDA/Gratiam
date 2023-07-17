@@ -109,6 +109,7 @@ const EditProfile = () => {
                   <input
                     type="file"
                     name="image"
+                    accept=".jpg, .jpeg, .png"
                     onChange={handleImageChange}
                   />
                 </p>
@@ -154,7 +155,7 @@ const EditProfile = () => {
             <span className="profileEdit-data">
               <div className="input_info_bottom">
                 <p>
-                  <label> Tel: </label>
+                  <label> Telefone: </label>
                   <input
                     type="text"
                     name="phone"

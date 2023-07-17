@@ -5,13 +5,12 @@ import PropTypes from "prop-types";
 const ClientForm = ({ client, handleInputChange, saveClient, required }) => {
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  console.log(client);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitted(true);
 
     if (client.name && client.email && client.phone && client.isMember) {
-      console.log(client);
       saveClient(client);
       navigate("/clients");
     } else {

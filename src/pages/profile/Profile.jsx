@@ -30,6 +30,8 @@ const Profile = () => {
     getUserData();
   }, [dispatch]);
 
+  const formattedBio = profile?.bio.replace(/\n/g, "<br />");
+
   return (
     <div className="profile">
       {isLoading && <SpinnerImg />}
@@ -50,14 +52,24 @@ const Profile = () => {
                 <span className="--color-primary">{profile?.email}</span>
               </p>
               <p style={{ fontSize: "1.8em" }}>
-                <b>Tel:</b> {profile?.phone}
+                <b>Telefone:</b> {profile?.phone}
               </p>
               <p style={{ fontSize: "1.8em" }}>
-                <b>Descrição:</b><br /><br />  {profile?.bio}
+                <b>Descrição:</b>
+                <br />
+                <br />
+                {profile?.bio ? (
+                  <p dangerouslySetInnerHTML={{ __html: formattedBio }}></p>
+                ) : (
+                  <p>Nenhuma descrição informada!</p>
+                )}
               </p>
               <div className="btn-edit">
                 <Link to="/edit-profile">
-                  <button className="--btn --btn-primary" style={{marginTop: "1em"}}>
+                  <button
+                    className="--btn --btn-primary"
+                    style={{ marginTop: "1em" }}
+                  >
                     {" "}
                     Editar Perfil
                   </button>

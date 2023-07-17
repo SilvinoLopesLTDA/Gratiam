@@ -15,7 +15,6 @@ export const createClient = createAsyncThunk(
   "client/create",
   async (formData, thunkAPI) => {
     try {
-      console.log(formData);
       return await clientService.createClient(formData);
     } catch (error) {
       const message =
@@ -73,7 +72,6 @@ export const updateClient = createAsyncThunk(
   "client/updateClient",
   async ({ id, formData }, thunkAPI) => {
     try {
-      console.log(id);
       return await clientService.updateClient(id, formData);
     } catch (error) {
       const message =

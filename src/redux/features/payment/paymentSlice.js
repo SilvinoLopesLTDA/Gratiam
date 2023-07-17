@@ -17,7 +17,6 @@ export const createPayment = createAsyncThunk(
   "payments/create",
   async (formData, thunkAPI) => {
     try {
-      console.log(formData);
       return await paymentService.createPayment(formData);
     } catch (error) {
       const message =

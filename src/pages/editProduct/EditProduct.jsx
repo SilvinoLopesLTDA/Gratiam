@@ -55,7 +55,7 @@ const EditProduct = () => {
     setProductImage(e.target.files[0]);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
-  console.log(colors);
+  
   const saveProduct = async () => {
     const formData = new FormData();
     formData.append("name", product.name);
@@ -68,7 +68,7 @@ const EditProduct = () => {
     if (productImage) {
       formData.append("image", productImage);
     }
-    console.log(...formData);
+    
     await dispatch(updateProduct({ id, formData }));
     await dispatch(getProducts());
     navigate("/storage");

@@ -217,7 +217,6 @@ const CartItems = ({ cartItems, isLoading }) => {
                     quantity,
                   } = item;
                   const totalValue = item.product.price * item.quantity;
-                  console.log(item.product.quantity);
                   return (
                     <tr key={_id}>
                       <td className={styles.verticalAlign}>{index + 1}</td>
