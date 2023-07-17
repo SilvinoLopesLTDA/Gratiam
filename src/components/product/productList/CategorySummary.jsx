@@ -35,7 +35,6 @@ const CategorySummary = ({ categories, getCategoryCount }) => {
         </thead>
         <tbody>
           {currentItems.map((category, index) => {
-            console.log(category);
             return (
               <tr key={index}>
                 <td>{category}</td>

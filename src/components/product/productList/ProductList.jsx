@@ -158,12 +158,15 @@ const ProductList = ({ product, isLoading }) => {
                         <td>{shortenText(name)}</td>
                         <td>{category}</td>
                         <td>
-                          {colors?.length
-                            ? colors?.join(", ")
-                            : Array.isArray(colors)
-                            ? "Nenhuma cor informada."
-                            : ""}
+                          {colors &&
+                          colors.length > 0 &&
+                          colors[0].trim() !== ""
+                            ? colors.length > 3
+                              ? `${colors.slice(0, 3).join(", ")}...`
+                              : colors.join(", ")
+                            : "Nenhuma cor informada."}
                         </td>
+
                         <td>
                           {"R$"}
                           {cost}

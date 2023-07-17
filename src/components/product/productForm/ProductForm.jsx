@@ -1,6 +1,6 @@
 import ReactQuill from "react-quill";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import "./ProductForm.scss";
 import Card from "../../card/Card";
@@ -22,8 +22,20 @@ const ProductForm = ({
 }) => {
   const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [tags, setTags] = useState([]);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (product && product.colors) {
+      setTags(
+        product.colors.map((color) => ({
+          id: color,
+          text: color,
+        }))
+      );
+    }
+  }, [product]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
 
@@ -35,7 +47,7 @@ const ProductForm = ({
       product.colors &&
       product.quantity
     ) {
-      saveProduct(product);
+      await saveProduct();
       navigate("/storage");
     } else {
       navigate("/add-product");
@@ -69,8 +81,6 @@ const ProductForm = ({
   };
 
   const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
-  const [tags, setTags] = useState([]);
 
   const handleAddition = (tag) => {
     const updatedTags = [...tags, tag];
@@ -111,26 +121,11 @@ const ProductForm = ({
     console.log("The tag at index " + index + " was clicked");
   };
 
-  const saveProductData = () => {
-    const productData = {
-      ...product,
-      colors: tags.map((tag) => tag.text),
-    };
-
-    saveProduct(productData);
-  };
-
   return (
     <div className="add-product">
       <Card cardClass={"card"}>
         <Card cardClass={"group"}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit(e);
-              saveProduct(e);
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <label> Imagem do Produto </label>
             <code className="--color-dark">
               {" "}
@@ -139,7 +134,8 @@ const ProductForm = ({
             <input
               type="file"
               name="image"
-              onChange={(e) => handleImageChange(e)}
+              accept=".jpg, .jpeg, .png"
+              onChange={handleImageChange}
             />
             {imagePreview != null ? (
               <div className="image-container image-preview">
@@ -155,13 +151,7 @@ const ProductForm = ({
       </Card>
 
       <div className="blockL">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit(e);
-            saveProduct(e);
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           <label>
             {" "}
             Nome <span>{required}</span>
@@ -267,11 +257,7 @@ const ProductForm = ({
           />
 
           <div className="--my">
-            <button
-              type="submit"
-              onClick={saveProductData}
-              className="--btn --btn-primary"
-            >
+            <button type="submit" className="--btn --btn-primary">
               {" "}
               Salvar{" "}
             </button>

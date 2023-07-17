@@ -61,9 +61,6 @@ const EditPayment = () => {
       completed: false,
     };
     await axios.patch(`${BACKEND_URL}/api/payments/${payment._id}`, newFormData);
-  
-
-    console.log(...formData);
 
     await dispatch(updatePayment({ id, formData }));
     navigate("/payments");

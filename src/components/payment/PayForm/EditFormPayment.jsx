@@ -65,6 +65,7 @@ const PayFormEdit = ({
             <input
               type="file"
               name="image"
+              accept=".jpg, .jpeg, .png"
               onChange={(e) => handleImageChange(e)}
             />
             {imagePreview != null ? (

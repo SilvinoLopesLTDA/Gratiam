@@ -17,7 +17,7 @@ const EditClient = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoading = useSelector(selectIsLoading);
-    console.log(id);
+    
   const clientEdit = useSelector(selectClient);
 
   const [client, setClient] = useState(clientEdit);
@@ -42,7 +42,7 @@ const EditClient = () => {
       phone: client.phone,
       isMember: client.isMember,
     };
-    console.log(formData + id);
+
     await dispatch(updateClient({ id, formData }));
     await dispatch(getClients());
     navigate("/clients");

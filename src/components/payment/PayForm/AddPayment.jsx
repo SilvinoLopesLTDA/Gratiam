@@ -50,7 +50,7 @@ const PayForm = ({ payment }) => {
     formData.append("expirateDate", paymentData.expirateDate);
     formData.append("description", description);
     formData.append("image", paymentImage);
-    console.log(...formData);
+
     await dispatch(createPayment(formData));
 
     if (
@@ -126,6 +126,7 @@ const PayForm = ({ payment }) => {
               <input
                 type="file"
                 name="image"
+                accept=".jpg, .jpeg, .png"
                 onChange={(e) => handleImageChange(e)}
               />
               {imagePreview != null ? (
