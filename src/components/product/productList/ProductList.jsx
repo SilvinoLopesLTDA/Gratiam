@@ -152,18 +152,22 @@ const ProductList = ({ product, isLoading }) => {
                       price,
                       quantity,
                     } = product;
+                    console.log(product);
                     return (
                       <tr key={_id}>
                         <td>{index + 1}</td>
                         <td>{shortenText(name)}</td>
                         <td>{category}</td>
                         <td>
-                          {colors?.length
-                            ? colors?.join(", ")
-                            : Array.isArray(colors)
-                            ? "Nenhuma cor informada."
-                            : ""}
+                          {colors &&
+                          colors.length > 0 &&
+                          colors[0].trim() !== ""
+                            ? colors.length > 5
+                              ? `${colors.slice(0, 5).join(", ")}...`
+                              : colors.join(", ")
+                            : "Nenhuma cor informada."}
                         </td>
+
                         <td>
                           {"R$"}
                           {cost}

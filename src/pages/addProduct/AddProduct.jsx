@@ -3,6 +3,7 @@ import ProductForm from "../../components/product/productForm/ProductForm";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createProduct,
+  getProducts,
   selectIsLoading,
 } from "../../redux/features/product/productSlice";
 import { useNavigate } from "react-router-dom";
@@ -47,8 +48,7 @@ const AddProduct = () => {
     return sku;
   };
 
-  const saveProduct = async (e) => {
-    e.preventDefault();
+  const saveProduct = async () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("sku", generateSku(category));
@@ -65,21 +65,8 @@ const AddProduct = () => {
     console.log(...formData);
 
     await dispatch(createProduct(formData));
-
-    if (
-      name &&
-      category &&
-      quantity &&
-      cost &&
-      price &&
-      name.trim() !== "" &&
-      category.trim() !== "" &&
-      quantity.trim() !== "" &&
-      cost.trim() !== "" &&
-      price.trim() !== ""
-    ) {
-      navigate("/storage");
-    }
+    dispatch(getProducts());
+    navigate("/storage");
   };
 
   const handleClick = () => {
@@ -94,9 +81,8 @@ const AddProduct = () => {
         style={{ margin: "1.5em 0", paddingLeft: ".85em" }}
         onClick={handleClick}
       >
-        {" "}
         <MdOutlineKeyboardDoubleArrowLeft style={{ marginRight: "0.3em" }} />
-        Voltar{" "}
+        Voltar
       </button>
       <h3 className="--mt">Adicionar Produto</h3>
       <p style={{ color: "var(--color-primary)" }}> * Campo obrigatório</p>
