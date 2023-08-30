@@ -10,12 +10,12 @@ const createProduct = asyncHandler(async (req, res) => {
   const { name, sku, category, quantity, cost, price, colors, description } =
     req.body;
 
-  //Validation
+  // Validation
   if (!name || !category || !quantity || !cost || !price) {
     res.status(400);
     throw new Error("Por favor, preencha os campos corretamente!");
   }
-
+  console.log(req);
   // Handle Image upload
   let fileData = {};
   if (req.file) {
@@ -38,7 +38,7 @@ const createProduct = asyncHandler(async (req, res) => {
       fileSize: fileSizeFormatter(req.file.size, 2),
     };
   }
-
+  console.log(fileData);
   // Create Product
   const product = await Product.create({
     user: req.user.id,
@@ -52,6 +52,7 @@ const createProduct = asyncHandler(async (req, res) => {
     description,
     image: fileData,
   });
+  console.log(product);
   res.status(201).json(product);
 });
 
