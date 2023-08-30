@@ -4,251 +4,247 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(../../../public/assets/cool-background.svg);
+  background-image: url(/assets/cool-background.svg);
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
   background-size: 4500px;
 
-.form_square {
-  width: 55rem;
-  padding: 4rem;
-  animation: slide-up 0.5s ease;
-  background-color: #fff;
+  .form_square {
+    width: 55rem;
+    padding: 4rem;
+    animation: slide-up 0.5s ease;
+    background-color: #fff;
 
-  h2 {
-    color: var(--color-primary);
-    font-size: 4em;
-    padding-bottom: .4em;
-    text-align: center;
-    border-bottom: 3px solid var(--color-secondary);
-  }
-
-  form {
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      display: flex;
-      font-size: 1.6rem;
-      font-weight: 300;
-      padding: 1rem;
-      margin: .8rem auto;
-      width: 100%;
-      border: 1px solid #ccc;
-      border-bottom: 3px solid #ccc;
-      border-radius: 3px;
-      outline: none;
-
-      &:focus {
-        outline: none;
-        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-        border-bottom: 3px solid #55c57a;
-      }
-
-      &:focus:invalid {
-        border-bottom: 3px solid #ff7730;
-      }
-    }
-
-    label {
+    h2 {
       color: var(--color-primary);
-      font-size: 1.4em;
-      font-weight: 700;
+      font-size: 4em;
+      padding-bottom: 0.4em;
+      text-align: center;
+      border-bottom: 3px solid var(--color-secondary);
     }
 
-    .links {
+    form {
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        display: flex;
+        font-size: 1.6rem;
+        font-weight: 300;
+        padding: 1rem;
+        margin: 0.8rem auto;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-bottom: 3px solid #ccc;
+        border-radius: 3px;
+        outline: none;
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+          border-bottom: 3px solid #55c57a;
+        }
+
+        &:focus:invalid {
+          border-bottom: 3px solid #ff7730;
+        }
+      }
+
+      label {
+        color: var(--color-primary);
+        font-size: 1.4em;
+        font-weight: 700;
+      }
+
+      .links {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2em;
+      }
+
+      .fields {
+        margin-top: 2em;
+      }
+
+      .btn_square {
+        margin-top: 1.8em;
+      }
+    }
+    .register {
       display: flex;
-      justify-content: space-between;
-      margin-top: 2em;
-    }
-
-    .fields {
-      margin-top: 2em;
-    }
-
-    .btn_square {
-      margin-top: 1.8em;
+      justify-content: start;
+      align-items: start;
+      margin: 2rem 0;
+      font-weight: 500;
     }
   }
-  .register {
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    margin: 2rem 0;  
-    font-weight: 500;
-  }
 }
-}
-
-
-
-
 
 .auth {
-    min-height: 100vh;
-    width: 100%;
-    background-image: url(../../../public/assets/cool-background.svg);
-    background-position: top center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-size: 2600px;
+  width: 100%;
+  height: 120vh;
+  background-image: url(/assets/cool-background.svg);
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 2600px;
 
-    .img {
-      animation: slide-down 0.5s ease;
+  .img {
+    animation: slide-down 0.5s ease;
+  }
+
+  .form {
+    width: 55rem;
+    height: 119.75vh;
+    padding: 4rem;
+    animation: slide-up 0.5s ease;
+    background-color: #fff;
+
+    h2 {
+      color: var(--color-primary);
+      font-size: 5em;
+      padding-left: 0.4em;
+      text-align: start;
+      border-left: 5.5px solid var(--color-secondary);
     }
 
-  
-    .form {
-      width: 55rem;
-      height: 99.8vh;
-      padding: 4rem;
-      animation: slide-up 0.5s ease;
-      background-color: #fff;
+    form {
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        display: flex;
+        font-size: 1.6rem;
+        font-weight: 300;
+        padding: 1rem;
+        margin: 0.8rem auto;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-bottom: 3px solid #ccc;
+        border-radius: 3px;
+        outline: none;
 
-      h2 {
+        &:focus {
+          outline: none;
+          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+          border-bottom: 3px solid #55c57a;
+        }
+
+        &:focus:invalid {
+          border-bottom: 3px solid #ff7730;
+        }
+      }
+
+      label {
         color: var(--color-primary);
-        font-size: 5em;
-        padding-left: .4em;
+        font-size: 1.4em;
+        font-weight: 700;
+      }
+
+      .links {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+      }
+
+      .fields {
+        margin-top: 2em;
+      }
+
+      p {
         text-align: start;
-        border-left: 5.5px solid var(--color-secondary);
+        margin-top: 1rem;
+      }
+
+      button {
+        margin-top: 4.5em;
+      }
+    }
+    .register {
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      margin: 2rem 0;
+      font-weight: 500;
+    }
+  }
+
+  @keyframes slide-up {
+    0% {
+      transform: translateY(-5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-down {
+    0% {
+      transform: translateY(5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .img {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .auth,
+  .auth_square {
+    // Forgot and Reset Form
+    .form_square {
+      padding: 1.8em;
+      width: 40em;
+
+      .btn_square {
+        width: 21.3em;
+      }
+
+      .links {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+        width: 36.4em;
       }
 
       form {
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-          display: flex;
-          font-size: 1.6rem;
-          font-weight: 300;
-          padding: 1rem;
-          margin: .8rem auto;
-          width: 100%;
-          border: 1px solid #ccc;
-          border-bottom: 3px solid #ccc;
-          border-radius: 3px;
-          outline: none;
-  
-          &:focus {
-            outline: none;
-            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-            border-bottom: 3px solid #55c57a;
-          }
-  
-          &:focus:invalid {
-            border-bottom: 3px solid #ff7730;
-          }
-        }
+        width: 100%;
+      }
 
-        label {
-          color: var(--color-primary);
-          font-size: 1.4em;
-          font-weight: 700;
-        }
+      h2 {
+        width: 9.2em;
+      }
+    }
 
-        .links {
-          display: flex;
-          justify-content: space-between;
-          margin: 5px 0;
-        }
+    // Login and Register Form
+    .form {
+      padding: 2.85em;
+
+      form {
+        max-width: 350px;
+        width: 100%;
+        display: table;
 
         .fields {
-          margin-top: 2em;
-        }
-  
-        p {
-          text-align: start;
-          margin-top: 1rem;
+          max-width: 90em;
         }
 
         button {
-          margin-top: 4.5em;
+          max-width: 70em;
         }
       }
-      .register {
-        display: flex;
-        justify-content: start;
-        align-items: start;
-        margin: 2rem 0;  
-        font-weight: 500;
+
+      p {
+        width: 17em;
       }
-    }
-  
-    @keyframes slide-up {
-      0% {
-        transform: translateY(-5rem);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
-    @keyframes slide-down {
-      0% {
-        transform: translateY(5rem);
-      }
-      100% {
-        transform: translateY(0);
+
+      h2 {
+        width: 7em;
       }
     }
   }
-  
-  @media screen and (max-width: 700px) {
-    .img {
-      display: none;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .auth, .auth_square {
-      // Forgot and Reset Form
-      .form_square {
-        padding: 1.8em;
-        width: 40em;
-
-        .btn_square{
-          width: 21.3em;
-        }
-
-        .links {
-          display: flex;
-          justify-content: space-between;
-          margin: 5px 0;
-          width: 36.4em;
-        }
-
-        form {
-          width: 100%;
-        }
-
-        h2 {
-          width: 9.2em;
-        }
-      }
-
-      // Login and Register Form
-      .form {
-        padding: 2.85em;
-
-        form {
-          max-width: 350px;
-          width: 100%;
-          display: table;
-
-          .fields{
-            max-width: 90em;
-          }
-
-          button {
-            max-width: 70em;
-          }
-        }
-
-        p {
-          width: 17em;
-        }
-
-        h2 {
-          width: 7em;
-        }
-      }
-    }
-  }
+}

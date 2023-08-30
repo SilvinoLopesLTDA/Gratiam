@@ -1,61 +1,73 @@
 .product-list {
-    color: #333;
-    .table {
-      padding: 5px;
+  color: #333;
+  .table {
+    padding: 5px;
+    width: 100%;
+    overflow-x: auto;
+
+    .low-quantity {
+      color: var(--color-primary);
+      /* Outras propriedades de estilo que você deseja aplicar para quantidades baixas */
+    }
+
+    .search {
       width: 100%;
-      overflow-x: auto;
-  
-      .search {
-        width: 100%;
-        max-width: 300px;
+      max-width: 300px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 1.4rem;
+
+      thead {
+        border-top: 2px solid var(--color-secondary);
+        border-bottom: 2px solid var(--color-secondary);
       }
-  
-      table {
-        border-collapse: collapse;
-        width: 100%;
-        font-size: 1.4rem;
-  
-        thead {
-          border-top: 2px solid var(--color-secondary);
-          border-bottom: 2px solid var(--color-secondary);
-        }
-  
-        th {
-          border: 1px solid #eee;
-        }
-  
-        th,
-        td {
-          vertical-align: top;
-          text-align: left;
-          padding: 8px;
-  
-          &.icons {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-              svg {
-                margin-right: 7px;
-                cursor: pointer;
-                vertical-align: middle;
-                align-self: center;
-              }
-          }
-        }
-  
-        tr {
-          border-bottom: 1px solid #ccc;
-        }
-  
-        tr:nth-child(even) {
-          background-color: #fff;
-        }
-        tbody {
-          tr:hover {
+
+      th {
+        border: 1px solid #eee;
+      }
+
+      th,
+      td {
+        vertical-align: top;
+        text-align: left;
+        padding: 8px;
+        text-align: center;
+
+        &.icons {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          svg {
+            text-align: center;
+            margin-right: 7px;
             cursor: pointer;
-            background-color: rgba(31, 147, 255, 0.3);
+            vertical-align: middle;
+            align-self: center;
           }
+        }
+      }
+
+      tr {
+        border-bottom: 1px solid #ccc;
+      }
+
+      tr:nth-child(even) {
+        background-color: #fff;
+      }
+      tbody {
+        tr:hover {
+          background-color: rgba(31, 147, 255, 0.3);
         }
       }
     }
   }
+  .export {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 1.5rem auto;
+  }
+}

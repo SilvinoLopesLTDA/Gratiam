@@ -1,12 +1,30 @@
 const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const dotenv = require("dotenv");
+dotenv.config();
 
-// Define file storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
+const { CLOUD_NAME, CLOUD_KEY, CLOUD_SECRET } = process.env;
+
+// Configurar o Cloudinary
+cloudinary.config({
+  cloud_name: CLOUD_NAME,
+  api_key: CLOUD_KEY,
+  api_secret: CLOUD_SECRET,
+});
+
+// Definir o storage para o multer usando o Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "Sistema Gratidão",
+    resource_type: "image",
   },
   filename: function (req, file, cb) {
-    cb(null, new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname);
+    cb(
+      null,
+      new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
+    );
   },
 });
 
@@ -23,19 +41,19 @@ function fileFilter(req, file, cb) {
   }
 }
 
-const upload = multer({ storage, fileFilter });
+const upload = multer({ storage: storage, fileFilter });
 
 // File size Formatter
 const fileSizeFormatter = (bytes, decimal) => {
-    if(bytes === 0) {
-        return "0 Bytes"
-    }
-    const dm = decimal || 2
-    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "YB", "ZB"]
-    const index = Math.floor(Math.log(bytes) / Math.log(1000))
-    return (
-        parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + " " + sizes[index]
-    ) 
-}
+  if (bytes === 0) {
+    return "0 Bytes";
+  }
+  const dm = decimal || 2;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "YB", "ZB"];
+  const index = Math.floor(Math.log(bytes) / Math.log(1000));
+  return (
+    parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + " " + sizes[index]
+  );
+};
 
 module.exports = { upload, fileSizeFormatter };

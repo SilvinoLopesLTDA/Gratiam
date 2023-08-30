@@ -1,0 +1,65 @@
+.container {
+  .pay_detail {
+    display: flex;
+    margin: 2.5em 0;
+    width: 100%;
+
+    .pay_group_image {
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--dark-blue);
+      padding: 1.5em 2.5em 1.5em 2em;
+      width: 50%;
+      min-height: 9.5em;
+      float: left;
+      img {
+        width: 70%;
+      }
+    }
+    .pay_info {
+      margin: 2em;
+      width: 50%;
+    }
+    h3 {
+      span {
+        color: var(--color-white);
+        background-color: var(--color-primary);
+        padding: 0.1em;
+        border-radius: 5px;
+      }
+    }
+    p {
+      margin: 2em 0;
+      span {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+    .pay_detail {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .pay_group_image {
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--dark-blue);
+        padding: 1.5em 2.5em 1.5em 2em;
+        width: 100%;
+        min-height: 9.5em;
+        float: left;
+      }
+      img {
+        height: 10em;
+      }
+      .pay_info {
+        margin: 2em;
+        width: 100%;
+      }
+    }
+  }
+}
