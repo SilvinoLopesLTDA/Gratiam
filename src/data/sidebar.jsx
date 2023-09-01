@@ -1,8 +1,8 @@
 import { BsPersonCircle, BsPersonFillAdd } from "react-icons/bs";
 import { TbDatabase } from "react-icons/tb";
-import { MdOutlineMail, MdOutlinePayments } from "react-icons/md";
+import { MdOutlineMail, MdOutlinePayments, MdPayment } from "react-icons/md";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-// import { CiImport } from "react-icons/ci"
+import { GrTransaction } from "react-icons/gr"
 
 const menu = [
   // {
@@ -21,10 +21,12 @@ const menu = [
     childrens: [
       {
         title: "Pagamentos",
+        icon: <MdPayment />,
         path: "/payments"
       },
       {
         title: "Transações",
+        icon: <GrTransaction />,
         path: "/transactions"
       }
     ]

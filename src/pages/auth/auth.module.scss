@@ -72,8 +72,8 @@
     }
     .register {
       display: flex;
-      justify-content: start;
-      align-items: start;
+      justify-content: flex-start;
+      align-items: flex-start;
       margin: 2rem 0;
       font-weight: 500;
     }
@@ -93,6 +93,18 @@
     animation: slide-down 0.5s ease;
   }
 
+  .toggleVisible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     svg {
+      position: absolute;
+      left: 30.5%;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  }
+
   .form {
     width: 55rem;
     height: 119.75vh;
@@ -104,7 +116,7 @@
       color: var(--color-primary);
       font-size: 5em;
       padding-left: 0.4em;
-      text-align: start;
+      text-align: flex-start;
       border-left: 5.5px solid var(--color-secondary);
     }
 
@@ -148,10 +160,13 @@
 
       .fields {
         margin-top: 2em;
+        .password {
+          display: flex;
+        }
       }
 
       p {
-        text-align: start;
+        text-align: flex-start;
         margin-top: 1rem;
       }
 
@@ -161,8 +176,8 @@
     }
     .register {
       display: flex;
-      justify-content: start;
-      align-items: start;
+      justify-content: flex-start;
+      align-items: flex-start;
       margin: 2rem 0;
       font-weight: 500;
     }

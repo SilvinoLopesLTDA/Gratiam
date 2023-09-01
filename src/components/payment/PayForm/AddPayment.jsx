@@ -215,7 +215,7 @@ const PayForm = ({ payment }) => {
               </div>
               <label style={{ marginBottom: "1rem", marginTop: "1rem" }}>
                 {" "}
-                Descrição{" "}
+                Descrição <span> *</span>
               </label>
               <ReactQuill
                 theme="snow"
