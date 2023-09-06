@@ -10,7 +10,7 @@ const NumberText = ({ num, text }) => {
 };
 
 NumberText.propTypes = {
-  num: PropTypes.number.isRequired,
+  num: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
 };
 

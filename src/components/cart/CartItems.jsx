@@ -16,6 +16,7 @@ import { getAllTransactions } from "../../redux/features/transaction/transaction
 import { FaTrashAlt } from "react-icons/fa";
 import { BsPlus } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const initialState = {
   clientId: "",
@@ -37,9 +38,9 @@ const CartItems = ({ cartItems, isLoading }) => {
   useEffect(() => {
     const calculateTotalAmount = () => {
       let subtotal = 0;
-      cartItems.forEach((item) => {
-        const price = item.product.price;
-        const quantity = item.quantity;
+      cartItems.forEach((items) => {
+        const price = items.product.price;
+        const quantity = items.quantity;
         subtotal += price * quantity;
       });
 
@@ -103,9 +104,9 @@ const CartItems = ({ cartItems, isLoading }) => {
 
   const calculateSubtotal = () => {
     let subtotal = 0;
-    cartItems.forEach((item) => {
-      const price = item.product.price;
-      const quantity = item.quantity;
+    cartItems.forEach((items) => {
+      const price = items.product.price;
+      const quantity = items.quantity;
       subtotal += price * quantity;
     });
     return subtotal;
@@ -133,10 +134,15 @@ const CartItems = ({ cartItems, isLoading }) => {
   };
 
   const handleAddUnityItem = async (id) => {
-    await dispatch(addToCart(id));
-    await dispatch(getCartItems());
+    const cartItem = cartItems.find((item) => item.product._id === id);
+    if (cartItem && cartItem.product.quantity > cartItem.quantity) {
+      await dispatch(addToCart(id));
+      await dispatch(getCartItems());
+    } else {
+      toast.error("Quantidade excedeu o disponível.");
+    }
   };
-
+  
   const handleCheckout = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
@@ -205,32 +211,32 @@ const CartItems = ({ cartItems, isLoading }) => {
                   <th>Imagem</th>
                   <th>Nome</th>
                   <th>Preço Unitário</th>
-                  <th>Quant.</th>
+                  <th>Quant.Compra</th>
                   <th>Valor Total</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((item, index) => {
+                {cartItems.map((items, index) => {
                   const {
                     product: { _id, name, price },
                     quantity,
-                  } = item;
-                  const totalValue = item.product.price * item.quantity;
+                  } = items;
+                  const totalValue = items.product.price * items.quantity;
                   return (
                     <tr key={_id}>
                       <td className={styles.verticalAlign}>{index + 1}</td>
                       <td>
-                        {item.product.image ? (
+                        {items.product.image ? (
                           <img
-                            src={item.product.image.filePath}
-                            alt={item.product.name}
+                            src={items.product.image.filePath}
+                            alt={items.product.name}
                             width={80}
                             height={80}
                           />
                         ) : (
                           <img
-                            src="/public/assets/placeholder.jpg"
+                            src="/assets/placeholder.jpg"
                             alt="Placeholder"
                             width={80}
                             height={80}
@@ -239,47 +245,51 @@ const CartItems = ({ cartItems, isLoading }) => {
                       </td>
                       <td className={styles.verticalAlign}>{name}</td>
                       <td className={styles.verticalAlign}>{"R$" + price}</td>
-                      <td className={styles.verticalAlign}>{quantity}</td>
+                      <td className={styles.verticalAlign}>
+                        {" "}
+                        <td
+                          className={`${styles.verticalAlign} ${styles.quantity}`}
+                        >
+                          <div className={styles.divQuantity}>
+                            <button
+                              className={styles.quantityButton}
+                              onClick={() =>
+                                handleRemoveUnityItem(items.product._id)
+                              }
+                            >
+                              <AiOutlineMinus color="white" size={17} />
+                            </button>
+                            <input
+                              type="number"
+                              min="1"
+                              value={quantity}
+                              className={styles.quantityInput}
+                              readOnly
+                            />
+                            <button
+                              className={styles.quantityButton}
+                              onClick={() => {
+                                if (items.product.quantity > 0) {
+                                  handleAddUnityItem(items.product._id);
+                                }
+                              }}
+                            >
+                              <BsPlus color="white" size={17} />
+                            </button>
+                          </div>
+                        </td>
+                      </td>
                       <td className={styles.verticalAlign}>
                         {formatCurrency(totalValue.toFixed(2))}
                       </td>
-                      <td
-                        className={`${styles.verticalAlign} ${styles.quantity}`}
-                      >
-                        <div className={styles.divQuantity}>
-                          <button
-                            className={styles.quantityButton}
-                            onClick={() =>
-                              handleRemoveUnityItem(item.product._id)
-                            }
-                          >
-                            <AiOutlineMinus color="white" size={17} />
-                          </button>
-                          <input
-                            type="number"
-                            min="1"
-                            value={quantity}
-                            className={styles.quantityInput}
-                            readOnly
-                          />
-                          <button
-                            className={styles.quantityButton}
-                            onClick={() => {
-                              if (item.product.quantity > 0) {
-                                handleAddUnityItem(item.product._id);
-                              }
-                            }}
-                          >
-                            <BsPlus color="white" size={17} />
-                          </button>
-                          <FaTrashAlt
-                            color="red"
-                            size={24}
-                            title="Excluir o item"
-                            onClick={() => handleRemoveItem(item.product._id)}
-                            style={{ cursor: "pointer" }}
-                          />
-                        </div>
+                      <td className={`${styles.verticalAlign}`}>
+                        <FaTrashAlt
+                          color="red"
+                          size={24}
+                          title="Excluir o item"
+                          onClick={() => handleRemoveItem(items.product._id)}
+                          style={{ cursor: "pointer" }}
+                        />
                       </td>
                     </tr>
                   );
