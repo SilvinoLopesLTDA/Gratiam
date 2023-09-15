@@ -10,6 +10,18 @@
   background-repeat: no-repeat;
   background-size: 4500px;
 
+  .toggleVisible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      position: absolute;
+      left: 47em;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  }
+
   .form_square {
     width: 55rem;
     padding: 4rem;
@@ -64,6 +76,9 @@
 
       .fields {
         margin-top: 2em;
+        .password {
+          display: flex;
+        }
       }
 
       .btn_square {
@@ -97,9 +112,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-     svg {
+    svg {
       position: absolute;
-      left: 30.5%;
+      left: 23em;
       font-size: 2em;
       cursor: pointer;
     }
@@ -204,6 +219,40 @@
 @media screen and (max-width: 700px) {
   .img {
     display: none;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .auth {
+    .toggleVisible {
+      svg {
+        left: 23em;
+      }
+    }
+    .form {
+      padding: 2rem;
+      h2 {
+        font-size: 3em;
+        border-left: 3px solid var(--color-secondary);
+      }
+      form {
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+          padding: 0.8rem;
+          margin: 0 auto;
+        }
+        button {
+          margin-top: 1.5em;
+        }
+      }
+    }
+    .fields {
+      margin-top: 1em;
+    }
+    .register {
+      font-size: 1em;
+    }
   }
 }
 

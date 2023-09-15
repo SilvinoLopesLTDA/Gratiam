@@ -36,6 +36,11 @@ const PayForm = ({ payment }) => {
     setPaymentData({ ...paymentData, [name]: value });
   };
 
+  const handleDescriptionChange = (e) => {
+    const { name, value } = e.target;
+    setDescription({ ...description, [name]: value });
+  };
+
   const handleImageChange = (e) => {
     setPaymentImage(e.target.files[0]);
     setImagePreview(URL.createObjectURL(e.target.files[0]));
@@ -55,6 +60,7 @@ const PayForm = ({ payment }) => {
 
     if (
       paymentData.name.trim() !== "" &&
+      paymentData.description.trim() !== "" &&
       paymentData.expirateDate.trim() !== ""
     ) {
       const newPayment = { ...paymentData, totalAmount: paymentValue };
@@ -221,7 +227,7 @@ const PayForm = ({ payment }) => {
                 theme="snow"
                 placeholder="Nenhuma descrição informada"
                 value={description}
-                onChange={setDescription}
+                onChange={handleDescriptionChange}
                 modules={PayForm.modules}
                 formats={PayForm.formats}
               />
