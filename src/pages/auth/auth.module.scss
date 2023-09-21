@@ -16,7 +16,7 @@
     justify-content: center;
     svg {
       position: absolute;
-      left: 47em;
+      left: 62.5%;
       font-size: 2em;
       cursor: pointer;
     }
@@ -114,7 +114,7 @@
     justify-content: center;
     svg {
       position: absolute;
-      left: 23em;
+      left: 23.5em;
       font-size: 2em;
       cursor: pointer;
     }
@@ -255,6 +255,51 @@
     }
   }
 }
+
+@media screen and (min-width: 2000px) {
+  .auth,
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 56%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1900px) {
+  .auth,
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 62.5%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .auth,
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 67%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .auth,
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 73.5%;
+      }
+    }
+  }
+}
+
 
 @media screen and (max-width: 600px) {
   .auth,
