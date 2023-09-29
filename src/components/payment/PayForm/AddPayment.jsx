@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import Card from "../../card/Card";
-import "./PayForm.scss";
+import "./AddPayment.scss";
 import { useDispatch } from "react-redux";
 import {
   createPayment,
@@ -10,6 +10,7 @@ import {
 } from "../../../redux/features/payment/paymentSlice";
 import { MdOutlineKeyboardDoubleArrowLeft } from "react-icons/md";
 import ReactQuill from "react-quill";
+import { toast } from "react-toastify";
 
 const initialState = {
   name: "",
@@ -19,7 +20,7 @@ const initialState = {
   completed: false,
 };
 
-const PayForm = ({ payment }) => {
+const AddPayment = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,13 +33,10 @@ const PayForm = ({ payment }) => {
   const [description, setDescription] = useState("");
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPaymentData({ ...paymentData, [name]: value });
-  };
-
-  const handleDescriptionChange = (e) => {
-    const { name, value } = e.target;
-    setDescription({ ...description, [name]: value });
+    if (e.target) {
+      const { name, value } = e.target;
+      setPaymentData({ ...paymentData, [name]: value });
+    }
   };
 
   const handleImageChange = (e) => {
@@ -60,7 +58,7 @@ const PayForm = ({ payment }) => {
 
     if (
       paymentData.name.trim() !== "" &&
-      paymentData.description.trim() !== "" &&
+      description.trim() !== "" &&
       paymentData.expirateDate.trim() !== ""
     ) {
       const newPayment = { ...paymentData, totalAmount: paymentValue };
@@ -76,11 +74,11 @@ const PayForm = ({ payment }) => {
     e.preventDefault();
     setIsSubmitted(true);
 
-    if (paymentData.name && paymentData.description) {
-      savePayment(paymentData);
+    if (paymentData.name && description && paymentData.expirateDate) {
+      savePayment(e);
       navigate("/payments");
     } else {
-      console.log("Por favor, preencha todos os campos obrigatórios.");
+      return toast.error("Por favor, preencha todos os campos obrigatórios.");
     }
   };
 
@@ -121,7 +119,6 @@ const PayForm = ({ payment }) => {
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit(e);
-                savePayment(e);
               }}
             >
               <label> Imagem do Pagamento </label>
@@ -153,7 +150,6 @@ const PayForm = ({ payment }) => {
             onSubmit={(e) => {
               e.preventDefault();
               handleSubmit(e);
-              savePayment(e);
             }}
           >
             <div className="form-container">
@@ -165,23 +161,23 @@ const PayForm = ({ payment }) => {
                   type="text"
                   name="name"
                   id="name"
-                  value={payment?.name}
+                  value={paymentData.name}
                   onChange={handleInputChange}
                   className={
-                    isSubmitted && payment?.name === "" ? "highlight" : ""
+                    isSubmitted && paymentData.name === "" ? "highlight" : ""
                   }
                 />
               </div>
               <div className="form-group --form-control">
                 <label htmlFor="phone">Número Telefone</label>
                 <input
-                  type="text"
+                  type="tel"
                   name="phone"
                   id="phone"
-                  value={payment?.phone}
+                  value={paymentData.phone}
                   onChange={handleInputChange}
                   className={
-                    isSubmitted && payment?.phone === "" ? "highlight" : ""
+                    isSubmitted && paymentData.phone === "" ? "highlight" : ""
                   }
                 />
               </div>
@@ -196,7 +192,7 @@ const PayForm = ({ payment }) => {
                   value={paymentValue}
                   onChange={handlePaymentValueChange}
                   className={
-                    isSubmitted && payment?.totalAmount === ""
+                    isSubmitted && paymentValue === ""
                       ? "highlight"
                       : ""
                   }
@@ -210,10 +206,10 @@ const PayForm = ({ payment }) => {
                   type="date"
                   name="expirateDate"
                   id="expirateDate"
-                  value={payment?.expirateDate}
+                  value={paymentData.expirateDate}
                   onChange={handleInputChange}
                   className={
-                    isSubmitted && payment?.expirateDate === ""
+                    isSubmitted && paymentData.expirateDate === ""
                       ? "highlight"
                       : ""
                   }
@@ -227,9 +223,9 @@ const PayForm = ({ payment }) => {
                 theme="snow"
                 placeholder="Nenhuma descrição informada"
                 value={description}
-                onChange={handleDescriptionChange}
-                modules={PayForm.modules}
-                formats={PayForm.formats}
+                onChange={setDescription}
+                modules={AddPayment.modules}
+                formats={AddPayment.formats}
               />
               <div className="--my">
                 <button className="--btn --btn-primary"> Salvar </button>
@@ -242,7 +238,7 @@ const PayForm = ({ payment }) => {
   );
 };
 
-PayForm.modules = {
+AddPayment.modules = {
   toolbar: [
     [{ header: "1" }, { header: "2" }, { font: [] }],
     [{ size: [] }],
@@ -259,7 +255,7 @@ PayForm.modules = {
   ],
 };
 
-PayForm.formats = [
+AddPayment.formats = [
   "header",
   "font",
   "size",
@@ -280,11 +276,8 @@ PayForm.formats = [
   "align",
 ];
 
-PayForm.propTypes = {
+AddPayment.propTypes = {
   payment: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  handleInputChange: PropTypes.func,
-  savePayment: PropTypes.func,
-  setPaymentImage: PropTypes.func,
 };
 
-export default PayForm;
+export default AddPayment;

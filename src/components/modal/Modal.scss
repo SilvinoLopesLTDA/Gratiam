@@ -59,19 +59,53 @@
   }
 }
 
-@media screen and (max-width: 1350px) {
+@media screen and (max-width: 1200px) {
   .modal {
     .container {
-      height: 100%;
+      width: 80%;
+      height: 90%;
     }
   }
 }
 
+
+@media screen and (min-width: 1400px) {
+  .modal {
+    .container {
+      height: 60%;
+    }
+  }
+}
 
 @media screen and (min-width: 1600px) {
   .modal {
     .container {
-      height: 52.4%;
+      height: 52%;
     }
   }
 }
+
+@media screen and (min-width: 2000px) {
+  .modal {
+    .container {
+      height: 42%;
+    }
+  }
+}
+
+@media screen and (min-width: 2400px) {
+  .modal {
+    .container {
+      height: 35%;
+    }
+  }
+}
+
+@media screen and (min-width: 3000px) {
+  .modal {
+    .container {
+      height: 28%;
+    }
+  }
+}
+
