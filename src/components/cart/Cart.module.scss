@@ -62,15 +62,15 @@ table {
 
 .verticalAlign {
   vertical-align: middle;
+  width: 18rem;
 }
 
 .quantity {
-  width: 3.5rem;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .divQuantity {
     display: flex;
-    justify-content: center;
-
     .quantityButton {
       padding: 0.35rem;
       margin: 0 0.75rem;

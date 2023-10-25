@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { LoginUser, validateEmail } from "../../services/authService";
 import { SET_LOGIN, SET_NAME } from "../../redux/features/auth/authSlice";
 import Loader from "../../components/loader/Loader";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const initialState = {
   email: "",
@@ -19,6 +20,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
+  const [visible, setVisible] = useState(true);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -91,15 +93,27 @@ const Login = () => {
             </div>
             <div className={styles.fields}>
               <label htmlFor="password"> Senha </label>
-              <input
-                type="password"
-                placeholder="******"
-                required
-                id="password"
-                name="password"
-                value={password}
-                onChange={handleInputChange}
-              />
+              <div className={styles.password}>
+                <input
+                  type={visible ? "text" : "password"}
+                  placeholder={visible ? "123456" : "******"}
+                  required
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handleInputChange}
+                />
+                <div
+                  className={styles.toggleVisible}
+                  onClick={() => setVisible(!visible)}
+                >
+                  {visible ? (
+                    <AiOutlineEye color="#2b2d42" />
+                  ) : (
+                    <AiOutlineEyeInvisible color="#2b2d42" />
+                  )}
+                </div>
+              </div>
               <p>
                 Esqueceu a Senha?
                 <Link

@@ -24,7 +24,7 @@ const ClientForm = ({ client, handleInputChange, saveClient, required }) => {
         <form onSubmit={handleSubmit}>
           <label>
             {" "}
-            Nome <span>{required}</span>
+            Nome <span style={{color: "red"}}>{required}</span>
           </label>
           <input
             type="text"
@@ -36,11 +36,11 @@ const ClientForm = ({ client, handleInputChange, saveClient, required }) => {
           />
           <label>
             {" "}
-            Email <span>{required}</span>
+            Email <span style={{color: "red"}}>{required}</span>
           </label>
           <input
             type="text"
-            placeholder="cachorros@email.com"
+            placeholder="email@email.com"
             name="email"
             value={client?.email}
             onChange={handleInputChange}
@@ -48,7 +48,7 @@ const ClientForm = ({ client, handleInputChange, saveClient, required }) => {
           />
           <label>
             {" "}
-            Telefone <span>{required}</span>
+            Telefone <span style={{color: "red"}}>{required}</span>
           </label>
           <input
             type="text"
@@ -59,7 +59,7 @@ const ClientForm = ({ client, handleInputChange, saveClient, required }) => {
             className={isSubmitted && client?.phone === "" ? "highlight" : ""}
           />
           <label>
-            É Sócio? <span>{required}</span>
+            É Sócio? <span style={{color: "red"}}>{required}</span>
           </label>
           <select
             name="isMember"

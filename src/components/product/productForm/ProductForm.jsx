@@ -12,9 +12,12 @@ const ProductForm = ({
   product,
   // eslint-disable-next-line no-unused-vars
   productImage,
+    // eslint-disable-next-line no-unused-vars
+  colors,
   imagePreview,
   description,
   setDescription,
+  setColors,
   handleInputChange,
   handleImageChange,
   saveProduct,
@@ -93,6 +96,9 @@ const ProductForm = ({
     handleInputChange({
       target: { name: "colors", value: updatedProduct.colors },
     });
+
+    // Atualize o estado global de cores
+    setColors(updatedProduct.colors);
   };
 
   const handleDelete = (i) => {
@@ -106,6 +112,9 @@ const ProductForm = ({
     handleInputChange({
       target: { name: "colors", value: updatedProduct.colors },
     });
+
+    // Atualize o estado global de cores
+    setColors(updatedProduct.colors);
   };
 
   const handleDrag = (tag, currPos, newPos) => {
@@ -311,7 +320,9 @@ ProductForm.propTypes = {
   productImage: PropTypes.string,
   imagePreview: PropTypes.string,
   description: PropTypes.string,
+  colors: PropTypes.string,
   setDescription: PropTypes.func,
+  setColors: PropTypes.func,
   handleInputChange: PropTypes.func.isRequired,
   handleImageChange: PropTypes.func.isRequired,
   saveProduct: PropTypes.func.isRequired,

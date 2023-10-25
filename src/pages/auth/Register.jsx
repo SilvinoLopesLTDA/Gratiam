@@ -7,6 +7,7 @@ import { registerUser, validateEmail } from "../../services/authService";
 import { useDispatch } from "react-redux";
 import { SET_LOGIN, SET_NAME } from "../../redux/features/auth/authSlice";
 import Loader from "../../components/loader/Loader";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const initialState = {
   name: "",
@@ -21,6 +22,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const { name, email, password, password2 } = formData;
+  const [visible, setVisible] = useState(true);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -113,27 +115,51 @@ const Register = () => {
             </div>
             <div className={styles.fields}>
               <label htmlFor="password"> Senha </label>
-              <input
-                type="password"
-                placeholder="******"
-                required
-                id="password"
-                name="password"
-                value={password}
-                onChange={handleInputChange}
-              />
+              <div className={styles.password}>
+                <input
+                  type={visible ? "text" : "password"}
+                  placeholder={visible ? "123456" : "******"}
+                  required
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handleInputChange}
+                />
+                <div
+                  className={styles.toggleVisible}
+                  onClick={() => setVisible(!visible)}
+                >
+                  {visible ? (
+                    <AiOutlineEye color="#2b2d42" />
+                  ) : (
+                    <AiOutlineEyeInvisible color="#2b2d42" />
+                  )}
+                </div>
+              </div>
             </div>
             <div className={styles.fields}>
               <label htmlFor="password2"> Confirmar Senha </label>
-              <input
-                type="password"
-                placeholder="******"
-                required
-                id="password2"
-                name="password2"
-                value={password2}
-                onChange={handleInputChange}
-              />
+              <div className={styles.password}>
+                <input
+                  type={visible ? "text" : "password"}
+                  placeholder={visible ? "123456" : "******"}
+                  required
+                  id="password2"
+                  name="password2"
+                  value={password2}
+                  onChange={handleInputChange}
+                />
+                <div
+                  className={styles.toggleVisible}
+                  onClick={() => setVisible(!visible)}
+                >
+                  {visible ? (
+                    <AiOutlineEye color="#2b2d42" />
+                  ) : (
+                    <AiOutlineEyeInvisible color="#2b2d42" />
+                  )}
+                </div>
+              </div>
             </div>
             <button type="submit" className="--btn --btn-primary --btn-block">
               {" "}
