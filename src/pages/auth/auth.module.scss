@@ -10,6 +10,18 @@
   background-repeat: no-repeat;
   background-size: 4500px;
 
+  .toggleVisible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      position: absolute;
+      left: 62.5%;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  }
+
   .form_square {
     width: 55rem;
     padding: 4rem;
@@ -64,6 +76,9 @@
 
       .fields {
         margin-top: 2em;
+        .password {
+          display: flex;
+        }
       }
 
       .btn_square {
@@ -72,8 +87,8 @@
     }
     .register {
       display: flex;
-      justify-content: start;
-      align-items: start;
+      justify-content: flex-start;
+      align-items: flex-start;
       margin: 2rem 0;
       font-weight: 500;
     }
@@ -93,6 +108,18 @@
     animation: slide-down 0.5s ease;
   }
 
+  .toggleVisible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      position: absolute;
+      left: 23.5em;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  }
+
   .form {
     width: 55rem;
     height: 119.75vh;
@@ -104,7 +131,7 @@
       color: var(--color-primary);
       font-size: 5em;
       padding-left: 0.4em;
-      text-align: start;
+      text-align: flex-start;
       border-left: 5.5px solid var(--color-secondary);
     }
 
@@ -148,10 +175,13 @@
 
       .fields {
         margin-top: 2em;
+        .password {
+          display: flex;
+        }
       }
 
       p {
-        text-align: start;
+        text-align: flex-start;
         margin-top: 1rem;
       }
 
@@ -161,8 +191,8 @@
     }
     .register {
       display: flex;
-      justify-content: start;
-      align-items: start;
+      justify-content: flex-start;
+      align-items: flex-start;
       margin: 2rem 0;
       font-weight: 500;
     }
@@ -191,6 +221,81 @@
     display: none;
   }
 }
+
+@media screen and (max-width: 1350px) {
+  .auth {
+    .toggleVisible {
+      svg {
+        left: 23em;
+      }
+    }
+    .form {
+      padding: 2rem;
+      h2 {
+        font-size: 3em;
+        border-left: 3px solid var(--color-secondary);
+      }
+      form {
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+          padding: 0.8rem;
+          margin: 0 auto;
+        }
+        button {
+          margin-top: 1.5em;
+        }
+      }
+    }
+    .fields {
+      margin-top: 1em;
+    }
+    .register {
+      font-size: 1em;
+    }
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 56%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1900px) {
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 62.5%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 67%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .auth_square {
+    .toggleVisible {
+      svg {
+        left: 73.5%;
+      }
+    }
+  }
+}
+
 
 @media screen and (max-width: 600px) {
   .auth,

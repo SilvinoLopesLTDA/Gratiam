@@ -140,7 +140,7 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addToCart.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading = false;
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -201,7 +201,7 @@ const cartSlice = createSlice({
         toast.error(action.payload);
       })
       .addCase(removeUnityItem.pending, (state) => {
-        state.isLoading = true;
+        state.isLoading = false;
       })
       .addCase(removeUnityItem.fulfilled, (state) => {
         state.isLoading = false;
