@@ -24,7 +24,7 @@ const ChangePassword = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      return toast.error(" As novas senhas não se coincidem");
+      return toast.error("As novas senhas não se coincidem");
     }
 
     const formData = {
@@ -43,29 +43,32 @@ const ChangePassword = () => {
       <div className="password-card">
         <h3> Alterar Senha </h3>
         <form onSubmit={changePass} className="--form-control">
-          <label>Senha Atual</label>
+          <label htmlFor="oldPassword">Senha Atual</label>
           <input
             type="password"
             placeholder="******"
             required
+            id="oldPassword"
             name="oldPassword"
             value={oldPassword}
             onChange={handleInputChange}
           />
-          <label> Nova Senha</label>
+          <label htmlFor="newPassword"> Nova Senha</label>
           <input
             type="password"
             placeholder="******"
             required
+            id="newPassword"
             name="password"
             value={password}
             onChange={handleInputChange}
           />
-          <label> Confirmar Nova Senha</label>
+          <label htmlFor="ConfirmPassword"> Confirmar Nova Senha</label>
           <input
             type="password"
             placeholder="******"
-            required
+            required 
+            id="ConfirmPassword"
             name="password2"
             value={password2}
             onChange={handleInputChange}

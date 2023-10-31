@@ -1,14 +1,15 @@
 module.exports = {
-  env: { browser: true, es2020: true, node: true },
+  env: { browser: true, es2020: true, node: true, jest: true }, // Adicionando Jest ao ambiente
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
+    "plugin:jest/recommended", 
   ],
   parserOptions: { ecmaVersion: "latest", sourceType: "module" },
   settings: { react: { version: "18.2" } },
-  plugins: ["react-refresh"],
+  plugins: ["react-refresh", "jest"], // Adicionando Jest aos plugins
   rules: {
     "react-refresh/only-export-components": "warn",
   },

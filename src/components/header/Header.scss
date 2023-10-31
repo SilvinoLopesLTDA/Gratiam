@@ -1,0 +1,16 @@
+.header_layout {
+    .btn_logout {
+        margin-left: 2em;
+    }
+}
+
+@media screen and (max-width: 612px) {
+  .header_layout {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    .btn_logout {
+        margin-left: 4em;
+    }
+  }
+}

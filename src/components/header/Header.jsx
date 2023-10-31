@@ -3,6 +3,7 @@ import { LogoutUser } from "../../services/authService";
 import { SET_LOGIN, selectName } from "../../redux/features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { BsCartFill } from "react-icons/bs";
+import "./Header.scss"
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Header = () => {
 
   return (
     <div className="--pad header">
-      <div className="--flex-between">
+      <div className="--flex-between header_layout">
         <h3>
           <span className="--fw-thin">Bem vindo(a) de volta, </span>
           <span className="--color-primary"> {name}</span>
@@ -27,7 +28,7 @@ const Header = () => {
           <Link to="/cart">
             <BsCartFill size={33} color="red" title="Carrinho" />
           </Link>
-          <button className="--btn --btn-primary --ml2" onClick={Logout}>
+          <button className="--btn --btn-primary btn_logout" onClick={Logout}>
             Sair
           </button>
         </div>

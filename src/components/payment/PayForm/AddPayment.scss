@@ -137,3 +137,22 @@ input[type="number"] {
     }
   }
 }
+
+@media screen and (max-width: 612px) {
+  .add-payment {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .card {
+      max-width: 100%;
+    }
+    .blockL {
+      margin-top: 4em;
+      max-width: 100%;
+    }
+  }
+    h2 {
+      text-align: center;
+    }
+  
+}

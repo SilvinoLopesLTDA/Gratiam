@@ -14,7 +14,8 @@ dist-ssr
 *.local
 /uploads
 /dev-dist
-
+.jest
+__snapshots__
 # Editor directories and files
 .vscode/*
 .vs
